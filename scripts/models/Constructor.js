@@ -1,33 +1,46 @@
 
 class Artists {
+    constructor (json) {
+        this.json = json;
+    }
+    get(name) {
+        return this.json[name];
+    }
+}
+let a = new Artists(api_url);
+console.log(a.get("Mimi Keel"))
+
+
+        
+class Photographe {
     constructor (photographers) {
-        this._name = photographers.name
-        this._id = photographers.id
-        this._city = photographers.city
-        this._country = photographers.country 
-        this._tagline = photographers.tagline
-        this._price = photographers.price
-        this._portrait = photographers.portrait
+        this._name = name;
+        this._id = id;
+        this._city = city;
+        this.country = country;
+        this._tagline = tagline;
+        this._price = price;
+        this._portrait = portrait;
     }
     get name () {
-        return this._name 
+        return this._name
     }
-    get id () {
-        return this._id 
+    get id() {
+        return this._id
     }
-    get city () {
-        return this._city 
+    get city(){
+        return this._city
     }
-    get country () {
-        return this._country
+    get country(){
+        return this._city
     }
-    get tagline () {
+    get tagline(){
         return this._tagline
     }
     get price () {
-        return this._price 
+        return this._price
     }
     get portrait () {
-        return `/assets/Sample Photos/Photographers ID Photos/${this._portrait}`   
+        return `/assets/Sample Photos/Photographers ID Photos/${this._portrait}`
     }
 }
