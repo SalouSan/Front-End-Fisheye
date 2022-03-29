@@ -47,6 +47,7 @@ h1 {
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 100px;
 }
 .photographer_section article .location {
     color : #901C1C;
