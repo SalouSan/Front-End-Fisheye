@@ -48,3 +48,14 @@ h1 {
     height: 200px;
     width: 200px;
 }
+.photographer_section article .location {
+    color : #901C1C;
+    font-size: 13px;
+}
+.photographer_section article .tagline {
+    font-size : 0.7rem;
+}
+.photographer_section article .price {
+    font-size : 0.6rem;
+    color: grey;
+}

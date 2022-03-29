@@ -14,7 +14,7 @@ console.log(a.get("Mimi Keel"))
         
 class Photographe {
     constructor (photographers) {
-        this._name = name;
+        this._name = name
         this._id = id;
         this._city = city;
         this.country = country;
