@@ -3,8 +3,7 @@ async function getPhotographers() {
     try {
     let response = await fetch (api_url)
     let data = await response.json();
-    let PhotographersData = data.photographers;
-    console.log(...PhotographersData);
+    console.log(data);
     }
     catch (error) {
         console.log(error)
