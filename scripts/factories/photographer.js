@@ -1,10 +1,10 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, tagline, price, } = data;
+    const { name, portrait, city, country, tagline, price, id } = data;
 
     const picture = `assets/Sample Photos/Photographers ID Photos/${portrait}`;
+    const article = document.createElement( 'article' );
 
     function getUserCardDOM() {
-        const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
         img.setAttribute("alt", "photo de profil des photographes");
@@ -19,17 +19,23 @@ function photographerFactory(data) {
         const span2 = document.createElement('span');
         span2.setAttribute("class", "price");
         span2.textContent = `${data.price}€` + "/jour";
-        const href = document.createElement('a');
-        href.textContent = "lien";
-        href.setAttribute("href", "./photographer.html");
-        href+=`?id=${data.id}`
         article.appendChild(img);
-        article.appendChild(href);
         article.appendChild(h2);
         article.appendChild(span0);
         article.appendChild(span1);
         article.appendChild(span2);
         return (article);
     }
-    return { name, picture, city, country, tagline, price, getUserCardDOM }
+
+    function getURL (article) {
+        let a = document.createElement('a');
+        a.setAttribute("href", "photographer.html");
+        a.setAttribute("id","photographer_link");
+        a.textContent = "lien";
+        article.appendChild(a);
+        a+=`?id=${data.id}`;
+    }
+    getURL(article);
+    
+    return { name, picture, city, country, tagline, price, id, getUserCardDOM, }
 }
