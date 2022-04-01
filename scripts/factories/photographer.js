@@ -19,7 +19,12 @@ function photographerFactory(data) {
         const span2 = document.createElement('span');
         span2.setAttribute("class", "price");
         span2.textContent = `${data.price}€` + "/jour";
+        const href = document.createElement('a');
+        href.textContent = "lien";
+        href.setAttribute("href", "./photographer.html");
+        href+=`?id=${data.id}`
         article.appendChild(img);
+        article.appendChild(href);
         article.appendChild(h2);
         article.appendChild(span0);
         article.appendChild(span1);

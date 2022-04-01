@@ -60,3 +60,6 @@ h1 {
     font-size : 0.6rem;
     color: grey;
 }
+.photographer_section article a {
+    cursor : pointer;
+}
