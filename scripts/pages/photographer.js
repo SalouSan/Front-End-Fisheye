@@ -1,25 +1,18 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
-function renderPhotos (data) {
+const pics = `assets/Sample Photos/Mimi/Portrait_Nora.jpg`
 
-    const pics = `assets/Sample Photos/Mimi/${image}`;
+function headerPhotographers () {
+    const header = document.querySelector(".photograph-header");
+    const p = document.createElement("p");
+    p.setAttribute("class", "prénom");
+    p.textContent = "Mimi Keel";
+    const img = document.createElement("img");
+    img.setAttribute("src",pics);
+    header.appendChild(p);
+    header.appendChild(img);
 
-    const {title, image} = data.media; 
-    const content = document.querySelector(".photographers-content");
-    const photos = document.createElement ('img');
-    const h2 = document.createElement ('h2');
-    h2.textContent = title;
-    photos.setAttribute("alt", "photos des photographers");
-    photos = image;
-    content.appendChild(photos);
-    content.appendChild(h2);
+    return (header);
 
-    return (content);
 }
-
-
-function likes (photographers) {
-    photographers.forEach(element => {
-        element.addEventlistener("click", photos) 
-    });
-}
+headerPhotographers()

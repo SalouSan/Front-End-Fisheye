@@ -13,6 +13,7 @@ async function getPhotographers() {
 			name: "Mimi Keel",
 			city: "London",
 			country: "UK",
+            id : 243,
 			tagline: "Voir le beau dans le quotidien",
 			price: 400,
 			portrait: "MimiKeel.jpg"
@@ -20,6 +21,7 @@ async function getPhotographers() {
         {
 			name: "Ellie-Rose Wilkens",
 			city: "Paris",
+            id : 930,
 			country: "France",
 			tagline: "Capturer des compositions complexes",
 			price: 250,
@@ -28,6 +30,7 @@ async function getPhotographers() {
         {
 			name: "Tracy Galindo",
 			city: "Montreal",
+            id : 82,
 			country: "Canada",
 			tagline: "Photographe freelance",
 			price: 500,
@@ -36,6 +39,7 @@ async function getPhotographers() {
         {
 			name: "Nabeel Bradford",
 			city: "Mexico City",
+            id : 527,
 			country: "Mexico",
 			tagline: "Toujours aller de l'avant",
 			price: 350,
@@ -44,6 +48,7 @@ async function getPhotographers() {
         {
 			name: "Rhode Dubois",
 			city: "Barcelona",
+            id : 925,
 			country: "Spain",
 			tagline: "Je crée des souvenirs",
 			price: 275,
@@ -52,6 +57,7 @@ async function getPhotographers() {
         {
 			name: "Marcel Nikolic",
 			city: "Berlin",
+            id : 195,
 			country: "Germany",
 			tagline: "Toujours à la recherche de LA photo",
 			price: 300,
