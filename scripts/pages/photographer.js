@@ -11,7 +11,6 @@ function headerPhotographers () {
     img.setAttribute("src",pics);
     header.appendChild(p);
     header.appendChild(img);
-
     return (header);
 
 }
