@@ -6,7 +6,7 @@ async function getPhotographers() {
     console.log(data);
     }
     catch (error) {
-        console.log(error)
+        console.log(error);
     }
      const photographers = [
         {
