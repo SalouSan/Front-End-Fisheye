@@ -28,7 +28,8 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin-top: 100px;
+    margin-top: 70px;
+    margin-left: 100px;
 }
 
 .photographer_section article {
@@ -39,27 +40,27 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
+h2 {
     color: #D3573C;
     font-size: 36px;
 }
 
-.photographer_section article img {
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
-}
-.photographer_section article .location {
+.location {
     color : #901C1C;
     font-size: 13px;
 }
-.photographer_section article .tagline {
+.tagline {
     font-size : 0.7rem;
 }
-.photographer_section article .price {
+ .price {
     font-size : 0.6rem;
     color: grey;
 }
 .photographer_section article a {
     cursor : pointer;
+}
+.profil {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
 }

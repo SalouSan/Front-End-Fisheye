@@ -1,46 +1,26 @@
-
-class Artists {
-    constructor (json) {
-        this.json = json;
-    }
-    get(name) {
-        return this.json[name];
-    }
-}
-let a = new Artists(api_url);
-console.log(a.get("Mimi Keel"))
-
-
         
-class Photographe {
-    constructor (photographers) {
-        this._name = name
-        this._id = id;
-        this._city = city;
-        this.country = country;
-        this._tagline = tagline;
-        this._price = price;
-        this._portrait = portrait;
+class Photos {
+    constructor (media) {
+        this._photographerId = media.photographerId;
+        this._id = media.id;
+        this._title = media.title;
+        this._image = media.image;
+        this._likes = media.likes;
+        this._price = media.price;
     }
-    get name () {
-        return this._name
+    get title () {
+        return this._title
     }
-    get id() {
-        return this._id
+    get image() {
+        return `/assets/Sample Photos/Ellie Rose/${this._image}`
     }
-    get city(){
-        return this._city
+    get likes(){
+        return this._likes
     }
-    get country(){
-        return this._city
-    }
-    get tagline(){
-        return this._tagline
-    }
-    get price () {
+    get price(){
         return this._price
     }
-    get portrait () {
-        return `/assets/Sample Photos/Photographers ID Photos/${this._portrait}`
-    }
+    
 }
+
+

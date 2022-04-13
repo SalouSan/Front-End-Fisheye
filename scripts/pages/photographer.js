@@ -42,37 +42,9 @@ async function getArtist (){
         const content = document.querySelector(".photographers-content");
         const article = document.createElement('article');
         const p = document.createElement('p');
-        p.textContent = [
-            {
-                title: "Wedding Gazebo",
-                image: "Event_WeddingGazebo.jpg",
-                likes: 69,
-            },
-            {
-                title: "Fashion Pattern on a Pattern",
-			    image: "Fashion_Pattern_on_Pattern.jpg",
-			    likes: 72, 
-            },
-            {
-                title: "Fashion Yellow Beach",
-			    image: "Fashion_Yellow_Beach.jpg",
-			    likes: 62,
-            },
-            {
-                title: "Fashion Urban Jungle",
-			    image: "Fashion_Urban_Jungle.jpg",
-			    likes: 11,
-            },
-            {
-                title: "Sparkles",
-			    image: "Event_Sparklers.jpg",
-			    likes: 2,
-            },
-        ];
         content.appendChild(article);
         article.appendChild(p);
-        return (article)
-
+        return (article);
     }
     photographerContent();
 }
