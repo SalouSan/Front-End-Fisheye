@@ -98,8 +98,13 @@ form .message {
     height : 200px;
 }
 .photographers-content article{
-    padding-left: 30px;
+    margin-left: 100px;
+    margin-top: 50px;
     display: grid;
-    grid-template-columns: 30% 20% 20% 20% 20%;
+    grid-template-columns: 33% 33% 33%;
+}
+.picture{
+    display : flex;
+    flex-direction: column;
 }
 

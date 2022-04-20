@@ -32,8 +32,7 @@ h1 {
     margin-left: 100px;
 }
 
-.photographer_section article {
-    justify-self: center;
+article {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,4 +62,8 @@ h2 {
     height: 200px;
     width: 200px;
     border-radius: 100px;
+}
+.photographer_link {
+    text-decoration: none;
+    
 }

@@ -25,7 +25,10 @@ displayPhotographers();
 
 const hero = {
     name: 'Batman',
-    realName: 'Bruce Wayne'
+    realName: 'Bruce Wayne',
+    city : function () {
+        console.log (this);
+    }
   };
   const { name, realName } = hero;
   name;     // => 'Batman',
