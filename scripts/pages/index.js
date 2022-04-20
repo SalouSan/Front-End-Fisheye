@@ -1,21 +1,20 @@
 let api_url = '/data/photographers.json'
 const article = document.querySelector(".photographer_section");
 const getPhotographers = async function () {
-    let response = await fetch (api_url)
+    let response = await fetch (api_url);
     let data = await response.json();
     console.log(data);
     article.innerHTML = renderPhotographers(data);
     function renderPhotographers (data) {
         const displayArtists = data.photographers.map((artist) => `
         <div class = "profil1">
-            <a href= "photographer.html?id=${artist.id}"  
+            <a href= "photographer.html?id=${artist.id}" </a> 
             <img class="profil" src= "/assets/Sample Photos/Photographers ID Photos/${artist.portrait}" alt= "photo de profil" 
             />
             <h2> ${artist.name} </h2>
             <span class="location"> ${artist.city}, ${artist.country} </span> </br>
             <span class="tagline"> ${artist.tagline} </span> </br>
             <span class="price"> ${artist.price} €/jour </span> 
-            </a>  
         </div>
         ` 
         ).join('');
