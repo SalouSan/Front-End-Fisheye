@@ -54,7 +54,7 @@ async function getArtist (){
         article.innerHTML=photograph;
         content.appendChild(article);
         return (article);
-    }
+        }
     photographerContent();
 }
 getArtist ();

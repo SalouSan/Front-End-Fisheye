@@ -1,6 +1,6 @@
 
-function photographerFactory(data) {
-    const id = data.photographers.map((key) => key.id);
+/* function photographerFactory(data) {
+    const { id } = data;
     console.log(id);
     function getID () {
         let a = document.createElement('a');
@@ -13,4 +13,4 @@ function photographerFactory(data) {
     
     return {id, getID }
 }
-photographerFactory();
+photographerFactory(); */
