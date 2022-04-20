@@ -64,6 +64,5 @@ h2 {
     border-radius: 100px;
 }
 .photographer_link {
-    text-decoration: none;
-    
+    text-decoration: red;    
 }

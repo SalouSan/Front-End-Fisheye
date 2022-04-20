@@ -8,7 +8,7 @@ const getPhotographers = async function () {
     function renderPhotographers (data) {
         const displayArtists = data.photographers.map((artist) => `
         <div class = "profil1">
-            <a href= "photographer.html?id=${artist.id}" </a> 
+            <a href= "photographer.html?id=${artist.id}" class="photographer_link" </a> 
             <img class="profil" src= "/assets/Sample Photos/Photographers ID Photos/${artist.portrait}" alt= "photo de profil" 
             />
             <h2> ${artist.name} </h2>
