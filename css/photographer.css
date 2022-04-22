@@ -107,4 +107,7 @@ form .message {
     display : flex;
     flex-direction: column;
 }
-
+.profil{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,4 @@
-let api_url = '/data/photographers.json';
+let api_url = 'data/photographers.json';
 const article = document.querySelector(".photographer_section");
 const getPhotographers = async function () {
     let response = await fetch (api_url);

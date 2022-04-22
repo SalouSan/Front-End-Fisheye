@@ -1,34 +1,27 @@
 //Mettre le code JavaScript lié à la page photographer.html
 async function getArtist (){
-    let responses = await fetch ('/data/photographers.json');
+    let responses = await fetch ('data/photographers.json');
     let dataa = await responses.json();
-    
-    
+    let header = document.querySelector(".photograph-header");
 
-    const pics = `assets/Sample Photos/Mimi/Portrait_Nora.jpg`
-    const naming = dataa.photographers.map((artist) => `${artist.name}`);
-    const citi = dataa.photographers.map((artist) => `${artist.city}`);
-    const country = dataa.photographers.map((artist) => `${artist.country}`);
-    const tagline = dataa.photographers.map((artist) => `${artist.tagline}`);
+    const naming = dataa.photographers.map((artist)=>artist.name);
+    const cities = dataa.photographers.map((artist)=>artist.city);
+    const countries = dataa.photographers.map((artist)=>artist.country);
+    const taglines = dataa.photographers.map((artist)=>artist.tagline);
+    const portrait = dataa.photographers.map((artist)=>artist.portrait);
+
+    header.innerHTML = headerPhotographers();
 
     function headerPhotographers () {
-        const header = document.querySelector(".photograph-header");
-        const p = document.createElement("p");
-        p.setAttribute("class", "prénom");
-        p.innerHTML = `${naming[0]}`;
-        const p1 = document.createElement("p");
-        p1.setAttribute("class", "city");
-        p1.innerHTML = `${citi[0]}`+ `, ${country[0]}`;
-        const p2 = document.createElement("p");
-        p2.setAttribute("class", "tagline");
-        p2.innerHTML =`${tagline[0]}`;
-        const img = document.createElement("img");
-        img.setAttribute("src",pics);
-        header.appendChild(p);
-        header.appendChild(p1);
-        header.appendChild(p2);
-        header.appendChild(img);
-        return (header);
+        const profiles = 
+        `       <div class= "profil">
+                    <h1 class = "name"> ${naming[1]} </h1>
+                    <span class = "location"> ${cities[1]},${countries[1]} </span>
+                    <span class = "tagline"> ${taglines[1]} </span>
+                </div>
+            <img class="picture" src="/assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
+            `
+        return `${profiles}`;
 
     }
     headerPhotographers();
@@ -40,11 +33,11 @@ async function getArtist (){
         const { media } = dataa;
         console.log(media);
         
-            const photograph = media.filter((id)=> id.photographerId === 82)
+            const photograph = media.filter((id)=> id.photographerId === 243)
                 .map((person) =>
             `
             <div class= "picture">
-                <img src = "assets/Sample Photos/Tracy/${person.image}" />
+                <img src = "assets/Sample Photos/Mimi/${person.image}" />
                 <h2 class = "title"> ${person.title} </h2>
                 <p class = "likes"> ${person.likes} </p>
             </div>
@@ -58,3 +51,5 @@ async function getArtist (){
     photographerContent();
 }
 getArtist ();
+
+
