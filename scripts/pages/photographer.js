@@ -19,7 +19,7 @@ async function getArtist (){
                     <span class = "location"> ${cities[1]},${countries[1]} </span>
                     <span class = "tagline"> ${taglines[1]} </span>
                 </div>
-            <img class="picture" src="/assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
+            <img class="picture" src="assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
             `
         return `${profiles}`;
 
