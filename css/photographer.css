@@ -7,8 +7,8 @@
     height: 300px;
     margin: 0 100px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 .photograph-header img {
     height : 150px;
@@ -39,6 +39,7 @@ font-size: 16px;
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    justify-content: flex-end;
 }
 
 .modal {
@@ -110,4 +111,9 @@ form .message {
 .profil{
     display: flex;
     flex-direction: column;
+    justify-content: space-between; 
 }
+.image{
+    justify-content: flex-end;
+}
+

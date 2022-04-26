@@ -10,8 +10,7 @@ const getPhotographers = async function () {
         <div class = "profil1">
             <a href= "photographer.html?id=${artist.id} "class="photographer_link"> 
                 <img class="profil" src= "assets/Sample Photos/Photographers ID Photos/${artist.portrait}" alt= "photo de profil" 
-                />
-            
+                />         
                 <h2> ${artist.name} </h2>
                 <span class="location"> ${artist.city}, ${artist.country} </span> </br>
                 <span class="tagline"> ${artist.tagline} </span> </br>
@@ -96,5 +95,4 @@ getPhotographers();
 getPhotographers ();
  */
 
-let url1_string = document.querySelector(".photographer_link");
-console.log(url1_string);
+

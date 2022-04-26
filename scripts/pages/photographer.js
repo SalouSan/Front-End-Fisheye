@@ -10,18 +10,21 @@ async function getArtist (){
     const taglines = dataa.photographers.map((artist)=>artist.tagline);
     const portrait = dataa.photographers.map((artist)=>artist.portrait);
 
-    header.innerHTML = headerPhotographers();
-
     function headerPhotographers () {
+        const profil = document.querySelector(".profil1")
+        const photo = document.querySelector(".image")
         const profiles = 
-        `       <div class= "profil">
-                    <h1 class = "name"> ${naming[1]} </h1>
-                    <span class = "location"> ${cities[1]},${countries[1]} </span>
-                    <span class = "tagline"> ${taglines[1]} </span>
-                </div>
-            <img class="picture" src="/assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
-            `
-        return `${profiles}`;
+        `   <h1 class = "name"> ${naming[1]} </h1>
+            <span class = "location"> ${cities[1]}, ${countries[1]} </span> </br>
+            <span class = "tagline"> ${taglines[1]} </span>
+        `
+        const image = 
+        `<img class="picture" src="/assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
+        `     
+        profil.innerHTML = profiles;
+        photo.innerHTML = image;
+
+        return `${profiles} ${image}`;
 
     }
     headerPhotographers();
@@ -35,7 +38,7 @@ async function getArtist (){
         const firstNames = dataa.photographers.map(character => character.name.split(" ")[0]);
         console.log(firstNames);
         let url0_string = document.querySelector(".photographer_link");
-        let url = new URLSearchParams(url2_string)
+        let url = new URLSearchParams(url0_string)
         let ch = url.get("id")
 
         console.log(ch);
