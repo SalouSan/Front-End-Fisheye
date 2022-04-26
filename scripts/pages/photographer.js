@@ -19,7 +19,7 @@ async function getArtist (){
                     <span class = "location"> ${cities[1]},${countries[1]} </span>
                     <span class = "tagline"> ${taglines[1]} </span>
                 </div>
-            <img class="picture" src="assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
+            <img class="picture" src="/assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
             `
         return `${profiles}`;
 
@@ -32,8 +32,16 @@ async function getArtist (){
         const p = document.createElement('p');
         const { media } = dataa;
         console.log(media);
+        const firstNames = dataa.photographers.map(character => character.name.split(" ")[0]);
+        console.log(firstNames);
+        let url0_string = document.querySelector(".photographer_link");
+        let url = new URLSearchParams(url2_string)
+        let ch = url.get("id")
+
+        console.log(ch);
+
         
-            const photograph = media.filter((id)=> id.photographerId === 243)
+            const photograph = media.filter((id)=> id.photographerId == 243)
                 .map((person) =>
             `
             <div class= "picture">

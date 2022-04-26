@@ -92,12 +92,9 @@ const displayPhotographers2 = async function () {
 } 
 displayPhotographers2();
 
-let url = "q=URLUtils.searchParams&topic=api";
-let paramstring = new URLSearchParams(url);
 
-paramstring.set("topic", "More webdev");
 
-console.log(url);
 
 
 //data.photographers.name//
+
