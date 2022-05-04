@@ -4,7 +4,7 @@ async function getArtist (){
     let dataa = await responses.json();
     let header = document.querySelector(".photograph-header");
 
-    const naming = dataa.photographers.map((artist)=>artist.name);
+    /* const naming = dataa.photographers.map((artist)=>artist.name);
     const cities = dataa.photographers.map((artist)=>artist.city);
     const countries = dataa.photographers.map((artist)=>artist.country);
     const taglines = dataa.photographers.map((artist)=>artist.tagline);
@@ -28,7 +28,7 @@ async function getArtist (){
         return `${profiles} ${image}`;
 
     }
-    headerPhotographers();
+    headerPhotographers(); */
 
     function photographerContent () {
         const content = document.querySelector(".photographers-content");
@@ -72,7 +72,7 @@ getArtist ();
 
 
 function replace (id_) {
-    const div = photograph.querySelector(".title");
+    const div = document.querySelector(".title");
     console.log(div);
     if(id_ == "82") {
         src.replace(`${key}`, "Tracy")
