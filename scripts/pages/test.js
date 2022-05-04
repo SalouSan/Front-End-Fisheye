@@ -92,7 +92,9 @@ const displayPhotographers2 = async function () {
 } 
 displayPhotographers2();
 
-
+const messi = document.getElementById("main");
+const mess = messi.getAttribute("id");
+console.log(mess)
 
 
 

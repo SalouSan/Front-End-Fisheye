@@ -8,21 +8,14 @@
     margin: 0 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .photograph-header img {
-    height : 150px;
+    height : 170px;
     border-radius: 90px;
-    width: 150px;
+    width: 170px;
 }
-.photograph-header p {
-    color: #D3573C;
-    font-size: 36px;
-}
-.photograph-header .city {
-    color : #901C1C;
-    font-size : 25px;
-}
+
 .photograph-header .tagline {
 color: grey;
 font-size: 16px;
@@ -32,7 +25,6 @@ font-size: 16px;
     font-size: 20px;
     font-weight: bold;
     color: white;
-    padding: 11px;
     width: 170px;
     height: 70px;
     border: none;
@@ -108,12 +100,23 @@ form .message {
     display : flex;
     flex-direction: column;
 }
-.profil{
+.profile{
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
 }
 .image{
     justify-content: flex-end;
+}
+.location1{
+    font-size: 20px;
+    color : #901C1C;
+}
+.name1{
+    color : #D3573C;
+    font-size: 39px;
+}
+.tagline1{
+    color: grey;
 }
 
