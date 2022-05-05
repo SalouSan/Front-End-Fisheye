@@ -47,7 +47,7 @@ async function getArtist (currentIds){
             .map((person) =>             
             `
             <div class= "picture">
-                <img id="photo" src = "/assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}" />
+                <img id="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}" />
                 <h2 class = "title"> ${person.title} </h2>
                 <p class = "likes"> ${person.likes} </p>
             </div>
