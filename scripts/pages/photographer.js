@@ -1,81 +1,66 @@
 //Mettre le code JavaScript lié à la page photographer.html
-async function getArtist (){
+async function getArtist (currentIds){
     let responses = await fetch ('data/photographers.json');
-    let dataa = await responses.json();
-    let header = document.querySelector(".photograph-header");
+    let data1 = await responses.json();
+    console.log(data1.name)
+    let urlParams = new URLSearchParams(window.location.search);
+    let idPhotographer = parseInt(urlParams.get("id"));
+    console.log(idPhotographer);
+    if (idPhotographer) {
+        let artist = data1.photographers;
+        function headerPhotographer (){
+            let header = document.querySelector(".photograph-header");
+            let profile = document.querySelector(".profile");
+            let image = document.querySelector(".image");
 
-    /* const naming = dataa.photographers.map((artist)=>artist.name);
-    const cities = dataa.photographers.map((artist)=>artist.city);
-    const countries = dataa.photographers.map((artist)=>artist.country);
-    const taglines = dataa.photographers.map((artist)=>artist.tagline);
-    const portrait = dataa.photographers.map((artist)=>artist.portrait);
-    const id = dataa.photographers.map((artist)=> artist.id);
+            const profil= artist.filter((person) => person.id === idPhotographer)
+            .map((person)=> `
+            <h2 class="name1"> ${person.name} </h2>
+            <p class="location1"> ${person.city}, ${person.country} </p>
+            <p class="tagline1"> ${person.tagline}</p>
+            `);
+            profile.innerHTML=profil;
 
-    function headerPhotographers () {
-        const profil = document.querySelector(".profile")
-        const photo = document.querySelector(".image")
-        const profiles = 
-        `   <h1 class= "name1"> ${naming[1]} </h1>
-            <span class= "location1"> ${cities[1]}, ${countries[1]} </span> </br>
-            <span class= "tagline1"> ${taglines[1]} </span>
-        `
-        const image = 
-        `<img class="picture" src="/assets/Sample Photos/Photographers ID Photos/${portrait[1]}" alt= "photo de profil" /> 
-        `     
-        profil.innerHTML = profiles;
-        photo.innerHTML = image;
-
-        return `${profiles} ${image}`;
-
+            const photo = artist.filter((person) => person.id === idPhotographer)
+            .map ((artist) => 
+            `<img class="picture" src="assets/Sample Photos/Photographers ID Photos/${artist.portrait}"/>`
+            );
+            image.innerHTML= photo;
+        }
+        headerPhotographer();
     }
-    headerPhotographers(); */
 
-    function photographerContent () {
+    function photographerContent (currentIds) {
         const content = document.querySelector(".photographers-content");
         const article = document.createElement('article');
-        const { media } = dataa;
+        const { media } = data1;
         console.log(media);
-        let firstNames = dataa.photographers.map(character => character.name.split(" ")[0]);
+        let firstNames = data1.photographers.map(character => character.name.split(" ")[0]);
         console.log(firstNames);
-        let urlParams = new URLSearchParams(window.location.search);
-        let id_ = parseInt(urlParams.get("id"));
-        console.log(id_)  
-        let names = {
-            Mimi : "243",
-        }
+        
 
-
-
-        console.log(names);
-        let key = Object.keys(names);
-        console.log(key);
-
-            const photograph = media.filter((id)=> id.photographerId == id_)
-                .map((person) =>             
+        if (idPhotographer) {
+            let artist = data1.photographers;
+            let photographerId = artist.find((photographer)=> photographer.id === currentIds);
+        
+            const photograph = media.filter((artist)=> artist.photographerId === idPhotographer)
+            .map((person) =>             
             `
             <div class= "picture">
-                <img id="photo" src = "assets/Sample Photos/${key}/${person.image}" />
+                <img id="photo" src = "/assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}" />
                 <h2 class = "title"> ${person.title} </h2>
                 <p class = "likes"> ${person.likes} </p>
             </div>
     
             `).join('');
-
-
-        article.innerHTML=photograph;
-        content.appendChild(article);
-        return (article);
+            article.innerHTML=photograph;
+            content.appendChild(article);
+            return (article);
         }
-    photographerContent();
+        
+    }
+    photographerContent(idPhotographer);
 }
 getArtist ();
 
 
-function replace (id_) {
-    const div = document.querySelector(".title");
-    console.log(div);
-    if(id_ == "82") {
-        src.replace(`${key}`, "Tracy")
-    }
-}
-replace();
