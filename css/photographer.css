@@ -127,11 +127,39 @@ form .message {
 }
 .title_likes {
     display: flex;
-    
+
 }
 .title{
     color : #901C1C;
     font-size : 18px;
+}
+.heart {
+    background: #901C1C;
+    width:20px;
+    height: 20px;
+    position: relative;
+    top :40%;
+    transform: rotate(-45deg);
+}
+.heart::after{
+    background: #901C1C;
+    width:20px;
+    height: 20px;
+    content : '';
+    position: absolute;
+    top : -10px;
+    left : 0px;
+    border-radius: 50%;
+}
+.heart::before{
+    background: #901C1C;
+    width:20px;
+    height: 20px;
+    content : '';
+    position: absolute;
+    top :0px;
+    right : -50%;
+    border-radius: 50%;
 }
 
 

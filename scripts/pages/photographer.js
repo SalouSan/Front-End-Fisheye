@@ -32,7 +32,7 @@ async function getArtist (){
         headerPhotographer();
     }
 
-    // Fonction affichant les réalisations du photographer 
+    // Fonction qui encadre le conteneur des photographes 
 
     function photographerContent (currentIds) {
         const content = document.querySelector(".photographers-content");
@@ -42,7 +42,7 @@ async function getArtist (){
         let firstNames = data1.photographers.map(character => character.name.split(" ")[0]);
         console.log(firstNames);
         
-// Condition permettant 
+// Condition permettant d'affichant les réalisations du photographer 
         if (idPhotographer) {
             let artist = data1.photographers;
             let photographerId = artist.find((photographer)=> photographer.id === currentIds);
@@ -53,7 +53,10 @@ async function getArtist (){
             <div class= "picture">
                 <img id="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
                 <div class="title_likes">    
-                    <h2 class="title"> ${person.title} ${person.likes}</h2>
+                    <h2 class="title"> ${person.title}</h2>
+                    <p class="likes"> ${person.likes} 
+                        <div class="heart"></div>
+                    </p>
                 </div>
             </div>
     
@@ -65,6 +68,19 @@ async function getArtist (){
         
     }
     photographerContent(idPhotographer);
+
+    // Fonction qui permet de gerer les likes 
+
+    function likes () {
+        let heart = document.querySelector(".heart");
+        heart.ForEach((heart)=> {
+            heart.addEventListener("click", function (e) {
+            e.prevent.default();
+            count++;
+            })
+        })
+        
+    }
 }
 getArtist ();
 
