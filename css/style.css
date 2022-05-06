@@ -39,7 +39,7 @@ article {
     flex-direction: column;
 }
 
-h2 {
+.name {
     color: #D3573C;
     font-size: 36px;
 }

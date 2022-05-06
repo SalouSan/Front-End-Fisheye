@@ -111,6 +111,7 @@ form .message {
 .location1{
     font-size: 20px;
     color : #901C1C;
+    margin-top: -15px;
 }
 .name1{
     color : #D3573C;
@@ -119,4 +120,20 @@ form .message {
 .tagline1{
     color: grey;
 }
+#photo {
+    height: 20rem;
+    width: 20rem;
+    object-fit: contain;
+}
+.title_likes {
+    display: flex;
+    
+}
+.title{
+    color : #901C1C;
+    font-size : 18px;
+}
+
+
+
 

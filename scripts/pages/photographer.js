@@ -1,5 +1,5 @@
-//Mettre le code JavaScript lié à la page photographer.html
-async function getArtist (currentIds){
+//Fonction asynchrone pour recuperer les données en JSON 
+async function getArtist (){
     let responses = await fetch ('data/photographers.json');
     let data1 = await responses.json();
     console.log(data1.name)
@@ -8,6 +8,8 @@ async function getArtist (currentIds){
     console.log(idPhotographer);
     if (idPhotographer) {
         let artist = data1.photographers;
+
+// Fonction affichant les infos du photographe dans le header
         function headerPhotographer (){
             let header = document.querySelector(".photograph-header");
             let profile = document.querySelector(".profile");
@@ -15,7 +17,7 @@ async function getArtist (currentIds){
 
             const profil= artist.filter((person) => person.id === idPhotographer)
             .map((person)=> `
-            <h2 class="name1"> ${person.name} </h2>
+            <h1 class="name1"> ${person.name} </h1>
             <p class="location1"> ${person.city}, ${person.country} </p>
             <p class="tagline1"> ${person.tagline}</p>
             `);
@@ -30,6 +32,8 @@ async function getArtist (currentIds){
         headerPhotographer();
     }
 
+    // Fonction affichant les réalisations du photographer 
+
     function photographerContent (currentIds) {
         const content = document.querySelector(".photographers-content");
         const article = document.createElement('article');
@@ -38,7 +42,7 @@ async function getArtist (currentIds){
         let firstNames = data1.photographers.map(character => character.name.split(" ")[0]);
         console.log(firstNames);
         
-
+// Condition permettant 
         if (idPhotographer) {
             let artist = data1.photographers;
             let photographerId = artist.find((photographer)=> photographer.id === currentIds);
@@ -47,9 +51,10 @@ async function getArtist (currentIds){
             .map((person) =>             
             `
             <div class= "picture">
-                <img id="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}" />
-                <h2 class = "title"> ${person.title} </h2>
-                <p class = "likes"> ${person.likes} </p>
+                <img id="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                <div class="title_likes">    
+                    <h2 class="title"> ${person.title} ${person.likes}</h2>
+                </div>
             </div>
     
             `).join('');

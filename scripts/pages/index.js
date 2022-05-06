@@ -11,7 +11,7 @@ const getPhotographers = async function () {
             <a href= "photographer.html?id=${artist.id} "class="photographer_link"> 
                 <img class="profil" src= "assets/Sample Photos/Photographers ID Photos/${artist.portrait}" alt= "photo de profil" 
                 />         
-                <h2> ${artist.name} </h2>
+                <h2 class="name"> ${artist.name} </h2>
                 <span class="location"> ${artist.city}, ${artist.country} </span> </br>
                 <span class="tagline"> ${artist.tagline} </span> </br>
                 <span class="price"> ${artist.price} €/jour </span> 
