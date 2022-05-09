@@ -53,10 +53,12 @@ async function getArtist (){
             <div class= "picture">
                 <img id="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
                 <div class="title_likes">    
-                    <h2 class="title"> ${person.title}</h2>
-                    <p class="likes"> ${person.likes} 
+                    <h2 class="title"> ${person.title} </h2>
+                    <div class="likes_heart">
+                        <p class="likes"> ${person.likes} 
                         <div class="heart"></div>
-                    </p>
+                        </p>
+                    </div>
                 </div>
             </div>
     
@@ -71,16 +73,17 @@ async function getArtist (){
 
     // Fonction qui permet de gerer les likes 
 
-    function likes () {
-        let heart = document.querySelector(".heart");
-        heart.ForEach((heart)=> {
-            heart.addEventListener("click", function (e) {
-            e.prevent.default();
-            count++;
-            })
-        })
-        
+    function likes () { 
+        let heart = document.querySelectorAll(".heart");
+        let count = 0;
+        for (let i = 0; i < heart.length; i++) {
+            heart[i].addEventListener('click', function () {
+                console.log(count++);
+            });
+        }            
     }
+    likes();
+
 }
 getArtist ();
 

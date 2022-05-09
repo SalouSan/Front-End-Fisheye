@@ -40,6 +40,12 @@ function emailValidate () {
         console.log("Veuillez bien saisir votre adresse mail");
     }
 }
+function messageValidate () {
+    let messageValue = message.value.trim();
+    if (messageValue.length <2) {
+        console.log("Veuillez entrer plus de 2 caractères");
+    }
+}
 
 // form add event listener 
 formData.addEventListener("input", function (e){
@@ -47,6 +53,7 @@ formData.addEventListener("input", function (e){
     firstValidate();
     nameValidate();
     emailValidate();
+    messageValidate();
 
 });
 

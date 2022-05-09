@@ -127,39 +127,48 @@ form .message {
 }
 .title_likes {
     display: flex;
+    justify-content: space-evenly;
 
 }
 .title{
     color : #901C1C;
     font-size : 18px;
 }
+.likes{
+    color : #901C1C;
+    font-weight: bolder;
+}
 .heart {
     background: #901C1C;
-    width:20px;
-    height: 20px;
+    width:13px;
+    height: 13px;
     position: relative;
     top :40%;
+    margin-left: 10px;
     transform: rotate(-45deg);
 }
 .heart::after{
     background: #901C1C;
-    width:20px;
-    height: 20px;
+    width:13px;
+    height: 13px;
     content : '';
     position: absolute;
-    top : -10px;
+    top : -7px;
     left : 0px;
     border-radius: 50%;
 }
 .heart::before{
     background: #901C1C;
-    width:20px;
-    height: 20px;
+    width:13px;
+    height: 13px;
     content : '';
     position: absolute;
     top :0px;
     right : -50%;
     border-radius: 50%;
+}
+.likes_heart{
+    display: flex;
 }
 
 
