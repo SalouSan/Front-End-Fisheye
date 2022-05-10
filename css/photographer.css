@@ -170,6 +170,12 @@ form .message {
 .likes_heart{
     display: flex;
 }
+.formData.success input {
+    border : 2px solid green;
+}
+.formData.error input {
+    border: 2px solid red;
+}
 
 
 
