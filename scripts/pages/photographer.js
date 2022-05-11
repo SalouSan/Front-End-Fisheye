@@ -52,12 +52,13 @@ async function getArtist (){
             `
             <div class= "picture">
                 <img id="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
-                <div class="title_likes">    
-                    <h2 class="title"> ${person.title} </h2>
-                    <div class="likes_heart">
-                        <p class="likes"> ${person.likes} 
-                        <div class="heart"></div>
-                        </p>
+                <div class="content">
+                    <div class="title_likes">    
+                        <h2 class="title"> ${person.title} </h2>
+                        <div class="likes_heart">
+                            <p class="likes"> ${person.likes} </p>
+                            <div class="heart"></div>       
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,17 +73,22 @@ async function getArtist (){
     photographerContent(idPhotographer);
 
     // Fonction qui permet de gerer les likes 
-
     function likes () { 
         let heart = document.querySelectorAll(".heart");
-        let count = 0;
+        let likes = document.querySelectorAll(".likes");
+        for (let like=0; like <likes.length; like++);
+        let value = likes.innerText;
+        console.log(value);
         for (let i = 0; i < heart.length; i++) {
             heart[i].addEventListener('click', function () {
-                console.log(count++);
+                likes.innerText=value;
+                value++;
             });
-        }            
+        }           
     }
     likes();
+
+
 
 }
 getArtist ();

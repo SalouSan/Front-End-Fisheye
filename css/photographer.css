@@ -123,11 +123,11 @@ form .message {
 #photo {
     height: 20rem;
     width: 20rem;
-    object-fit: contain;
+    object-fit: cover;
 }
 .title_likes {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
 }
 .title{
@@ -176,7 +176,10 @@ form .message {
 .formData.error input {
     border: 2px solid red;
 }
-
+.content {
+    width: 72%;
+    margin-top: 10px;
+}
 
 
 

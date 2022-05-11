@@ -14,26 +14,27 @@ let lastName = document.getElementById("last");
 let email = document.getElementById("mail");
 let message = document.getElementById("message");
 let formData = document.querySelector(".formData");
+let form = document.querySelector("form");
 
 
 // Validate functions 
 
 function firstValidate () {
     let firstNameValue = firstName.value.trim();
-    if (firstNameValue.length < 2) {
-        return false
+    if (firstNameValue.length>2) {
+        return true
     }
     else {
-        return true
+        return false
     }
 }
 function nameValidate () {
     let lastNameValue = lastName.value.trim();
-    if (lastNameValue.length < 2) {
-        return false
+    if (lastNameValue.length>2) {
+        return true
     }
     else {
-        return true
+        return false
     }
 }
 function emailValidate () {
@@ -48,11 +49,11 @@ function emailValidate () {
 }
 function messageValidate () {
     let messageValue = message.value.trim();
-    if (messageValue.length <2) {
-        return false
+    if (messageValue.length>2) {
+        return true
     }
     else {
-        return true
+        return false
     }
 }
 // function message d'erreurs et de succès 
@@ -66,7 +67,7 @@ function setError (input,message) {
     formData.classList.remove("success");
     
 }
-function setSucess (input) {
+function setSuccess (input) {
     let formData = input.parentElement;
     let errorElement = document.querySelector("small");
     errorElement.style.visibility= "hidden";
@@ -76,55 +77,44 @@ function setSucess (input) {
 }
 
 // form add event listener 
-formData.addEventListener("input", function (e){
+form.addEventListener("input", function (e){
     e.preventDefault();
-    firstValidate();
-    nameValidate();
-    emailValidate();
-    messageValidate();
+    globalValidate();   
 
 });
 
 // function qui valide tous les inputs en meme temps 
 function globalValidate () {
-    if (firstValidate ()){
-        setSucess(firstName);
+    if (firstValidate()){
+        setSuccess(firstName);
     }
     else {
         setError(firstName, "Vous devez entrer au moins deux caractères pour le prénom");
     }
-    if (nameValidate()){
-        setSucess(lastName);
+    if (nameValidate ()) {
+        setSuccess(lastName);
     }
     else {
-        setError(lastName, "Vous devez entrer au moins deux caractères pour le nom");
+        setError(lastName, "Vous devez");
     }
-    if (emailValidate()){
-        setSucess(email);
-    }
-    else {
-        setError(email, "Merci d'entrer un email valide");
-    }
-    if (messageValidate()){
-        setSucess(message);
-    }
-    else {
-        setError(message, "Merci de bien entrer au moins caractères");
-    }
-    if (firstValidate() && nameValidate () && emailValidate () && messageValidate){
-
+    if (firstValidate() && nameValidate () && emailValidate () && messageValidate ()){
+        successMessage();
     }
 }
 
 
 // add event listener submit 
 
-formData.addEventListener("submit", function (e){
+form.addEventListener("submit", function (e){
     e.preventDefault();
     globalValidate();
-})
-// message succès
+});
+// message confirmation
 
 function successMessage () {
-    
+    let h2 = document.querySelector("h2");
+    h2.style.display = "none";
+    form.style.display = "none";
+    let span = document.querySelector("span");
+    span.innerText= "Votre demande a bien été prise en compte. Merci !";    
 }
