@@ -76,14 +76,14 @@ async function getArtist (){
     function likes () { 
         let heart = document.querySelectorAll(".heart");
         let likes = document.querySelectorAll(".likes");
-        for (let like=0; like <likes.length; like++);
-        let value = likes.innerText;
-        console.log(value);
-        for (let i = 0; i < heart.length; i++) {
+        for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
+            let integer = likes[j].innerText;
+            console.log(likes[j]);
             heart[i].addEventListener('click', function () {
-                likes.innerText=value;
-                value++;
+                likes[j].innerText=integer;
+                integer++;
             });
+            
         }           
     }
     likes();
