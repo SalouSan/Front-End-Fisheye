@@ -89,6 +89,18 @@ const displayPhotographers2 = async function () {
         } */
     }
     renderPhotographers2();
+    const images = media.map((person)=> new Video(person));
+
+
+    const article = document.createElement("article");
+    article.innerHTML=  ` 
+    <div class="template">
+        <video class="video"> ${this._video} </video>
+        <h2 class="title" ${this._title} </h2>
+        <span class="likes" ${this._likes} </span> 
+    </div> `;
+
+    photographersContener.appendChild(article);
 } 
 displayPhotographers2();
 
@@ -99,4 +111,53 @@ console.log(mess)
 
 
 //data.photographers.name//
+
+
+// Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
+
+
+
+class Video {
+    constructor(media, type) {
+        const element = document.createElement(type);
+        const source = document.createElement("source");
+        const src = source.setAttribute("src", "");
+        this.video = media.video;
+        return {
+            element,
+            setPath() {
+                src.innerHTML = `assets/Sample Photos/Mimi/${this.video}`;
+            },
+            setAttribute () {
+                element.setAttribute("controls", "controls")
+            }
+        };
+    }
+}
+class Image {
+    constructor(media, type) {
+        const element = document.createElement(type);
+        this.video = media.image;
+        return {
+            element,
+            setTag() {
+                element.innerHTML = `assets/Sample Photos/Mimi/${this.image}`;
+            }
+        };
+    }
+}
+
+class Media {
+    constructor (media, type){
+        if (type === "video") {
+            return new Video(media)
+        }
+        else if (type === "image") {
+            return new Image(media)
+        }
+        else {
+            throw 'Unknown type format'
+        }
+    }
+}
 

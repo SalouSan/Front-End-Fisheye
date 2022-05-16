@@ -62,9 +62,15 @@ async function getArtist (){
                     </div>
                 </div>
             </div>
-    
             `).join('');
-            article.innerHTML=photograph;
+            let div = `
+            <div id="modale" class="modal">
+                <span class="close">&times;</span>
+                <div class=modal_content>
+                    <img src="assets/Sample Photos/Photographers ID Photos/MimiKeel.jpg " alt="">
+                </div>
+            </div>`
+            article.innerHTML=photograph + div;
             content.appendChild(article);
             return (article);
         }
@@ -76,20 +82,52 @@ async function getArtist (){
     function likes () { 
         let heart = document.querySelectorAll(".heart");
         let likes = document.querySelectorAll(".likes");
+        let total = 0;
         for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
             let integer = likes[j].innerText;
             console.log(likes[j]);
             heart[i].addEventListener('click', function () {
                 likes[j].innerText=integer;
                 integer++;
+                total++;  
+                
             });
             
-        }           
+        }   
+        function globalLikesCounter () {            
+            for (let j=0; j <likes.length; j++){
+            total+= parseInt(likes[j].innerText);
+            console.log(total);
+            }
+            let counter = document.createElement("div");
+            counter.setAttribute("class", "counter_content");
+            for (let person of data1.photographers) {
+                let price = person.price;
+                console.log(price);
+                counter.innerHTML = 
+                `
+                <div class= counter_price> 
+                    <p class="counter"> ${total}</p>
+                    <p class="price1"> 100€ /jour </p>
+                </div>`;
+                const content = document.querySelector(".photographers-content");
+                content.appendChild(counter);
+            }
+        }
+        globalLikesCounter();    
+        
     }
     likes();
 
+    // function pour la modale lightbox 
 
+    window.onload = () => {
+        const modale = document.getElementById("modale");
+        const close = document.querySelector(".close");
+        const links = document.querySelectorAll("a");
+    } 
 
+    
 }
 getArtist ();
 
