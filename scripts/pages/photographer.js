@@ -25,7 +25,7 @@ async function getArtist (){
 
             const photo = artist.filter((person) => person.id === idPhotographer)
             .map ((artist) => 
-            `<img class="picture" src="assets/Sample Photos/Photographers ID Photos/${artist.portrait}"/>`
+            `<img class="pic" src="assets/Sample Photos/Photographers ID Photos/${artist.portrait}"/>`
             );
             image.innerHTML= photo;
         }
@@ -46,12 +46,13 @@ async function getArtist (){
         if (idPhotographer) {
             let artist = data1.photographers;
             let photographerId = artist.find((photographer)=> photographer.id === currentIds);
+            
         
             const photograph = media.filter((artist)=> artist.photographerId === idPhotographer)
             .map((person) =>             
             `
             <div class= "picture">
-                <img id="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                <img class="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
                 <div class="content">
                     <div class="title_likes">    
                         <h2 class="title"> ${person.title} </h2>
@@ -63,6 +64,9 @@ async function getArtist (){
                 </div>
             </div>
             `).join('');
+            const picture = document.querySelectorAll(".picture");
+            console.log(picture); 
+            
             let div = `
             <div id="modale" class="modal">
                 <span class="close">&times;</span>
@@ -73,8 +77,7 @@ async function getArtist (){
             article.innerHTML=photograph + div;
             content.appendChild(article);
             return (article);
-        }
-        
+        }   
     }
     photographerContent(idPhotographer);
 
@@ -82,36 +85,37 @@ async function getArtist (){
     function likes () { 
         let heart = document.querySelectorAll(".heart");
         let likes = document.querySelectorAll(".likes");
-        let total = 0;
-        for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
-            let integer = likes[j].innerText;
-            console.log(likes[j]);
-            heart[i].addEventListener('click', function () {
-                likes[j].innerText=integer;
-                integer++;
-                total++;  
-                
-            });
-            
-        }   
+        let total = 0;   
         function globalLikesCounter () {            
             for (let j=0; j <likes.length; j++){
-            total+= parseInt(likes[j].innerText);
+            total+=parseInt(likes[j].innerText);
             console.log(total);
             }
             let counter = document.createElement("div");
             counter.setAttribute("class", "counter_content");
             for (let person of data1.photographers) {
                 let price = person.price;
-                console.log(price);
                 counter.innerHTML = 
                 `
                 <div class= counter_price> 
-                    <p class="counter"> ${total}</p>
+                    <p class="counter"> ${total} </p>
                     <p class="price1"> 100€ /jour </p>
                 </div>`;
                 const content = document.querySelector(".photographers-content");
                 content.appendChild(counter);
+            }
+            for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
+                let integer = likes[j].innerText;
+                let count = document.querySelector(".counter");
+                console.log(likes[j]);
+                heart[i].addEventListener('click', function () {
+                    likes[j].innerText=integer;
+                    count.innerText=total;
+                    integer++;
+                    total++;
+
+                });
+                
             }
         }
         globalLikesCounter();    
@@ -124,10 +128,28 @@ async function getArtist (){
     window.onload = () => {
         const modale = document.getElementById("modale");
         const close = document.querySelector(".close");
-        const links = document.querySelectorAll("a");
-    } 
+        const imgs = document.querySelectorAll(".photo");
+        for (let i=0; i<imgs.length; i++){
 
-    
+    // on ajoute l'ecouteur click 
+        for (let img of imgs) {
+            img.addEventListener("click", function (e){
+                e.preventDefault();
+
+                // On ajoute l'image du lien clique dans la modale
+                const im = document.querySelector(".modal_content img");
+                im.src = this.src;
+                console.log(im);
+
+
+                // on affiche la modale
+                modale.classList.add("show");
+            });
+
+        } 
+    }
+
+    }
 }
 getArtist ();
 

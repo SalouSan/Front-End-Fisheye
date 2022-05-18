@@ -120,7 +120,7 @@ form .message {
 .tagline1{
     color: grey;
 }
-#photo {
+.photo {
     height: 20rem;
     width: 20rem;
     object-fit: cover;
@@ -223,4 +223,9 @@ form .message {
     position: absolute;
     left:95%;
 }
-
+.pic{
+    object-fit: cover;
+}
+.modal.show{
+    display: initial;
+}

@@ -62,7 +62,7 @@ function setError (input,message) {
     let formData = input.parentElement;
     let errorElement = document.querySelector("small");
     errorElement.innerText= message;
-    errorElement.style.color= "red";
+    errorElement.style.color="red";
     formData.classList.add("error");
     formData.classList.remove("success");
     

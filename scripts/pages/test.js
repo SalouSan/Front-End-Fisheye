@@ -71,27 +71,8 @@ const displayPhotographers2 = async function () {
                     </div>`
                     ).join('')
 
-        
-       /*  for (const person of data2.media) {
-            console.log(person)
-            const article = document.createElement('article');
-            main.appendChild(article);
-            const cardPhotos = 
-            `<div class = "template">
-                <img 
-                    alt="La photo"
-                    src="${person.image}"
-                />
-                <h2 class="title"> ${person.title} </h2>
-                <span class= "likes">  ${person.likes} </span>
-            </div>`
-            article.innerHTML = cardPhotos;
-        } */
     }
     renderPhotographers2();
-    const images = media.map((person)=> new Video(person));
-
-
     const article = document.createElement("article");
     article.innerHTML=  ` 
     <div class="template">
@@ -99,65 +80,107 @@ const displayPhotographers2 = async function () {
         <h2 class="title" ${this._title} </h2>
         <span class="likes" ${this._likes} </span> 
     </div> `;
+   
 
     photographersContener.appendChild(article);
+
+    function Media () {
+        for (let type of media) {
+            const {media} = data2;
+            let video = type.video;
+            let image = type.image;
+            const div = document.querySelector(".picture");
+            const img = document.querySelector("img");
+
+            if (media.map === video) {
+                const vid = document.createElement("video");
+                const vidClass = vid.setAttribute("class", "player");
+                const controls = vid.setAttribute("controls", "controls");
+                const source = document.createAttribute("source");
+                source.src = "assets/Sample Photos/Mimi/${person.video}";
+                source.type = "video/mp4";
+                div.appendChild(vid);
+                div.removeChild(img);              
+            }
+            
+        }
+    } 
+    Media();
+    
+
 } 
+
+
+
+    class Video {
+        constructor(media) {
+            this._title = media.title;
+            this._likes = media.likes;
+            this._video = media.video;
+        }
+        get title () {
+            return this._title
+        }
+        get likes () {
+            return this._likes
+        }
+        get video () {
+            return `assets/Sample Photos/Mimi/${this._video}`;
+        }
+        
+    }
+
+
+    class Image {
+        constructor(media, type) {
+            const element = document.createElement("img");
+            const src = element.setAttribute("src", "");
+            this.video = media.image;
+            return {
+                element,
+                setPath() {
+                    src.innerHTML = `assets/Sample Photos/Mimi/${this.image}`;
+                }
+            };
+        }
+    }
+
+
+    // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
+    class Media {
+        constructor (media, type){
+            if (type === "video") {
+                return new Video(media)
+            }
+            else if (type === "image") {
+                return new Image(media)
+            }
+            else {
+                throw 'Unknown type format'
+            }
+        }
+    }
+
+    const source = document.createElement("source");
+    source.type = "video/mp4";
+    source.src = "assets/Sample Photos/Photographers ID/ Mimi.jpg";
+    console.log(source);
+
+
+
+
+
+
+
+
 displayPhotographers2();
-
-const messi = document.getElementById("main");
-const mess = messi.getAttribute("id");
-console.log(mess)
-
-
 
 //data.photographers.name//
 
 
-// Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
 
 
 
-class Video {
-    constructor(media, type) {
-        const element = document.createElement(type);
-        const source = document.createElement("source");
-        const src = source.setAttribute("src", "");
-        this.video = media.video;
-        return {
-            element,
-            setPath() {
-                src.innerHTML = `assets/Sample Photos/Mimi/${this.video}`;
-            },
-            setAttribute () {
-                element.setAttribute("controls", "controls")
-            }
-        };
-    }
-}
-class Image {
-    constructor(media, type) {
-        const element = document.createElement(type);
-        this.video = media.image;
-        return {
-            element,
-            setTag() {
-                element.innerHTML = `assets/Sample Photos/Mimi/${this.image}`;
-            }
-        };
-    }
-}
 
-class Media {
-    constructor (media, type){
-        if (type === "video") {
-            return new Video(media)
-        }
-        else if (type === "image") {
-            return new Image(media)
-        }
-        else {
-            throw 'Unknown type format'
-        }
-    }
-}
+
 
