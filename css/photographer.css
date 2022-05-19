@@ -203,6 +203,7 @@ form .message {
     top:0;
     bottom: 0;
     right: 0;
+    overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 14px rgba(0,0,0,0.3);
 }
@@ -210,8 +211,9 @@ form .message {
     height: 400px;
     width: 800px;
     margin:auto;
-    max-width: 1200px;
     position:absolute;
+    position: relative;
+    display: flex;
     top:50%;
     left: 49%;
     transform: translate(-50%, -50%);
@@ -221,20 +223,52 @@ form .message {
     height:100%;
 }
 .close{
-    color:white;
+    color: #901C1C;
     font-size: 70px;
     margin-top: -20px;
     position: absolute;
     left:95%;
 }
-.bouton{
-    position: absolute;
-    width: 70px;
-    cursor: pointer;
+
+#g{
+    left: 0;
+    opacity: 0.4;
 }
 .pic{
     object-fit: cover;
 }
 .modal.show{
     display: initial;
+}
+.container{
+    display: flex;
+}
+.chevron::before {
+	border-style: solid;
+	border-width: 0.25em 0.25em 0 0;
+	content: '';
+	display: inline-block;
+	height: 0.45em;
+	left: 0.15em;
+	position: relative;
+	top: 45%;
+    color: #901C1C;
+    font-size: 33px;
+	transform: rotate(-45deg);
+	vertical-align: top;
+	width: 0.45em;
+}
+
+.chevron.left:before {
+	left: 0;
+	transform: rotate(-135deg);
+}
+.chevron.right:before {
+	left: 0;
+	transform: rotate(45deg);
+}
+.photographies {
+    width: 800px;
+    height:800px;
+    margin:0;
 }

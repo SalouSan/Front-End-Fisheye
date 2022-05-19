@@ -71,8 +71,8 @@ async function getArtist (){
             <div id="modale" class="modal">
                 <span class="close">&times;</span>
                 <div class=modal_content>
-                    <img src="" alt="" class="bouton" id="d" />
-                    <img src="" alt="" class="bouton" id="g" />
+                    <span class="chevron left"></span>  
+                    <span class="chevron right"></span>
                 </div>
             </div>`
             article.innerHTML=photograph + div;
@@ -99,8 +99,10 @@ async function getArtist (){
             let people = person.filter((person) => person.id === idPhotographer)
                 .map((person)=>
                 `
-                <div class= counter_price> 
-                    <p class="counter"> ${total} </p>
+                <div class="counter_price"> 
+                    <div class="container">
+                        <p class="counter"> ${total} </p>
+                    </div>
                     <p class="price1"> ${person.price}€/jour </p>
                 </div>`);
                 counter.innerHTML=people;
@@ -132,23 +134,40 @@ async function getArtist (){
         const modale = document.getElementById("modale");
         const close = document.querySelector(".close");
         const imgs = document.querySelectorAll(".photo");
+        let leftButton = document.querySelector(".chevron.left");
+        let rightButton = document.querySelector(".chevron.right");
+        const im = document.querySelector(".modal_content img");
+        const modalContent = document.querySelector(".modal_content");
+        let nbr = 9;
+        let p =0;
+        modalContent.style.width=(800*nbr)+"px";
         for (let i=0; i<imgs.length; i++){
+            
+            
 
     // on ajoute l'ecouteur click 
         for (let img of imgs) {
             img.addEventListener("click", function (e){
                 e.preventDefault();
-
-                // On ajoute l'image du lien clique dans la modale
-                const im = document.querySelector(".modal_content img");
-                im.src = this.src;
-                console.log(im);
-
+                // On ajoute l'image de la page photographe dans la modale
+                const elementDiv = document.createElement("div");
+                elementDiv.setAttribute("class","photographies");
+                elementDiv.style.backgroundImage = `url('${imgs[i].src}')`;
+                modalContent.appendChild(elementDiv);
+                modalContent.style.width=(900*nbr)+"px";
+                modalContent.style.height=(20*nbr)+"px";
 
                 // on affiche la modale
                 modale.classList.add("show");
             });
-
+            leftButton.addEventListener("click", function (e){
+                console.log("left");
+                im.src--;
+            })
+            rightButton.addEventListener("click", function (e){
+                console.log("right");
+                im.src++;
+            })
             close.addEventListener("click", function (e){
                 modale.classList.remove("show")
             })
