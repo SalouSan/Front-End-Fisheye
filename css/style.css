@@ -62,6 +62,7 @@ article {
     height: 200px;
     width: 200px;
     border-radius: 100px;
+    object-fit:cover;
 }
 .photographer_link {
     text-decoration: red;

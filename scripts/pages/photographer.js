@@ -71,7 +71,8 @@ async function getArtist (){
             <div id="modale" class="modal">
                 <span class="close">&times;</span>
                 <div class=modal_content>
-                    <img src="assets/Sample Photos/Photographers ID Photos/MimiKeel.jpg " alt="">
+                    <img src="" alt="" class="bouton" id="d" />
+                    <img src="" alt="" class="bouton" id="g" />
                 </div>
             </div>`
             article.innerHTML=photograph + div;
@@ -93,17 +94,19 @@ async function getArtist (){
             }
             let counter = document.createElement("div");
             counter.setAttribute("class", "counter_content");
-            for (let person of data1.photographers) {
-                let price = person.price;
-                counter.innerHTML = 
+            let person = data1.photographers;
+                
+            let people = person.filter((person) => person.id === idPhotographer)
+                .map((person)=>
                 `
                 <div class= counter_price> 
                     <p class="counter"> ${total} </p>
-                    <p class="price1"> 100€ /jour </p>
-                </div>`;
+                    <p class="price1"> ${person.price}€/jour </p>
+                </div>`);
+                counter.innerHTML=people;
                 const content = document.querySelector(".photographers-content");
                 content.appendChild(counter);
-            }
+            
             for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
                 let integer = likes[j].innerText;
                 let count = document.querySelector(".counter");
@@ -145,6 +148,10 @@ async function getArtist (){
                 // on affiche la modale
                 modale.classList.add("show");
             });
+
+            close.addEventListener("click", function (e){
+                modale.classList.remove("show")
+            })
 
         } 
     }
