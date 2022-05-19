@@ -25,7 +25,7 @@ async function getArtist (){
 
             const photo = artist.filter((person) => person.id === idPhotographer)
             .map ((artist) => 
-            `<img class="pic" src="assets/Sample Photos/Photographers ID Photos/${artist.portrait}"/>`
+            `<img class="pic" src="assets/Sample_Photos/Photographers-ID_Photos/${artist.portrait}"/>`
             );
             image.innerHTML= photo;
         }
@@ -52,7 +52,7 @@ async function getArtist (){
             .map((person) =>             
             `
             <div class= "picture">
-                <img class="photo" src = "assets/Sample Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
                 <div class="content">
                     <div class="title_likes">    
                         <h2 class="title"> ${person.title} </h2>
@@ -64,17 +64,19 @@ async function getArtist (){
                 </div>
             </div>
             `).join('');
-            const picture = document.querySelectorAll(".picture");
-            console.log(picture); 
             
             let div = `
             <div id="modale" class="modal">
                 <span class="close">&times;</span>
                 <div class=modal_content>
-                    <span class="chevron left"></span>  
+                    <span class="chevron left"></span>
+                    <div class="slider"> 
+                        <img class="pics" src="assets/Sample_Photos/Photographers-ID_Photos/MimiKeel.jpg" alt=""/> 
+                    </div>
                     <span class="chevron right"></span>
                 </div>
             </div>`
+            
             article.innerHTML=photograph + div;
             content.appendChild(article);
             return (article);
@@ -102,6 +104,7 @@ async function getArtist (){
                 <div class="counter_price"> 
                     <div class="container">
                         <p class="counter"> ${total} </p>
+                        <div class="coeur"></div>  
                     </div>
                     <p class="price1"> ${person.price}€/jour </p>
                 </div>`);
@@ -129,18 +132,18 @@ async function getArtist (){
     likes();
 
     // function pour la modale lightbox 
-
+    
     window.onload = () => {
         const modale = document.getElementById("modale");
         const close = document.querySelector(".close");
-        const imgs = document.querySelectorAll(".photo");
+        const imgs = Array.from(document.querySelectorAll(".photo"));
+        const gallery = imgs.map((img)=> img.getAttribute("src"));
+        console.log(gallery);
         let leftButton = document.querySelector(".chevron.left");
         let rightButton = document.querySelector(".chevron.right");
-        const im = document.querySelector(".modal_content img");
         const modalContent = document.querySelector(".modal_content");
         let nbr = 9;
         let p =0;
-        modalContent.style.width=(800*nbr)+"px";
         for (let i=0; i<imgs.length; i++){
             
             
@@ -149,24 +152,19 @@ async function getArtist (){
         for (let img of imgs) {
             img.addEventListener("click", function (e){
                 e.preventDefault();
+                let src = e.currentTarget.getAttribute("src");
+                console.log(src);
                 // On ajoute l'image de la page photographe dans la modale
-                const elementDiv = document.createElement("div");
-                elementDiv.setAttribute("class","photographies");
-                elementDiv.style.backgroundImage = `url('${imgs[i].src}')`;
-                modalContent.appendChild(elementDiv);
-                modalContent.style.width=(900*nbr)+"px";
-                modalContent.style.height=(20*nbr)+"px";
 
                 // on affiche la modale
                 modale.classList.add("show");
             });
             leftButton.addEventListener("click", function (e){
                 console.log("left");
-                im.src--;
             })
             rightButton.addEventListener("click", function (e){
                 console.log("right");
-                im.src++;
+                gallery.findIndex(image => image === this.url)
             })
             close.addEventListener("click", function (e){
                 modale.classList.remove("show")
