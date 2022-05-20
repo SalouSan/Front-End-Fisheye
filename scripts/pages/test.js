@@ -88,35 +88,37 @@ const displayPhotographers2 = async function () {
         for (let type of media) {
             const {media} = data2;
             let video = type.video;
-            let image = type.image;
-            const div = document.querySelector(".picture");
+            const div = document.querySelectorAll(".picture");
             const img = document.querySelector("img");
 
-            if (media.map === video) {
+            if (media.map((element)=> element.video)) {
                 const vid = document.createElement("video");
                 const vidClass = vid.setAttribute("class", "player");
                 const controls = vid.setAttribute("controls", "controls");
-                const source = document.createAttribute("source");
+                const source = document.createElement("source");
                 source.src = "assets/Sample Photos/Mimi/${person.video}";
                 source.type = "video/mp4";
-                div.appendChild(vid);
-                div.removeChild(img);              
+                for (let i=0; i<div.length; i++){
+                vid.insertAdjacentElement('afterbegin',source);
+                div[i].insertAdjacentElement('afterbegin',vid);     
+                }       
             }
+            return div;
             
         }
     } 
-    Media();
+    Media(); 
     
 
 } 
 
 
-
     class Video {
-        constructor(media) {
+        constructor(media,data2) {
             this._title = media.title;
             this._likes = media.likes;
             this._video = media.video;
+            this._name = data2.name;
         }
         get title () {
             return this._title
@@ -127,22 +129,57 @@ const displayPhotographers2 = async function () {
         get video () {
             return `assets/Sample Photos/Mimi/${this._video}`;
         }
+
+        createVideoCard(){
+            `<div class= "picture">
+            <img class="photo" src = "assets/Sample_Photos/${this._name.split(" ")[0]}/${this._video}"/>
+            <div class="content">
+                <div class="title_likes">    
+                    <h2 class="title"> ${this._title} </h2>
+                    <div class="likes_heart">
+                        <p class="likes"> ${this._likes} </p>
+                        <div class="heart"></div>       
+                    </div>
+                </div>
+            </div>
+        </div>`
+        }
         
     }
 
 
     class Image {
-        constructor(media, type) {
-            const element = document.createElement("img");
-            const src = element.setAttribute("src", "");
-            this.video = media.image;
-            return {
-                element,
-                setPath() {
-                    src.innerHTML = `assets/Sample Photos/Mimi/${this.image}`;
-                }
-            };
+        constructor(media,data2) {
+            this._title = media.title;
+            this._likes = media.likes;
+            this._image = media.image;
+            this._name = data2.name;
         }
+        get title () {
+            return this._title
+        }
+        get likes () {
+            return this._likes
+        }
+        get video () {
+            return `assets/Sample Photos/${this._name.split(" ")[0]}/${this._video}`;
+        }
+
+        createPhotoCard(){
+            `<div class= "picture">
+            <img class="photo" src = "assets/Sample_Photos/${this._name.split(" ")[0]}/${this._image}"/>
+            <div class="content">
+                <div class="title_likes">    
+                    <h2 class="title"> ${this._title} </h2>
+                    <div class="likes_heart">
+                        <p class="likes"> ${this._likes} </p>
+                        <div class="heart"></div>       
+                    </div>
+                </div>
+            </div>
+        </div>`
+        }
+        
     }
 
 
@@ -160,11 +197,6 @@ const displayPhotographers2 = async function () {
             }
         }
     }
-
-    const source = document.createElement("source");
-    source.type = "video/mp4";
-    source.src = "assets/Sample Photos/Photographers ID/ Mimi.jpg";
-    console.log(source);
 
 
 

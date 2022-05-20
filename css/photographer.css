@@ -194,7 +194,7 @@ form .message {
     align-items: center;
     justify-content: space-evenly;
 }
-.modal {
+.caroussel {
     display: none;
     position: fixed;
     height: 400px;
@@ -234,14 +234,10 @@ form .message {
     cursor: pointer;
 }
 
-#g{
-    left: 0;
-    opacity: 0.4;
-}
 .pic{
     object-fit: cover;
 }
-.modal.show{
+.caroussel.show{
     display: initial;
 }
 .container{

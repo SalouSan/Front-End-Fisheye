@@ -97,7 +97,13 @@ function globalValidate () {
     else {
         setError(lastName, "Vous devez");
     }
-    if (firstValidate() && nameValidate () && emailValidate () && messageValidate ()){
+    if (messageValidate()){
+        setSuccess(message);
+    }
+    else{
+        setError(message, "Vous devez ecrire quelque chose");
+    }
+    if (firstValidate() && nameValidate () && messageValidate ()){
         successMessage();
     }
 }

@@ -64,10 +64,34 @@ async function getArtist (){
                 </div>
             </div>
             `).join('');
+            function Media () {
+                for (let type of media) {
+                    const {media} = data1;
+                    let video = type.video;
+                    const div = document.querySelectorAll(".picture");
+                    const img = document.querySelector("img");
+        
+                    if (media.map((element)=> element.video)) {
+                        const vid = document.createElement("video");
+                        const vidClass = vid.setAttribute("class", "player");
+                        const controls = vid.setAttribute("controls", "controls");
+                        const source = document.createElement("source");
+                        source.src = "assets/Sample Photos/Mimi/${person.video}";
+                        source.type = "video/mp4";
+                        for (let i=0; i<div.length; i++){
+                        vid.insertAdjacentElement('afterbegin',source);
+                        div[i].insertAdjacentElement('afterbegin',vid);     
+                        }       
+                    }
+                    return div;
+                    
+                }
+            } 
+            Media(); 
             
             let div = `
-            <div id="modale" class="modal">
-                <span class="close">&times;</span>
+            <div id="modale" class="caroussel">
+                <span class="close"> &times;</span>
                 <div class=modal_content>
                     <span class="chevron left"></span>
                     <div class="slider"> 
@@ -75,8 +99,7 @@ async function getArtist (){
                     </div>
                     <span class="chevron right"></span>
                 </div>
-            </div>`
-            
+            </div>`         
             article.innerHTML=photograph + div;
             content.appendChild(article);
             return (article);
@@ -92,7 +115,6 @@ async function getArtist (){
         function globalLikesCounter () {            
             for (let j=0; j <likes.length; j++){
             total+=parseInt(likes[j].innerText);
-            console.log(total);
             }
             let counter = document.createElement("div");
             counter.setAttribute("class", "counter_content");
@@ -167,7 +189,7 @@ async function getArtist (){
                 gallery.findIndex(image => image === this.url)
             })
             close.addEventListener("click", function (e){
-                modale.classList.remove("show")
+                modale.classList.remove("show");
             })
 
         } 
