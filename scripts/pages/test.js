@@ -210,9 +210,26 @@ displayPhotographers2();
 //data.photographers.name//
 
 
+class person {
+    constructor(firstName, lastName, email){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    }
+
+    getfullName (){
+        return `${this.firstName} ${this.lastName}`;
+
+    }
+}
+
+
+const person1 = new person ("John", "Doe", "john@gmail.com");
+const person2 = new person ("Bruce", "Wayne", "bw@gmail.com");
+
+console.log(person1.getfullName());
+console.log(person2.getfullName());
 
 
 
-
-
-
+let John 

@@ -21,26 +21,26 @@ let form = document.querySelector("form");
 
 function firstValidate () {
     let firstNameValue = firstName.value.trim();
-    if (firstNameValue.length>2) {
-        return true
+    if (firstNameValue.length < 2) {
+        return false
     }
     else {
-        return false
+        return true
     }
 }
 function nameValidate () {
     let lastNameValue = lastName.value.trim();
-    if (lastNameValue.length>2) {
-        return true
+    if (lastNameValue.length < 2) {
+        return false
     }
     else {
-        return false
+        return true
     }
 }
 function emailValidate () {
     let emailValue = email.value.trim();
     let regx = /^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
-    if (emailValue.match(regx)) {
+    if (emailValue.test(regx)) {
         return true
     }
     else {
@@ -49,11 +49,11 @@ function emailValidate () {
 }
 function messageValidate () {
     let messageValue = message.value.trim();
-    if (messageValue.length>2) {
-        return true
+    if (messageValue.length < 2) {
+        return false
     }
     else {
-        return false
+        return true
     }
 }
 // function message d'erreurs et de succès 
@@ -97,13 +97,19 @@ function globalValidate () {
     else {
         setError(lastName, "Vous devez");
     }
+    if (emailValidate()){
+        setSuccess(email);
+    }
+    else{
+        setError(email, "Vous devez ecrire quelque chose");
+    }
     if (messageValidate()){
         setSuccess(message);
     }
     else{
         setError(message, "Vous devez ecrire quelque chose");
     }
-    if (firstValidate() && nameValidate () && messageValidate ()){
+    if (firstValidate() && nameValidate () && emailValidate () && messageValidate ()){
         successMessage();
     }
 }
