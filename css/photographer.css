@@ -304,3 +304,79 @@ form .message {
     right : -50%;
     border-radius: 50%;
 }
+
+.wrapper{
+    padding-top: 15px;
+    border : 2px solid transparent;
+    border-radius: 5px;
+    width: 115px;
+    height: 115px;
+    margin-top: 20px;
+    color: #FAFAFA;
+    justify-content: center;
+    background-color: #901C1C;
+    list-style-type: none;
+    padding-left: 10px;
+
+}
+.divNav{
+    display: flex;
+    margin-left: 100px;
+    align-items: flex-start;
+    cursor: pointer;
+}
+.Tri{
+    margin-top: 30px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+.popularité{
+    padding-bottom: 9px;
+}
+.date{
+    border-top: 0.5px solid white;
+    padding-top: 9px;
+    border-bottom: 0.5px solid white;
+    padding-bottom: 9px;
+}
+.titre{
+    padding-top: 9px;
+}
+.sous_menu{
+    list-style-type: none;
+    padding-left: 0px;
+    padding-top: 10px;
+}
+.chevron::before {
+	border-style: solid;
+	border-width: 0.25em 0.25em 0 0;
+	content: '';
+	display: inline-block;
+	height: 0.45em;
+	left: 0.15em;
+	position: relative;
+	top: 0.15em;
+	transform: rotate(-45deg);
+	vertical-align: top;
+	width: 0.45em;
+    color: white;
+    position: absolute;
+    left: 93px;
+    top:10px;
+    font-size:14px;
+}
+.lien{
+    position: relative;
+    text-decoration: none;
+    color: white;
+}
+.sous_menu{
+    visibility: hidden;
+    height: 0;
+    top:0
+}
+
+.popularité:hover .sous_menu{
+    visibility: visible;
+    height: auto;
+}
