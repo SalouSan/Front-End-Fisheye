@@ -84,7 +84,7 @@ const displayPhotographers2 = async function () {
 
     photographersContener.appendChild(article);
 
-    function Media () {
+    function Med () {
         for (let type of media) {
             const {media} = data2;
             let video = type.video;
@@ -107,67 +107,41 @@ const displayPhotographers2 = async function () {
             
         }
     } 
-    Media(); 
-    
-
-} 
-
-
-    class Video {
-        constructor(media,data2) {
-            this._title = media.title;
-            this._likes = media.likes;
-            this._video = media.video;
-            this._name = data2.name;
-        }
-        get title () {
-            return this._title
-        }
-        get likes () {
-            return this._likes
-        }
-        get video () {
-            return `assets/Sample Photos/Mimi/${this._video}`;
-        }
-
-        createVideoCard(){
-            `<div class= "picture">
-            <img class="photo" src = "assets/Sample_Photos/${this._name.split(" ")[0]}/${this._video}"/>
-            <div class="content">
-                <div class="title_likes">    
-                    <h2 class="title"> ${this._title} </h2>
-                    <div class="likes_heart">
-                        <p class="likes"> ${this._likes} </p>
-                        <div class="heart"></div>       
-                    </div>
-                </div>
-            </div>
-        </div>`
-        }
-        
-    }
-
-
-    class Image {
-        constructor(media,data2) {
+    Med(); 
+    // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
+    class Media {
+        constructor(media) {
             this._title = media.title;
             this._likes = media.likes;
             this._image = media.image;
-            this._name = data2.name;
-        }
-        get title () {
-            return this._title
-        }
-        get likes () {
-            return this._likes
-        }
-        get video () {
-            return `assets/Sample Photos/${this._name.split(" ")[0]}/${this._video}`;
+            this._video = media.video;
+            if(this._image){
+                this.displayImage();
+            }
+            else if (this._video){
+                this.displayVideo();
+            }
         }
 
-        createPhotoCard(){
+        displayImage(){
             `<div class= "picture">
-            <img class="photo" src = "assets/Sample_Photos/${this._name.split(" ")[0]}/${this._image}"/>
+            <img class="media" src ="assets/Sample_Photos/Mimi/${this._image}"/>
+            <div class="content">
+                <div class="title_likes">    
+                    <h2 class="title"> ${this._title} </h2>
+                    <div class="likes_heart">
+                        <p class="likes"> ${this._likes} </p>
+                        <div class="heart"></div>       
+                    </div>
+                </div>
+            </div>
+        </div>`
+        }
+        displayVideo(){
+            `<div class= "picture">
+            <video class="media" controls="controls"
+                <source src = "assets/Sample_Photos/Mimi/${this._video}"
+                        type="video/mp4">
             <div class="content">
                 <div class="title_likes">    
                     <h2 class="title"> ${this._title} </h2>
@@ -181,25 +155,9 @@ const displayPhotographers2 = async function () {
         }
         
     }
-
-
-    // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
-    class Media {
-        constructor (media, type){
-            if (type === "video") {
-                return new Video(media)
-            }
-            else if (type === "image") {
-                return new Image(media)
-            }
-            else {
-                throw 'Unknown type format'
-            }
-        }
-    }
-
-
-
+    const vid = new Media;
+    console.log(vid.displayVideo());
+} 
 
 
 
@@ -230,6 +188,3 @@ const person2 = new person ("Bruce", "Wayne", "bw@gmail.com");
 console.log(person1.getfullName());
 console.log(person2.getfullName());
 
-
-
-let John 

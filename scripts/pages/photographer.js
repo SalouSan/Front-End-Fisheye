@@ -41,6 +41,43 @@ async function getArtist (){
         console.log(media);
         let firstNames = data1.photographers.map(character => character.name.split(" ")[0]);
         console.log(firstNames);
+
+        // Function tri 
+        console.log(article);
+        const nav = document.createElement("nav");
+        const ul = document.createElement("ul");
+        ul.setAttribute("class", "wrapper");
+        const li = document.createElement("li");
+        li.setAttribute("class", "popularité");
+        const span1 = document.createElement("span");
+        span1.setAttribute("class", "chevron top");
+        const li2 = document.createElement("li");
+        li2.setAttribute("class", "date");
+        const li3 = document.createElement("li");
+        li3.setAttribute("class", "titre");
+        let baliseA = document.createElement("a");
+        baliseA.setAttribute("class", "lien");
+        baliseA.setAttribute("href", "#");
+        baliseA.innerText="Popularité";
+        baliseA.insertAdjacentElement("afterbegin", span1);
+        li.insertAdjacentElement("afterbegin", baliseA);
+        const sousMenu= document.createElement("ul");
+        sousMenu.setAttribute("class", "sous_menu");
+        li2.innerText = "Date";
+        li3.innerText = "Titre";
+        const divNav = document.createElement("div");
+        divNav.setAttribute("class", "divNav"); 
+        const spanHeader = document.createElement("span");
+        spanHeader.setAttribute("class", "Tri");
+        spanHeader.innerText= "Trier par";
+        divNav.insertAdjacentElement("afterbegin", spanHeader);
+        divNav.appendChild(ul);
+        ul.appendChild(li);
+        li.appendChild(sousMenu);
+        sousMenu.appendChild(li2);
+        sousMenu.appendChild(li3);
+        nav.appendChild(divNav);
+        content.insertAdjacentElement("beforebegin", nav);
         
 // Condition permettant d'affichant les réalisations du photographer 
         if (idPhotographer) {
@@ -64,30 +101,6 @@ async function getArtist (){
                 </div>
             </div>
             `).join('');
-            function Media () {
-                for (let type of media) {
-                    const {media} = data1;
-                    let video = type.video;
-                    const div = document.querySelectorAll(".picture");
-                    const img = document.querySelector("img");
-        
-                    if (media.map((element)=> element.video)) {
-                        const vid = document.createElement("video");
-                        const vidClass = vid.setAttribute("class", "player");
-                        const controls = vid.setAttribute("controls", "controls");
-                        const source = document.createElement("source");
-                        source.src = "assets/Sample Photos/Mimi/${person.video}";
-                        source.type = "video/mp4";
-                        for (let i=0; i<div.length; i++){
-                        vid.insertAdjacentElement('afterbegin',source);
-                        div[i].insertAdjacentElement('afterbegin',vid);     
-                        }       
-                    }
-                    return div;
-                    
-                }
-            } 
-            Media(); 
             
             let div = `
             <div id="modale" class="caroussel">
@@ -196,6 +209,17 @@ async function getArtist (){
     }
 
     }
+
+
+    // functon qui trie les images par titres et par popularité 
+
+    
+       
+        const medias = document.querySelectorAll(".photo");
+        for (let i=0; i<medias.length; i++){
+            console.log(medias[i].src);
+        }
+
 }
 getArtist ();
 
