@@ -42,7 +42,7 @@ async function getArtist (){
         let firstNames = data1.photographers.map(character => character.name.split(" ")[0]);
         console.log(firstNames);
 
-        // Function tri 
+        // DOM elements tri 
         console.log(article);
         const nav = document.createElement("nav");
         const ul = document.createElement("ul");
