@@ -97,17 +97,14 @@ async function getArtist (){
             `).join('');
             
             let div = `
-            <div id="modale" class="caroussel">
-                <span class="close"> &times;</span>
-                <div class=modal_content>
-                    <span class="chevron left"></span>
-                    <div class="slider"> 
-                        <img class="pics" src="assets/Sample_Photos/Photographers-ID_Photos/MimiKeel.jpg" alt=""/> 
-                    </div>
-                    <span class="chevron right"></span>
+            <div class="lightbox" id="modale">
+                <button class="lightbox__close">Fermer</button>
+                <button class="lightbox__next">Suivant</button>
+                <button class="lightbox__prev">Precedent</button>
+                <div class=lightbox__container>
+                    <img class="pics" src="https://picsum.photos/500/500" alt=""/> 
                 </div>
             </div>`        
-            photograph+= media.sort((a,b)=> a.likes - b.likes);
             article.innerHTML=photograph + div;
             content.appendChild(article);
             return (article);      
@@ -131,7 +128,7 @@ async function getArtist (){
         titre.addEventListener("click", function (e){
             e.preventDefault;
             console.log("Titre");
-            photograph+= media.sort((a,b)=> a.title - b.title);
+            photograph+= media.sort((a,b)=> a.title.localeCompare(b.title));
         });
         popularité.addEventListener("click", function (e){
             e.preventDefault;
@@ -192,15 +189,13 @@ async function getArtist (){
     
     window.onload = () => {
         const modale = document.getElementById("modale");
-        const close = document.querySelector(".close");
+        const close = document.querySelector(".lightbox__close");
         const imgs = Array.from(document.querySelectorAll(".photo"));
         const gallery = imgs.map((img)=> img.getAttribute("src"));
         gallery.sort((a,b)=> {
             return a.localeCompare(b);
         });
         console.log(gallery);
-        let previous = document.querySelector(".chevron.left");
-        let next = document.querySelector(".chevron.right");
         const modalContent = document.querySelector(".modal_content");
         let nbr = 9;
         let p =0;
@@ -219,13 +214,6 @@ async function getArtist (){
                 // on affiche la modale
                 modale.classList.add("show");
             });
-            previous.addEventListener("click", function (e){
-                console.log("left");
-            })
-            next.addEventListener("click", function (e){
-                console.log("right");
-                gallery.findIndex(image => image === this.url)
-            })
             close.addEventListener("click", function (e){
                 modale.classList.remove("show");
             })
