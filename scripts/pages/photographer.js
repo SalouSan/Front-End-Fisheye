@@ -2,7 +2,6 @@
 async function getArtist (){
     let responses = await fetch ('data/photographers.json');
     let data1 = await responses.json();
-    console.log(data1.name)
     let urlParams = new URLSearchParams(window.location.search);
     let idPhotographer = parseInt(urlParams.get("id"));
     console.log(idPhotographer);
@@ -43,7 +42,6 @@ async function getArtist (){
         console.log(firstNames);
 
         // DOM elements tri 
-        console.log(article);
         const nav = document.createElement("nav");
         const ul = document.createElement("ul");
         ul.setAttribute("class", "wrapper");
@@ -55,12 +53,8 @@ async function getArtist (){
         li2.setAttribute("class", "date");
         const li3 = document.createElement("li");
         li3.setAttribute("class", "titre");
-        let baliseA = document.createElement("a");
-        baliseA.setAttribute("class", "lien");
-        baliseA.setAttribute("href", "#");
-        baliseA.innerText="Popularité";
-        baliseA.insertAdjacentElement("afterbegin", span1);
-        li.insertAdjacentElement("afterbegin", baliseA);
+        li.innerText="Popularité";
+        li.insertAdjacentElement("afterbegin", span1);
         const sousMenu= document.createElement("ul");
         sousMenu.setAttribute("class", "sous_menu");
         li2.innerText = "Date";
@@ -73,7 +67,7 @@ async function getArtist (){
         divNav.insertAdjacentElement("afterbegin", spanHeader);
         divNav.appendChild(ul);
         ul.appendChild(li);
-        li.appendChild(sousMenu);
+        li.insertAdjacentElement("afterend", sousMenu);
         sousMenu.appendChild(li2);
         sousMenu.appendChild(li3);
         nav.appendChild(divNav);
@@ -85,7 +79,7 @@ async function getArtist (){
             let photographerId = artist.find((photographer)=> photographer.id === currentIds);
             
         
-            const photograph = media.filter((artist)=> artist.photographerId === idPhotographer)
+            let photograph = media.filter((artist)=> artist.photographerId === idPhotographer)
             .map((person) =>             
             `
             <div class= "picture">
@@ -112,13 +106,42 @@ async function getArtist (){
                     </div>
                     <span class="chevron right"></span>
                 </div>
-            </div>`         
+            </div>`        
+            photograph+= media.sort((a,b)=> a.likes - b.likes);
             article.innerHTML=photograph + div;
             content.appendChild(article);
-            return (article);
-        }   
+            return (article);      
+        }  
+        
     }
     photographerContent(idPhotographer);
+    
+
+    // function qui permet de trier les images 
+
+    function Sort(){
+        const date = document.querySelector(".date");
+        const titre = document.querySelector(".titre");
+        const popularité = document.querySelector(".popularité");
+        date.addEventListener("click", function (e){
+            e.preventDefault;
+            console.log("Date");
+            console.log(photograph)
+        });
+        titre.addEventListener("click", function (e){
+            e.preventDefault;
+            console.log("Titre");
+            photograph+= media.sort((a,b)=> a.title - b.title);
+        });
+        popularité.addEventListener("click", function (e){
+            e.preventDefault;
+            console.log("Popularité");
+            photograph+= media.sort((a,b)=> a.likes - b.likes);
+        });
+
+    }
+    Sort();
+
 
     // Fonction qui permet de gerer les likes 
     function likes () { 
@@ -150,7 +173,6 @@ async function getArtist (){
             for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
                 let integer = likes[j].innerText;
                 let count = document.querySelector(".counter");
-                console.log(likes[j]);
                 heart[i].addEventListener('click', function () {
                     likes[j].innerText=integer;
                     count.innerText=total;
@@ -173,9 +195,12 @@ async function getArtist (){
         const close = document.querySelector(".close");
         const imgs = Array.from(document.querySelectorAll(".photo"));
         const gallery = imgs.map((img)=> img.getAttribute("src"));
+        gallery.sort((a,b)=> {
+            return a.localeCompare(b);
+        });
         console.log(gallery);
-        let leftButton = document.querySelector(".chevron.left");
-        let rightButton = document.querySelector(".chevron.right");
+        let previous = document.querySelector(".chevron.left");
+        let next = document.querySelector(".chevron.right");
         const modalContent = document.querySelector(".modal_content");
         let nbr = 9;
         let p =0;
@@ -194,10 +219,10 @@ async function getArtist (){
                 // on affiche la modale
                 modale.classList.add("show");
             });
-            leftButton.addEventListener("click", function (e){
+            previous.addEventListener("click", function (e){
                 console.log("left");
             })
-            rightButton.addEventListener("click", function (e){
+            next.addEventListener("click", function (e){
                 console.log("right");
                 gallery.findIndex(image => image === this.url)
             })
@@ -206,21 +231,16 @@ async function getArtist (){
             })
 
         } 
-    }
-
-    }
-
-
-    // functon qui trie les images par titres et par popularité 
-
-    
-       
-        const medias = document.querySelectorAll(".photo");
-        for (let i=0; i<medias.length; i++){
-            console.log(medias[i].src);
         }
 
+    }
+
+    
+   
+    
 }
+
+
 getArtist ();
 
 

@@ -49,72 +49,31 @@ const displayPhotographers2 = async function () {
     function renderPhotographers2 () {
         console.log(media);
         const article = document.createElement('article');
-        main.appendChild(article);
-        for (let ids of media) {
-            let id = ids.photographerId;
-            console.log(id);
-            for (let i=0; i<id.length; i++){
-                const card = media.map((person) =>
-                    `<div class = "template">
-                        <h2 class="title"> ${person.title} </h2>
-                        <span class= "likes">  ${person.likes} </span>
-                    </div>`
-                ).join('')
-                article.innerHTML = card;
-            }
-            
-        }
-        const cardPhotos = media.map((person) =>
-                    `<div class = "template">
-                        <h2 class="title"> ${person.title} </h2>
-                        <span class= "likes">  ${person.likes} </span>
-                    </div>`
-                    ).join('')
-
+        let card = media.sort((a,b)=> a.title.localeCompare(b.title))
+        .map((person) =>
+            `<div class = "template">
+                <h2 class="title"> ${person.title} </h2>
+                <span class= "likes">  ${person.likes} </span>
+             </div>`
+            ).join('')
+            article.innerHTML = card;
+            photographersContener.appendChild(article);
+            console.log(card);
     }
+
+    
     renderPhotographers2();
-    const article = document.createElement("article");
-    article.innerHTML=  ` 
-    <div class="template">
-        <video class="video"> ${this._video} </video>
-        <h2 class="title" ${this._title} </h2>
-        <span class="likes" ${this._likes} </span> 
-    </div> `;
-   
+    
 
-    photographersContener.appendChild(article);
-
-    function Med () {
-        for (let type of media) {
-            const {media} = data2;
-            let video = type.video;
-            const div = document.querySelectorAll(".picture");
-            const img = document.querySelector("img");
-
-            if (media.map((element)=> element.video)) {
-                const vid = document.createElement("video");
-                const vidClass = vid.setAttribute("class", "player");
-                const controls = vid.setAttribute("controls", "controls");
-                const source = document.createElement("source");
-                source.src = "assets/Sample Photos/Mimi/${person.video}";
-                source.type = "video/mp4";
-                for (let i=0; i<div.length; i++){
-                vid.insertAdjacentElement('afterbegin',source);
-                div[i].insertAdjacentElement('afterbegin',vid);     
-                }       
-            }
-            return div;
-            
-        }
-    } 
-    Med(); 
+    
     // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
-    class Media {
+    /* class Media {
         constructor(media) {
             this._title = media.title;
             this._likes = media.likes;
             this._image = media.image;
             this._video = media.video;
+
             if(this._image){
                 this.displayImage();
             }
@@ -154,9 +113,7 @@ const displayPhotographers2 = async function () {
         </div>`
         }
         
-    }
-    const vid = new Media;
-    console.log(vid.displayVideo());
+    } */
 } 
 
 
@@ -188,3 +145,7 @@ const person2 = new person ("Bruce", "Wayne", "bw@gmail.com");
 console.log(person1.getfullName());
 console.log(person2.getfullName());
 
+let messi = "Messi"
+messi+= "Neymar";
+
+console.log(messi);
