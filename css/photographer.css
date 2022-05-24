@@ -307,16 +307,14 @@ form .message {
 
 .wrapper{
     padding-top: 15px;
-    border : 2px solid transparent;
-    border-radius: 5px;
-    width: 115px;
+    width: 130px;
     height: 115px;
     margin-top: 20px;
     color: #FAFAFA;
     justify-content: center;
-    background-color: #901C1C;
     list-style-type: none;
     padding-left: 10px;
+    margin-top: 3px;
 
 }
 .divNav{
@@ -332,6 +330,12 @@ form .message {
 }
 .popularité{
     padding-bottom: 9px;
+    padding-top: 12px;
+    padding-left: 8px;
+    border: 2px solid transparent;
+    background-color:#901C1C;
+    border-radius: 5px;
+    position: relative;
 }
 .date{
     border-top: 0.5px solid white;
@@ -344,8 +348,16 @@ form .message {
 }
 .sous_menu{
     list-style-type: none;
-    padding-left: 0px;
-    padding-top: 10px;
+    padding-left: 8px;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    border:2px solid transparent;
+    background-color: #901C1C;
+    border-radius: 5px;
+    margin-top: -13px;
+    transform: scaleY(1);
+    transition: transform 1s ease-in-out;
+    visibility: hidden;
 }
 .chevron::before {
 	border-style: solid;
@@ -353,7 +365,6 @@ form .message {
 	content: '';
 	display: inline-block;
 	height: 0.45em;
-	left: 0.15em;
 	position: relative;
 	top: 0.15em;
 	transform: rotate(-45deg);
@@ -361,22 +372,10 @@ form .message {
 	width: 0.45em;
     color: white;
     position: absolute;
-    left: 93px;
-    top:10px;
+    left: 98px;
+    top:20px;
     font-size:14px;
 }
-.lien{
-    position: relative;
-    text-decoration: none;
-    color: white;
-}
-.sous_menu{
-    visibility: hidden;
-    height: 0;
-    top:0
-}
-
-.popularité:hover .sous_menu{
+.wrapper:hover .sous_menu{
     visibility: visible;
-    height: auto;
 }
