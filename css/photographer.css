@@ -14,6 +14,7 @@
     height : 170px;
     border-radius: 90px;
     width: 170px;
+    object-fit: cover;
 }
 
 .photograph-header .tagline {
@@ -90,6 +91,92 @@ form input {
 form .message {
     height : 200px;
 }
+.formData.success input {
+    border : 2px solid green;
+}
+.formData.error input {
+    border: 2px solid red;
+}
+
+
+
+.divNav{
+    display: flex;
+    margin-left: 100px;
+    align-items: flex-start;
+    cursor: pointer;
+}
+.Tri{
+    margin-top: 30px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+.popularité{
+    padding-bottom: 9px;
+    padding-top: 12px;
+    padding-left: 8px;
+    border: 2px solid transparent;
+    background-color:#901C1C;
+    border-radius: 5px;
+    position: relative;
+}
+.date{
+    border-top: 0.5px solid white;
+    padding-top: 9px;
+    border-bottom: 0.5px solid white;
+    padding-bottom: 9px;
+}
+.titre{
+    padding-top: 9px;
+}
+.sous_menu{
+    list-style-type: none;
+    padding-left: 8px;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    border:2px solid transparent;
+    background-color: #901C1C;
+    border-radius: 5px;
+    margin-top: -13px;
+    transform: scaleY(1);
+    transition: transform 1s ease-in-out;
+    visibility: hidden;
+}
+
+.wrapper{
+    padding-top: 15px;
+    width: 130px;
+    height: 115px;
+    margin-top: 20px;
+    color: #FAFAFA;
+    justify-content: center;
+    list-style-type: none;
+    padding-left: 10px;
+    margin-top: 3px;
+
+}
+.chevron::before {
+	border-style: solid;
+	border-width: 0.25em 0.25em 0 0;
+	content: '';
+	display: inline-block;
+	height: 0.45em;
+	position: relative;
+	top: 0.15em;
+	transform: rotate(-45deg);
+	vertical-align: top;
+	width: 0.45em;
+    color: white;
+    position: absolute;
+    left: 98px;
+    top:20px;
+    font-size:14px;
+}
+.wrapper:hover .sous_menu{
+    visibility: visible;
+}
+
+
 .photographers-content article{
     margin-left: 100px;
     margin-top: 50px;
@@ -104,6 +191,10 @@ form .message {
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
+}
+.content {
+    width: 72%;
+    margin-top: 10px;
 }
 .image{
     justify-content: flex-end;
@@ -170,16 +261,13 @@ form .message {
 .likes_heart{
     display: flex;
 }
-.formData.success input {
-    border : 2px solid green;
+
+
+.container{
+    display: flex;
+    align-items: center;
 }
-.formData.error input {
-    border: 2px solid red;
-}
-.content {
-    width: 72%;
-    margin-top: 10px;
-}
+
 .counter_content{
     width: 30%;
     height: 80px;
@@ -194,82 +282,6 @@ form .message {
     align-items: center;
     justify-content: space-evenly;
 }
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.9);
-    z-index:10;
-    
-}
-.lightbox__next,
-.lightbox__prev{
-    border: none;
-    background: url(assets/icons/arrow.svg) center center / 100% 100%;
-    width: 35px;
-    height: 34px;
-    position: fixed;
-    top:50%;
-    margin-top: -13px;
-    z-index: 11;
-    opacity: .5;
-}
-.modal_content{
-    margin:auto;
-    position:absolute;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    top:50%;
-    left: 49%;
-    transform: translate(-50%, -50%);
-}
-.modal_content img {
-    width:800px;
-    height:400px;
-    max-width: 100%;
-    display: flex;
-}
-.close{
-    color: #901C1C;
-    font-size: 70px;
-    margin-top: -20px;
-    position: absolute;
-    left:95%;
-    cursor: pointer;
-}
-
-.pic{
-    object-fit: cover;
-}
-.lightbox.show{
-    display: initial;
-}
-.container{
-    display: flex;
-    align-items: center;
-}
-.chevron::before {
-	border-style: solid;
-	border-width: 0.25em 0.25em 0 0;
-	content: '';
-	display: inline-block;
-	height: 0.45em;
-	left: 0.15em;
-	position: relative;
-	top: 45%;
-    color: #901C1C;
-    font-size: 33px;
-	transform: rotate(-45deg);
-	vertical-align: top;
-	width: 0.45em;
-}
-
 .coeur {
     background: black;
     width:13px;
@@ -300,77 +312,57 @@ form .message {
     border-radius: 50%;
 }
 
-.wrapper{
-    padding-top: 15px;
-    width: 130px;
-    height: 115px;
-    margin-top: 20px;
-    color: #FAFAFA;
-    justify-content: center;
-    list-style-type: none;
-    padding-left: 10px;
-    margin-top: 3px;
 
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.9);
+    z-index:10;
+    overflow: auto;
+    
 }
-.divNav{
-    display: flex;
-    margin-left: 100px;
-    align-items: flex-start;
-    cursor: pointer;
-}
-.Tri{
-    margin-top: 30px;
-    margin-right: 20px;
-    font-weight: bold;
-}
-.popularité{
-    padding-bottom: 9px;
-    padding-top: 12px;
-    padding-left: 8px;
-    border: 2px solid transparent;
-    background-color:#901C1C;
-    border-radius: 5px;
-    position: relative;
-}
-.date{
-    border-top: 0.5px solid white;
-    padding-top: 9px;
-    border-bottom: 0.5px solid white;
-    padding-bottom: 9px;
-}
-.titre{
-    padding-top: 9px;
-}
-.sous_menu{
-    list-style-type: none;
-    padding-left: 8px;
-    padding-top: 18px;
-    padding-bottom: 10px;
-    border:2px solid transparent;
-    background-color: #901C1C;
-    border-radius: 5px;
-    margin-top: -13px;
-    transform: scaleY(1);
-    transition: transform 1s ease-in-out;
-    visibility: hidden;
-}
-.chevron::before {
-	border-style: solid;
-	border-width: 0.25em 0.25em 0 0;
-	content: '';
-	display: inline-block;
-	height: 0.45em;
-	position: relative;
-	top: 0.15em;
-	transform: rotate(-45deg);
-	vertical-align: top;
-	width: 0.45em;
-    color: white;
-    position: absolute;
-    left: 98px;
+
+.lightbox__close{
+    width: 15px;
+    height: 15px;
+    background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 8.571L51.429 0L30 21.429L8.571 0L0 8.571L21.429 30L0 51.429L8.571 60L30 38.571L51.429 60L60 51.429L38.571 30L60 8.571Z" fill="white"/></svg>') center center / 15px 28px no-repeat transparent;
+    position: fixed;
     top:20px;
-    font-size:14px;
+    right:20px;
+    opacity: .5;
+    z-index: 12;
+    color: #901C1C;
 }
-.wrapper:hover .sous_menu{
-    visibility: visible;
+
+.lightbox__container{
+    margin-left: 50px;
+    margin-right: 50px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.lightbox__container img {
+    width:800px;
+    height:400px;
+    max-width: 100%;
+    display: flex;
+}
+
+.lightbox.show{
+    display: initial;
+}
+
+.button{
+    position: relative;
+    top: 50;
+}
+.next {
+    top:10;
+	left: 0.25em;   
 }
