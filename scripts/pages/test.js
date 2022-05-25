@@ -48,18 +48,42 @@ const displayPhotographers2 = async function () {
     
     function renderPhotographers2 () {
         console.log(media);
-        const article = document.createElement('article');
-        let card = media.sort((a,b)=> a.title.localeCompare(b.title))
-        .map((person) =>
+        
+
+        let card = media.map((person) =>
             `<div class = "template">
                 <h2 class="title"> ${person.title} </h2>
                 <span class= "likes">  ${person.likes} </span>
              </div>`
             ).join('')
+            const article = document.createElement('article');
             article.innerHTML = card;
+            const template = document.querySelectorAll(".template");
+            const button = document.createElement("button");
+            button.setAttribute("class", "btn");
+            button.innerText="Tri";
             photographersContener.appendChild(article);
-            console.log(card);
-    }
+            article.insertAdjacentElement("beforebegin", button);
+
+
+                    button.addEventListener("click", function (e){
+                        e.preventDefault();
+                        console.log("tri");
+                        let card = media.sort((a,b) => a.likes - b.likes)
+                        .map((person) =>
+                        `<div class = "template">
+                            <h2 class="title"> ${person.title} </h2>
+                            <span class= "likes">  ${person.likes} </span>
+                         </div>`
+                        ).join('')
+                        article.innerHTML = card;
+                        return card
+                    });
+
+        }
+                
+                
+                
 
     
     renderPhotographers2();
@@ -67,7 +91,7 @@ const displayPhotographers2 = async function () {
 
     
     // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
-    /* class Media {
+    class Media {
         constructor(media) {
             this._title = media.title;
             this._likes = media.likes;
@@ -113,7 +137,7 @@ const displayPhotographers2 = async function () {
         </div>`
         }
         
-    } */
+    }
 } 
 
 

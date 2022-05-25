@@ -77,6 +77,9 @@ async function getArtist (){
         if (idPhotographer) {
             let artist = data1.photographers;
             let photographerId = artist.find((photographer)=> photographer.id === currentIds);
+            const popularité = document.querySelector(".popularité");
+            const date = document.querySelector(".date");
+            const titre = document.querySelector(".titre");
             
         
             let photograph = media.filter((artist)=> artist.photographerId === idPhotographer)
@@ -98,46 +101,96 @@ async function getArtist (){
             
             let div = `
             <div class="lightbox" id="modale">
-                <button class="lightbox__close">Fermer</button>
-                <button class="lightbox__next">Suivant</button>
-                <button class="lightbox__prev">Precedent</button>
-                <div class=lightbox__container>
-                    <img class="pics" src="https://picsum.photos/500/500" alt=""/> 
+                <div class="button">
+                    <button class="lightbox__close"></button>
+                    <button class="next"> Suivant </button>
+                    <button class="prev"> Précédent </button> 
+                </div>                            
+                <div class="lightbox__container">
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                </div>  
+                
+            </div>
+            `   
+            // Evenements qui permettent de trier les images 
+            popularité.addEventListener("click", function (e){
+                e.preventDefault;
+                let photo = media.filter((artist)=> artist.photographerId === idPhotographer)
+                .sort((a,b)=> a.likes - b.likes)
+                .map((person) =>             
+                `
+                <div class= "picture">
+                    <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                    <div class="content">
+                        <div class="title_likes">    
+                            <h2 class="title"> ${person.title} </h2>
+                            <div class="likes_heart">
+                                <p class="likes"> ${person.likes} </p>
+                                <div class="heart"></div>       
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>`        
+                `).join('');
+                article.innerHTML= photo
+            });
+            titre.addEventListener("click", function (e){
+                e.preventDefault;
+                let photo = media.filter((artist)=> artist.photographerId === idPhotographer)
+                .sort((a,b)=> a.title.localeCompare(b.title))
+                .map((person) =>             
+                `
+                <div class= "picture">
+                    <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                    <div class="content">
+                        <div class="title_likes">    
+                            <h2 class="title"> ${person.title} </h2>
+                            <div class="likes_heart">
+                                <p class="likes"> ${person.likes} </p>
+                                <div class="heart"></div>       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `).join('');
+                article.innerHTML= photo
+            });
+
+            date.addEventListener("click", function (e){
+                e.preventDefault;
+                let photo = media.filter((artist)=> artist.photographerId === idPhotographer)
+                .sort((a,b)=> a.date -b.date)
+                .map((person) =>             
+                `
+                <div class= "picture">
+                    <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                    <div class="content">
+                        <div class="title_likes">    
+                            <h2 class="title"> ${person.title} </h2>
+                            <div class="likes_heart">
+                                <p class="likes"> ${person.likes} </p>
+                                <div class="heart"></div>       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `).join('');
+                article.innerHTML= photo
+            });
             article.innerHTML=photograph + div;
             content.appendChild(article);
             return (article);      
         }  
         
+        
     }
     photographerContent(idPhotographer);
     
-
-    // function qui permet de trier les images 
-
-    function Sort(){
-        const date = document.querySelector(".date");
-        const titre = document.querySelector(".titre");
-        const popularité = document.querySelector(".popularité");
-        date.addEventListener("click", function (e){
-            e.preventDefault;
-            console.log("Date");
-            console.log(photograph)
-        });
-        titre.addEventListener("click", function (e){
-            e.preventDefault;
-            console.log("Titre");
-            photograph+= media.sort((a,b)=> a.title.localeCompare(b.title));
-        });
-        popularité.addEventListener("click", function (e){
-            e.preventDefault;
-            console.log("Popularité");
-            photograph+= media.sort((a,b)=> a.likes - b.likes);
-        });
-
-    }
-    Sort();
 
 
     // Fonction qui permet de gerer les likes 
@@ -196,32 +249,127 @@ async function getArtist (){
             return a.localeCompare(b);
         });
         console.log(gallery);
-        const modalContent = document.querySelector(".modal_content");
-        let nbr = 9;
-        let p =0;
-        for (let i=0; i<imgs.length; i++){
-            
+        const lightboxContent = document.querySelector(".lightbox__container img");
+        const baliseImg = document.querySelectorAll(".pics")
+        const next = document.querySelector(".next");
+        const prev = document.querySelector(".prev");
+        for (let i=0,j=0; i<imgs.length, j<baliseImg; i++, j++){
             
 
     // on ajoute l'ecouteur click 
         for (let img of imgs) {
             img.addEventListener("click", function (e){
+                this.url = null;
                 e.preventDefault();
-                let src = e.currentTarget.getAttribute("src");
-                console.log(src);
+                let url = e.currentTarget.getAttribute("src");
                 // On ajoute l'image de la page photographe dans la modale
-
+                this.url=url;
+                lightboxContent.src = this.src
                 // on affiche la modale
                 modale.classList.add("show");
             });
             close.addEventListener("click", function (e){
+                e.preventDefault();
                 modale.classList.remove("show");
             })
+            next.addEventListener("click",function (e){
+                e.preventDefault();
+                let i = img.findIndex(image => image === this.url);
+                if (i === img.length -1){
+                    i=-1
+                }
+                imgs[i+1];
+            });
+            prev.addEventListener('click', function (e){
+                e.preventDefault();
+                let i = img.findIndex(image => image === this.url);
+                if (i === 0){
+                    i= this.images.length -1;
+                }
+                imgs[i-1];
+            });
 
         } 
         }
 
     }
+
+
+    class Lightbox {
+        static init(){
+            const imagesPhotographer = Array.from(document.querySelectorAll(".photo"))
+            const gallery = imagesPhotographer.map((img)=>img.getAttribute('src'));
+            imagesPhotographer.forEach((image)=> image.addEventListener('click', e =>{
+                    e.preventDefault();
+                    new Lightbox (e.currentTarget.getAttribute('src'), gallery);
+                }))
+        }
+
+
+        constructor(url,images){
+            this.element = this.buildDOM(url)
+            this.images=images
+            document.body.appendChild(this.element)
+        }
+        loadImage(){
+            this.url = null;
+            const image = new Image();
+            const container = this.element.querySelector(".lightbox__container");
+            container.innerHTML=""
+            image.onload = () => {
+                container.appendChild(image);
+                this.url=url;
+            }
+            image.src=url
+        }
+        next(e){
+            e.preventDefault();
+            let i = this.images.findIndex(image => image === this.url)
+            if(i === this.images.length -1){
+                i=-1
+            }
+            this.loadImage(this.images[i+1])
+        }
+        prev (e) {
+            e.preventDefault();
+            let i = this.images.findIndex(image => image === this.url)
+            this.loadImage(this.images[i+1]);
+            if(i == 0){
+                i= this.images.length -1
+            }
+            this.loadImage(this.images[i-1]);
+        }
+
+        close (e){
+            e.preventDefault();
+            this.element.classList.add('')
+        }
+        onKeyUp(e){
+            if (e.key === 'Escape'){
+                this.close(e);
+            }
+        }
+
+        buildDOM (url){
+            const dom = document.createElement('div');
+            dom.classList.add('lightbox');
+            dom.innerHTML = `<button class="lightbox__close"></button>
+            <button class="next"> Suivant </button>
+            <button class="prev"> Précédent </button>                              
+            <div class=lightbox__container>
+                <img class="pics" src="https://picsum.photos/500/500" alt=""/> 
+            </div>`
+            dom.querySelector(".lightbox__close").addEventListener('click', 
+            this.close.bind(this))
+            dom.querySelector(".next").addEventListener('click', 
+            this.next.bind(this))
+            dom.querySelector(".prev").addEventListener('click', 
+            this.prev.bind(this))
+            
+            return dom
+        }
+    }
+    Lightbox.init()
 
     
    
