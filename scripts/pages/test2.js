@@ -31,3 +31,57 @@ class User {
   const user2 = new User("Jane","Doe","jane@doe.com");
 
   console.log(user2.displayFirstName());
+
+
+
+
+
+  
+
+  class Media {
+    constructor(media) {
+        this._title = media.title;
+        this._likes = media.likes;
+        this._image = media.image;
+        this._video = media.video;
+
+        if(this._image){
+            this.displayImage();
+        }
+        else if (this._video){
+            this.displayVideo();
+        }
+    }
+
+    displayImage(){
+        `<div class= "picture">
+        <img class="media" src ="assets/Sample_Photos/Mimi/${this._image}"/>
+        <div class="content">
+            <div class="title_likes">    
+                <h2 class="title"> ${this._title} </h2>
+                <div class="likes_heart">
+                    <p class="likes"> ${this._likes} </p>
+                    <div class="heart"></div>       
+                </div>
+            </div>
+        </div>
+    </div>`
+    }
+    displayVideo(){
+        `<div class= "picture">
+        <video class="media" controls="controls"
+            <source src = "assets/Sample_Photos/Mimi/${this._video}"
+                    type="video/mp4">
+        <div class="content">
+            <div class="title_likes">    
+                <h2 class="title"> ${this._title} </h2>
+                <div class="likes_heart">
+                    <p class="likes"> ${this._likes} </p>
+                    <div class="heart"></div>       
+                </div>
+            </div>
+        </div>
+    </div>`
+    }
+    
+}

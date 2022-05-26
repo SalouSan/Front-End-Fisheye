@@ -80,8 +80,61 @@ async function getArtist (){
             const popularité = document.querySelector(".popularité");
             const date = document.querySelector(".date");
             const titre = document.querySelector(".titre");
-            
+
+
+            class Media {
+                constructor(media) {
+                    this.image = media.image;
+                    this.title = media.title;
+                    this.like = media.likes;
+                    this.video = media.video;
         
+                    if(this.image){
+                        this.displayImage();
+                    }
+                    else if (this.video){
+                        this.displayVideo();
+                    }
+                }
+        
+                displayImage(){
+                    `<div class= "picture">
+                    <img class="media" src ="assets/Sample_Photos/Mimi/${this.image}"/>
+                    <div class="content">
+                        <div class="title_likes">    
+                            <h2 class="title"> ${this.title} </h2>
+                            <div class="likes_heart">
+                                <p class="likes"> ${this.likes} </p>
+                                <div class="heart"></div>       
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+                }
+                displayVideo(){
+                    `<div class= "picture">
+                    <video class="media" controls="controls"
+                        <source src = "assets/Sample_Photos/Mimi/${this.video}"
+                                type="video/mp4">
+                    <div class="content">
+                        <div class="title_likes">    
+                            <h2 class="title"> ${this.title} </h2>
+                            <div class="likes_heart">
+                                <p class="likes"> ${this.likes} </p>
+                                <div class="heart"></div>       
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+                }
+                
+            }
+            const listMedias = media.map((element)=> new Media (element));
+            const division = document.createElement("div");
+            division.setAttribute("class", "test");
+            article.insertAdjacentElement("afterend", division);
+            const Mapvideos = listMedias.map((element)=> element.displayVideo()).join("");
+            division.insertAdjacentHTML("afterbegin",Mapvideos);
             let photograph = media.filter((artist)=> artist.photographerId === idPhotographer)
             .map((person) =>             
             `
@@ -113,6 +166,11 @@ async function getArtist (){
                     <img class="pics" src="" alt=""/> 
                     <img class="pics" src="" alt=""/> 
                     <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
+                    <img class="pics" src="" alt=""/> 
                 </div>  
                 
             </div>
@@ -138,6 +196,7 @@ async function getArtist (){
                 </div>
                 `).join('');
                 article.innerHTML= photo
+                likes();
             });
             titre.addEventListener("click", function (e){
                 e.preventDefault;
@@ -159,6 +218,7 @@ async function getArtist (){
                 </div>
                 `).join('');
                 article.innerHTML= photo
+                likes();
             });
 
             date.addEventListener("click", function (e){
@@ -181,6 +241,7 @@ async function getArtist (){
                 </div>
                 `).join('');
                 article.innerHTML= photo
+                likes();
             });
             article.innerHTML=photograph + div;
             content.appendChild(article);
@@ -244,27 +305,26 @@ async function getArtist (){
         const modale = document.getElementById("modale");
         const close = document.querySelector(".lightbox__close");
         const imgs = Array.from(document.querySelectorAll(".photo"));
-        const gallery = imgs.map((img)=> img.getAttribute("src"));
-        gallery.sort((a,b)=> {
-            return a.localeCompare(b);
-        });
-        console.log(gallery);
+        const nbImgs = imgs.length;
         const lightboxContent = document.querySelector(".lightbox__container img");
         const baliseImg = document.querySelectorAll(".pics")
         const next = document.querySelector(".next");
         const prev = document.querySelector(".prev");
-        for (let i=0,j=0; i<imgs.length, j<baliseImg; i++, j++){
-            
+        let count =0;
+        for (let i=0, j=0;i<imgs.length, j<baliseImg.length;i++,j++){
+            let getAtt = imgs[i].getAttribute("src");
+            console.log(getAtt);    
+            baliseImg[j].src+= getAtt;
 
     // on ajoute l'ecouteur click 
         for (let img of imgs) {
             img.addEventListener("click", function (e){
-                this.url = null;
                 e.preventDefault();
+
                 let url = e.currentTarget.getAttribute("src");
+                baliseImg.src = this.src
                 // On ajoute l'image de la page photographe dans la modale
-                this.url=url;
-                lightboxContent.src = this.src
+                this.classList.add("active");
                 // on affiche la modale
                 modale.classList.add("show");
             });
@@ -272,24 +332,36 @@ async function getArtist (){
                 e.preventDefault();
                 modale.classList.remove("show");
             })
-            next.addEventListener("click",function (e){
-                e.preventDefault();
-                let i = img.findIndex(image => image === this.url);
-                if (i === img.length -1){
-                    i=-1
-                }
-                imgs[i+1];
-            });
-            prev.addEventListener('click', function (e){
-                e.preventDefault();
-                let i = img.findIndex(image => image === this.url);
-                if (i === 0){
-                    i= this.images.length -1;
-                }
-                imgs[i-1];
-            });
+            next.addEventListener("click",nextS);
+            prev.addEventListener('click', previous)
 
         } 
+        }
+
+        function nextS (){
+            imgs[count].classList.remove("active");
+            if (count < nbImgs -1) {
+                count++;
+            }
+            else {
+                count=0;
+            }
+        
+            imgs[count].classList.add("active");
+            console.log(count);
+        }
+        
+        function previous (){
+            imgs[count].classList.remove("active");
+            if (count > 0) {
+                count--;
+            }
+            else {
+                count= nbImgs - 1;
+            }
+        
+            imgs[count].classList.add("active");
+            console.log(count);
         }
 
     }
@@ -370,11 +442,27 @@ async function getArtist (){
         }
     }
     Lightbox.init()
+    const {media} = data1
+    console
+  
+
+
+
+
+
+
 
     
    
     
 }
+
+
+
+
+
+
+
 
 
 getArtist ();

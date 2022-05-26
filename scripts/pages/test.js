@@ -42,6 +42,7 @@ const displayPhotographers2 = async function () {
     const data2 = await resp2.json();
     const picture = `assets/Sample Photos/Mimi/Portrait_Nora.jpg`
     const {media} = data2;
+    const article = document.createElement('article');
     
 
     
@@ -56,8 +57,6 @@ const displayPhotographers2 = async function () {
                 <span class= "likes">  ${person.likes} </span>
              </div>`
             ).join('')
-            const article = document.createElement('article');
-            article.innerHTML = card;
             const template = document.querySelectorAll(".template");
             const button = document.createElement("button");
             button.setAttribute("class", "btn");
@@ -88,32 +87,30 @@ const displayPhotographers2 = async function () {
     
     renderPhotographers2();
     
-
-    
-    // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
     class Media {
         constructor(media) {
-            this._title = media.title;
-            this._likes = media.likes;
-            this._image = media.image;
-            this._video = media.video;
+            this.image = media.image;
+            this.title = media.title;
+            this.likes = media.likes;
+            this.video = media.video;
 
-            if(this._image){
+            if(this.image){
                 this.displayImage();
             }
-            else if (this._video){
+            else if (this.video){
                 this.displayVideo();
             }
         }
 
         displayImage(){
-            `<div class= "picture">
-            <img class="media" src ="assets/Sample_Photos/Mimi/${this._image}"/>
+        return `
+        <div class= "picture">
+            <img class="media" src="assets/Sample_Photos/Mimi/${this.image}"/>
             <div class="content">
                 <div class="title_likes">    
-                    <h2 class="title"> ${this._title} </h2>
+                    <h2 class="title"> ${this.title} </h2>
                     <div class="likes_heart">
-                        <p class="likes"> ${this._likes} </p>
+                        <p class="likes"> ${this.likes} </p>
                         <div class="heart"></div>       
                     </div>
                 </div>
@@ -121,15 +118,17 @@ const displayPhotographers2 = async function () {
         </div>`
         }
         displayVideo(){
-            `<div class= "picture">
+        return `
+        <div class= "picture">
             <video class="media" controls="controls"
-                <source src = "assets/Sample_Photos/Mimi/${this._video}"
+                <source src="assets/Sample_Photos/Mimi/${this.video}"
                         type="video/mp4">
+            </video>
             <div class="content">
                 <div class="title_likes">    
-                    <h2 class="title"> ${this._title} </h2>
+                    <h2 class="title"> ${this.title} </h2>
                     <div class="likes_heart">
-                        <p class="likes"> ${this._likes} </p>
+                        <p class="likes"> ${this.likes} </p>
                         <div class="heart"></div>       
                     </div>
                 </div>
@@ -138,6 +137,15 @@ const displayPhotographers2 = async function () {
         }
         
     }
+    const listMedias = media.map((element)=> new Media (element));
+    const division = document.createElement("div");
+    division.setAttribute("class", "test");
+    article.insertAdjacentElement("afterend", division);
+    const mapVideos = listMedias.map((element)=> element.displayImage()).join("");
+    article.innerHTML= mapVideos;
+    
+    // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
+   
 } 
 
 
@@ -173,3 +181,5 @@ let messi = "Messi"
 messi+= "Neymar";
 
 console.log(messi);
+
+
