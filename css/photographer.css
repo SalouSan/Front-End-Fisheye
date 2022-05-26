@@ -316,11 +316,11 @@ form .message {
 .lightbox {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
+    top:0;
+    left:0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,.9);
+    background-color: rgba(0, 0, 0, 0.69);
     z-index:10;
     overflow: auto;
     
@@ -331,8 +331,8 @@ form .message {
     height: 15px;
     background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 8.571L51.429 0L30 21.429L8.571 0L0 8.571L21.429 30L0 51.429L8.571 60L30 38.571L51.429 60L60 51.429L38.571 30L60 8.571Z" fill="white"/></svg>') center center / 15px 28px no-repeat transparent;
     position: fixed;
-    top:20px;
-    right:20px;
+    top:40px;
+    right:40px;
     opacity: .5;
     z-index: 12;
     color: #901C1C;
@@ -348,9 +348,12 @@ form .message {
     
 }
 .lightbox__container img {
-    width:800px;
-    height:400px;
+    width:400px;
+    height:300px;
     max-width: 100%;
+    display: none;
+}
+img.active{
     display: flex;
 }
 
@@ -360,7 +363,6 @@ form .message {
 
 .button{
     position: relative;
-    top: 50;
 }
 .next {
     top:10;

@@ -1,11 +1,17 @@
 img {
-    height: 100px;
+    height: 20rem;
+    width: 20rem;
+    object-fit: cover;
 }
 h2 {
     font-size: 20px;
 }
-article .template{
+article {
     display: grid;
     grid-template-columns: repeat(8);
     grid-template-rows: 5%;
+}
+.picture{
+    display : flex;
+    flex-direction: column;
 }
