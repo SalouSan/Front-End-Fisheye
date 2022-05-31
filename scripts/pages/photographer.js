@@ -209,7 +209,7 @@ async function getArtist (){
                     </div>
                 </div>
                 `).join('');
-                article.innerHTML= photo
+                article.innerHTML= photographer
                 likes();
             });
 
