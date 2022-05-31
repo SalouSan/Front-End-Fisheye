@@ -87,25 +87,18 @@ const displayPhotographers2 = async function () {
     
     renderPhotographers2();
     
-    class Media {
+    class Image {
         constructor(media) {
             this.image = media.image;
             this.title = media.title;
             this.likes = media.likes;
-            this.video = media.video;
-
-            if(this.image){
-                this.displayImage();
-            }
-            else if (this.video){
-                this.displayVideo();
-            }
+            this.photographerId = media.photographerId; 
         }
 
-        displayImage(){
+        display(){
         return `
-        <div class= "picture">
-            <img class="media" src="assets/Sample_Photos/Mimi/${this.image}"/>
+        <div class= "media_container">
+            <img class="media" src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>
             <div class="content">
                 <div class="title_likes">    
                     <h2 class="title"> ${this.title} </h2>
@@ -117,11 +110,20 @@ const displayPhotographers2 = async function () {
             </div>
         </div>`
         }
-        displayVideo(){
+    }
+
+    class Video{
+        constructor(media) {
+            this.title = media.title;
+            this.likes = media.likes;
+            this.video = media.video;
+            this.photographerId = media.photographerId; 
+        }
+        display(){
         return `
-        <div class= "picture">
+        <div class= "media_container">
             <video class="media" controls="controls"
-                <source src="assets/Sample_Photos/Mimi/${this.video}"
+                <source src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
                         type="video/mp4">
             </video>
             <div class="content">
@@ -137,12 +139,24 @@ const displayPhotographers2 = async function () {
         }
         
     }
-    const listMedias = media.map((element)=> new Media (element));
+
+
+    class Media {
+        constructor(media){
+            if ("image" in media){
+                return new Image(media);
+            }
+            else {
+                return new Video(media);
+            }
+        }
+    }
     const division = document.createElement("div");
     division.setAttribute("class", "test");
-    article.insertAdjacentElement("afterend", division);
-    const mapVideos = listMedias.map((element)=> element.displayImage()).join("");
-    article.innerHTML= mapVideos;
+    const listMedias =media.map((element) => new Media(element));
+    const display= listMedias.map((element)=> element.display())
+    
+    article.innerHTML= display;
     
     // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
    
@@ -168,6 +182,9 @@ class person {
         return `${this.firstName} ${this.lastName}`;
 
     }
+    getEmail(){
+        return `${this.email}`
+    }
 }
 
 
@@ -183,3 +200,78 @@ messi+= "Neymar";
 console.log(messi);
 
 
+class Messi {
+    constructor (choice){
+        this.choice = choice;
+    }
+
+    displayMessi (choice) {
+        return `Voici le meilleur joueur du monde : ${choice}`
+    }
+
+    displayNeymar () {
+
+        this.displayNeymar = `Neyney`
+        this.displayMessi(this.displayNeymar)
+    }
+}
+
+
+const Mapper = new Messi ("Mbappe")
+const voici = Mapper.displayMessi("Mbappe")
+
+console.log(this.Mapper)
+
+
+const prenom = "Karl";
+const nom = "Toko Ekambi";
+
+console.log ("Bonjour je m'appelle " + prenom + " " + nom );
+
+
+
+
+class Media {
+    constructor(media) {
+        this.image = media.image;
+        this.title = media.title;
+        this.likes = media.likes;
+        this.video = media.video;
+        this.photographerId = media.photographerId; 
+
+        if(this.image){
+           this.displayMedias(this.displayImage)
+        }
+        else if (this.video){
+            this.displayMedias(this.displayVideo)
+        }
+
+    }
+    displayMedias(choice){
+        return `<div class= "picture">
+                   Video ou image : ${choice}
+                    <div class="content">
+                        <div class="title_likes">    
+                            <h2 class="title"> ${this.title} </h2>
+                            <div class="likes_heart">
+                                <p class="likes"> ${this.likes} </p>
+                                <div class="heart"></div>       
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+    }
+    displayImage(){
+        this.displayImage = `<img class="media" src ="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>`
+        this.displayMedias(this.displayImage);
+    }
+    displayVideo(){
+        this.displayVideo = `<video class="media" controls="controls"
+        <source src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
+                type="video/mp4">
+    </video>`;
+        this.displayMedias(this.displayVideo);
+    }
+
+    
+}

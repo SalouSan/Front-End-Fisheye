@@ -38,7 +38,7 @@ class User {
 
   
 
-  class Media {
+  class Image {
     constructor(media) {
         this._title = media.title;
         this._likes = media.likes;

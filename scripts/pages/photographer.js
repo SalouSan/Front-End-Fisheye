@@ -82,24 +82,19 @@ async function getArtist (){
             const titre = document.querySelector(".titre");
 
 
-            class Media {
+            // Classe qui gere l'affichage de l'image ou de la video 
+            class Image {
                 constructor(media) {
                     this.image = media.image;
                     this.title = media.title;
-                    this.like = media.likes;
-                    this.video = media.video;
-        
-                    if(this.image){
-                        this.displayImage();
-                    }
-                    else if (this.video){
-                        this.displayVideo();
-                    }
+                    this.likes = media.likes;
+                    this.photographerId = media.photographerId; 
                 }
         
-                displayImage(){
-                    `<div class= "picture">
-                    <img class="media" src ="assets/Sample_Photos/Mimi/${this.image}"/>
+                display(){
+                return `
+                <div class= "media_container">
+                    <img class="media" src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>
                     <div class="content">
                         <div class="title_likes">    
                             <h2 class="title"> ${this.title} </h2>
@@ -111,11 +106,22 @@ async function getArtist (){
                     </div>
                 </div>`
                 }
-                displayVideo(){
-                    `<div class= "picture">
+            }
+        
+            class Video{
+                constructor(media) {
+                    this.title = media.title;
+                    this.likes = media.likes;
+                    this.video = media.video;
+                    this.photographerId = media.photographerId; 
+                }
+                display(){
+                return `
+                <div class= "media_container">
                     <video class="media" controls="controls"
-                        <source src = "assets/Sample_Photos/Mimi/${this.video}"
+                        <source src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
                                 type="video/mp4">
+                    </video>
                     <div class="content">
                         <div class="title_likes">    
                             <h2 class="title"> ${this.title} </h2>
@@ -129,48 +135,34 @@ async function getArtist (){
                 }
                 
             }
+        
+        
+            class Media {
+                constructor(media){
+                    if ("image" in media){
+                        return new Image(media);
+                    }
+                    else {
+                        return new Video(media);
+                    }
+                }
+            }
             const listMedias = media.map((element)=> new Media (element));
-            const division = document.createElement("div");
-            division.setAttribute("class", "test");
-            article.insertAdjacentElement("afterend", division);
-            const Mapvideos = listMedias.map((element)=> element.displayVideo()).join("");
-            division.insertAdjacentHTML("afterbegin",Mapvideos);
-            let photograph = media.filter((artist)=> artist.photographerId === idPhotographer)
-            .map((person) =>             
-            `
-            <div class= "picture">
-                <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
-                <div class="content">
-                    <div class="title_likes">    
-                        <h2 class="title"> ${person.title} </h2>
-                        <div class="likes_heart">
-                            <p class="likes"> ${person.likes} </p>
-                            <div class="heart"></div>       
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `).join('');
+            const photographer = listMedias
+            .filter((artist)=> artist.photographerId === idPhotographer)
+            .map((element)=>{
+                return element.display();
+            }).join('');
             
             let div = `
             <div class="lightbox" id="modale">
                 <div class="button">
-                    <button class="lightbox__close"></button>
-                    <button class="next"> Suivant </button>
-                    <button class="prev"> Précédent </button> 
+                    <span class="lightbox__close">&times;</span>
                 </div>                            
                 <div class="lightbox__container">
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
-                    <img class="pics" src="" alt=""/> 
+                    <span class="chevron1 left"></span>
+                    <img class="pics" src="https://picsum.photos/200/300" alt=""/> 
+                    <span class="chevron1 right"></span>
                 </div>  
                 
             </div>
@@ -182,8 +174,8 @@ async function getArtist (){
                 .sort((a,b)=> a.likes - b.likes)
                 .map((person) =>             
                 `
-                <div class= "picture">
-                    <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                <div class= "media_container">
+                    <img class="media" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
                     <div class="content">
                         <div class="title_likes">    
                             <h2 class="title"> ${person.title} </h2>
@@ -204,8 +196,8 @@ async function getArtist (){
                 .sort((a,b)=> a.title.localeCompare(b.title))
                 .map((person) =>             
                 `
-                <div class= "picture">
-                    <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                <div class= "media_container">
+                    <img class="media" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
                     <div class="content">
                         <div class="title_likes">    
                             <h2 class="title"> ${person.title} </h2>
@@ -227,8 +219,8 @@ async function getArtist (){
                 .sort((a,b)=> a.date -b.date)
                 .map((person) =>             
                 `
-                <div class= "picture">
-                    <img class="photo" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
+                <div class= "media_container">
+                    <img class="media" src = "assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${person.image}"/>
                     <div class="content">
                         <div class="title_likes">    
                             <h2 class="title"> ${person.title} </h2>
@@ -243,7 +235,7 @@ async function getArtist (){
                 article.innerHTML= photo
                 likes();
             });
-            article.innerHTML=photograph + div;
+            article.innerHTML= photographer + div;
             content.appendChild(article);
             return (article);      
         }  
@@ -302,41 +294,25 @@ async function getArtist (){
     // function pour la modale lightbox 
     
     window.onload = () => {
-        const modale = document.getElementById("modale");
+        const lightbox = document.querySelector(".lightbox");
         const close = document.querySelector(".lightbox__close");
-        const imgs = Array.from(document.querySelectorAll(".photo"));
-        const nbImgs = imgs.length;
         const lightboxContent = document.querySelector(".lightbox__container img");
-        const baliseImg = document.querySelectorAll(".pics")
-        const next = document.querySelector(".next");
-        const prev = document.querySelector(".prev");
+        const next = document.querySelector(".chevron1.right");
+        const prev = document.querySelector(".chevron1.left");
+        const pics = document.querySelectorAll(".pics");
         let count =0;
-        for (let i=0, j=0;i<imgs.length, j<baliseImg.length;i++,j++){
-            let getAtt = imgs[i].getAttribute("src");
-            console.log(getAtt);    
-            baliseImg[j].src+= getAtt;
 
     // on ajoute l'ecouteur click 
-        for (let img of imgs) {
-            img.addEventListener("click", function (e){
-                e.preventDefault();
-
-                let url = e.currentTarget.getAttribute("src");
-                baliseImg.src = this.src
-                // On ajoute l'image de la page photographe dans la modale
-                this.classList.add("active");
-                // on affiche la modale
-                modale.classList.add("show");
-            });
+        
             close.addEventListener("click", function (e){
                 e.preventDefault();
-                modale.classList.remove("show");
-            })
+                lightbox.style.display = "none";
+            });
             next.addEventListener("click",nextS);
-            prev.addEventListener('click', previous)
+            prev.addEventListener('click', previous);
 
-        } 
-        }
+         
+        
 
         function nextS (){
             imgs[count].classList.remove("active");

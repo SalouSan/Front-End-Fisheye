@@ -40,11 +40,14 @@ function nameValidate () {
 function emailValidate () {
     let emailValue = email.value.trim();
     let regx = /^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
-    if (emailValue.test(regx)) {
-        return true
+    if (!emailValue.match(regx)) {
+        return false
+    }
+    else if (emailValue.length <2){
+        return false
     }
     else {
-        return false
+        return true
     }
 }
 function messageValidate () {
@@ -60,7 +63,7 @@ function messageValidate () {
 
 function setError (input,message) {
     let formData = input.parentElement;
-    let errorElement = document.querySelector("small");
+    let errorElement = formData.querySelector("small");
     errorElement.innerText= message;
     errorElement.style.color="red";
     formData.classList.add("error");
@@ -69,7 +72,7 @@ function setError (input,message) {
 }
 function setSuccess (input) {
     let formData = input.parentElement;
-    let errorElement = document.querySelector("small");
+    let errorElement = formData.querySelector("small");
     errorElement.style.visibility= "hidden";
     formData.classList.add("success");
     formData.classList.remove("error");
@@ -87,27 +90,25 @@ form.addEventListener("input", function (e){
 function globalValidate () {
     if (firstValidate()){
         setSuccess(firstName);
-    }
-    else {
+    } else {
         setError(firstName, "Vous devez entrer au moins deux caractères pour le prénom");
     }
-    if (nameValidate ()) {
+    if (nameValidate()){
         setSuccess(lastName);
-    }
-    else {
-        setError(lastName, "Vous devez");
+    } else {
+        setError (lastName, "Vous devez entrer au moins deux caractères pour le nom");
     }
     if (emailValidate()){
-        setSuccess(email);
+        setSuccess(email)
     }
-    else{
-        setError(email, "Vous devez ecrire quelque chose");
+    else {
+        setError(email, "Merci d'entrer un email valide");
     }
     if (messageValidate()){
-        setSuccess(message);
+        setSuccess(message)
     }
-    else{
-        setError(message, "Vous devez ecrire quelque chose");
+    else {
+        setSuccess(message, "Vous devez entrer au moins deux caractères");
     }
     if (firstValidate() && nameValidate () && emailValidate () && messageValidate ()){
         successMessage();
@@ -129,4 +130,10 @@ function successMessage () {
     form.style.display = "none";
     let span = document.querySelector("span");
     span.innerText= "Votre demande a bien été prise en compte. Merci !";    
+}
+
+// Récuperer les données des utilisateurs
+
+function saveUserData() {
+
 }
