@@ -114,7 +114,7 @@ form .message {
     margin-right: 20px;
     font-weight: bold;
 }
-.popularité{
+.filter--popularité{
     padding-bottom: 9px;
     padding-top: 12px;
     padding-left: 8px;
@@ -123,13 +123,13 @@ form .message {
     border-radius: 5px;
     position: relative;
 }
-.date{
+.filter--date{
     border-top: 0.5px solid white;
     padding-top: 9px;
     border-bottom: 0.5px solid white;
     padding-bottom: 9px;
 }
-.titre{
+.filter--titre{
     padding-top: 9px;
 }
 .sous_menu{
@@ -146,7 +146,7 @@ form .message {
     visibility: hidden;
 }
 
-.wrapper{
+.filter{
     padding-top: 15px;
     width: 130px;
     height: 115px;
@@ -175,7 +175,7 @@ form .message {
     top:20px;
     font-size:14px;
 }
-.wrapper:hover .sous_menu{
+.filter:hover .sous_menu{
     visibility: visible;
 }
 
@@ -190,7 +190,7 @@ form .message {
     display : flex;
     flex-direction: column;
 }
-.profile{
+.profile-description{
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
@@ -199,19 +199,19 @@ form .message {
     width: 72%;
     margin-top: 10px;
 }
-.image{
+.profile__image{
     justify-content: flex-end;
 }
-.location1{
+.profile__descrpition--location{
     font-size: 20px;
     color : #901C1C;
     margin-top: -15px;
 }
-.name1{
+.profile__descrpition--name{
     color : #D3573C;
     font-size: 39px;
 }
-.tagline1{
+.profile__descrpition--tagline{
     color: grey;
 }
 .media {
@@ -219,20 +219,20 @@ form .message {
     width: 20rem;
     object-fit: cover;
 }
-.title_likes {
+.content__description {
     display: flex;
     justify-content: space-between;
 
 }
-.title{
+.content__description--title{
     color : #901C1C;
     font-size : 18px;
 }
-.likes{
+.content__items--like{
     color : #901C1C;
     font-weight: bolder;
 }
-.heart {
+.content__items--heart {
     background: #901C1C;
     width:13px;
     height: 13px;
@@ -241,7 +241,7 @@ form .message {
     margin-left: 10px;
     transform: rotate(-45deg);
 }
-.heart::after{
+.content__items--heart::after{
     background: #901C1C;
     width:13px;
     height: 13px;
@@ -251,7 +251,7 @@ form .message {
     left : 0px;
     border-radius: 50%;
 }
-.heart::before{
+.content__items--heart::before{
     background: #901C1C;
     width:13px;
     height: 13px;
@@ -261,7 +261,7 @@ form .message {
     right : -50%;
     border-radius: 50%;
 }
-.likes_heart{
+.content__items{
     display: flex;
 }
 
@@ -330,12 +330,13 @@ form .message {
    color:#901C1C;
    font-size: 4em;
    cursor:pointer;
-   right:10px;
-   top:10px;
    position: fixed;
+   top:0;
+   margin-left: -25px;
+   margin-top: -35px;
 }
 
-.lightbox__container{
+.lightbox.container{
     width: 90%;
     margin:100px;
     position: absolute;
@@ -345,7 +346,7 @@ form .message {
     max-width: 1200px;
     
 }
-.lightbox__container img {
+.lightbox.container img {
    width: 500px;
    height: 300px;
 }
@@ -360,7 +361,7 @@ img.active{
 .button{
      position: relative;
 }
-.chevron1::before {
+.lightbox.container.chevron::before {
 	border-style:solid;
 	border-width: 0.25em 0.25em 0 0;
 	content: '';
@@ -378,11 +379,11 @@ img.active{
     cursor: pointer;
 }
 
-.chevron1.left:before {
+.lightbox.container.chevronL:before {
 	top:70;
 	transform: rotate(-135deg);
 }
-.chevron1.right:before {
+.lightbox.container.chevronR:before {
 	left: 0;
     bottom: 30;
 	transform: rotate(45deg);

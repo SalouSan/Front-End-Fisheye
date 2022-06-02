@@ -39,31 +39,31 @@ article {
     flex-direction: column;
 }
 
-.name {
+.photographer__profil--name {
     color: #D3573C;
     font-size: 36px;
 }
 
-.location {
+.photographer__profil--location {
     color : #901C1C;
     font-size: 13px;
 }
-.tagline {
+.photographer__profil--tagline {
     font-size : 0.7rem;
 }
- .price {
+.photographer__profil--price {
     font-size : 0.6rem;
     color: grey;
 }
 .photographer_section article a {
     cursor : pointer;
 }
-.profil {
+.photographer__profil--portrait {
     height: 200px;
     width: 200px;
     border-radius: 100px;
     object-fit:cover;
 }
-.photographer_link {
+.photographer__profil--IDlink {
     text-decoration: red;
 }
