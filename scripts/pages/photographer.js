@@ -1,4 +1,4 @@
-import {Image} from "/models/Images.js";
+
 //Fonction asynchrone pour recuperer les données en JSON 
 async function getArtist (){
     let responses = await fetch ('data/photographers.json');
@@ -89,12 +89,13 @@ async function getArtist (){
                     this.image = media.image;
                     this.title = media.title;
                     this.likes = media.likes;
+                    this.id = media.id;
                     this.photographerId = media.photographerId; 
                 }
         
                 display(){
                 return `
-                <div class= "media_container">
+                <div class= "media_container" data-id="${this.id}">
                     <img class="media" src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>
                     <div class="content">
                         <div class="content__description">    
@@ -114,11 +115,12 @@ async function getArtist (){
                     this.title = media.title;
                     this.likes = media.likes;
                     this.video = media.video;
+                    this.id = media.id;
                     this.photographerId = media.photographerId; 
                 }
                 display(){
                 return `
-                <div class= "media_container">
+                <div class= "media_container" data-id="${this.id}">
                     <video class="media" controls="controls"
                         <source src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
                                 type="video/mp4">
@@ -159,7 +161,7 @@ async function getArtist (){
             <div class="lightbox" id="modale">                          
                 <div class="lightbox container">
                     <span class="lightbox container chevronL"></span>
-                    <img class="lightbox container pictures" src="https://picsum.photos/200/300" alt=""/> 
+                    <img class="lightbox container pictures" src="" alt=""/>
                     <span class="lightbox container chevronR"></span>
                     <span class="lightbox container close">&times;</span> 
                 </div>  
@@ -297,6 +299,7 @@ async function getArtist (){
     likes();
 
     // function pour la modale lightbox 
+    const mediasPhotographer = Array.from(document.querySelectorAll(".media"))
     
     window.onload = () => {
         const light = document.querySelector(".lightbox");
@@ -308,8 +311,7 @@ async function getArtist (){
 
     // on ajoute l'ecouteur click 
         
-            next.addEventListener("click",nextS);
-            prev.addEventListener('click', previous);
+            
 
          
         
@@ -345,7 +347,7 @@ async function getArtist (){
 
     class Lightbox {
         static init(){
-            const mediasPhotographer = Array.from(document.querySelectorAll(".media"))
+            
             const gallery = mediasPhotographer.map((media)=>media.getAttribute('src'));
             mediasPhotographer.forEach((media)=> media.addEventListener('click', e =>{
                     e.preventDefault();
@@ -416,14 +418,44 @@ async function getArtist (){
             
             return dom
         }
+        
     }
-    Lightbox.init()
+
+    class Light {
+        constructor (listElement) {
+            this.currentElement = null; 
+            this.listElement = listElement;
+    
+        }
+        show (id) {
+            this.currentElement = this.getElementById(id);
+            document.querySelectorAll(".lightbox.container.pictures").src = this.currentElement.pictures
+            document.querySelector("#modale").classList.add("show");
+        }
+        next (){
+    
+        }
+        previous () {
+    
+        }
+        manageEvent () {
+    
+        }
+        getElementById(id) {
+            return this.listElement.find(element=> element.id == id);
+        }
+    }
+    let Lb = new Light (mediasPhotographer);
+    document.querySelectorAll(".media").forEach((media) => {
+        media.addEventListener("click", function (e){
+            Lb.show(e.currentTarget.dataset.id);
+        })
+        
+    })
     const {media} = data1
     console
   
-
-
-
+    
 
 
 

@@ -1,11 +1,12 @@
 class Light {
-    constructor (element, listElement) {
-        this.currentElement = element;
+    constructor (listElement) {
+        this.currentElement = null; 
         this.listElement = listElement;
 
     }
-    show () {
-        
+    show (element) {
+        this.currentElement = element;
+        console.log(element);
     }
     next (){
 

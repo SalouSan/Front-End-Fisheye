@@ -354,8 +354,8 @@ img.active{
     display: flex;
 }
 
-.lightbox.show{
-    display: initial;
+#modale.show{
+    display: block;
 }
 
 .button{
