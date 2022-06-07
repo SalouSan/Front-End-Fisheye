@@ -339,16 +339,16 @@ form .message {
 .lightbox.container.picture{
     width: 500px;
     height: 300px;
+    object-fit: cover;
 }
 
 .chevron1.R:before {
-    left: 15.5em;
+    left: 14em;
 	transform: rotate(45deg);
     
 }
 .chevron1.L:before {
-    left: 14em;
-    top:11.2em;
+    left: -1em;
 	transform: rotate(-135deg);
     cursor: pointer;
 
@@ -362,7 +362,7 @@ form .message {
 	height: 0.45em;
 	left: 0.15em;
 	position: relative;
-	top: 4em;
+	top: 3em;
 	transform: rotate(-45deg);
 	vertical-align: top;
 	width: 0.45em;
@@ -374,7 +374,7 @@ form .message {
     font-size: 62px;
     color: #901C1C;
     position: relative;
-    left:7.8em;
+    left:6.8em;
     bottom:0.6em;
     background-color: none;
     cursor: pointer;

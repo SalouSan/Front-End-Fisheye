@@ -161,15 +161,13 @@ async function getArtist (){
             }).join('');
             
             let modale = `
-            <div class="lightbox" id="modale">  
-                <span class="chevron1 L"></span>                        
+            <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
+                    <button class="chevron1 L"></button>  
                     <img class="lightbox container picture" src="" alt=""/>
-                    <span class="chevron1 R"></span>
-                    <span class="lightbox__close">&times;</span>
-                     
-                </div>  
-                
+                    <button class="chevron1 R"></button>
+                    <span class="lightbox__close">&times;</span>                 
+                </div>                  
             </div>
             `   
             article.innerHTML= photographer + modale;
@@ -311,34 +309,61 @@ async function getArtist (){
         constructor (listElement) {
             this.currentElement = null; 
             this.listElement = listElement;  
-    
+            this.manageEvent();
         }
-        show (image) {
-            this.currentElement = this.listElement.find(element => element.image == image);
-            console.log(this.currentElement);
+        show (country) {
+            this.currentElement = this.listElement.find(element => element.country == country);
+            this.display()
+           
+        }
+        next (){
+            let index = this.listElement.findIndex(element => element.country === this.currentElement.country);
+            if (index == this.listElement.length -1) {
+                this.currentElement = this.listElement[0];
+            }
+            else {
+                this.currentElement = this.listElement [index + 1];
+            }
+            
+            this.display();
+        }
+        previous () {
+            let index = this.listElement.findIndex(element => element.country === this.currentElement.country);
+            if (index == 0) {
+                this.currentElement = this.listElement[this.listElement.length -1];
+            }
+            else {
+                this.currentElement = this.listElement [index - 1];
+            }
+            
+            this.display();
+        }
+        manageEvent () {
+            document.querySelector(".chevron1.R").addEventListener("click", () => {
+                this.next()
+            })
+            document.querySelector(".chevron1.L").addEventListener("click", () => {
+                this.previous()
+            })
+            document.querySelector(".lightbox__close").addEventListener("click", () => {
+                this.close()
+            })
+        }
+        close (){
+            document.querySelector(".lightbox").classList.remove("show");
+        }
+        
+        getElementById(id) {
+            return this.listElement.find(element=> element.id == id);
+        }
+        display(){
             document.querySelector(".lightbox").classList.add("show");
             document.querySelector(".lightbox.container").classList.add("show");
             document.querySelector(".lightbox.container.picture").classList.add("show");
             document.querySelector(".lightbox.container.picture").src= `assets/Sample_Photos/Tracy/${this.currentElement.image}`;
-            
-        
-
-        }
-        next (){
-    
-        }
-        previous () {
-    
-        }
-        manageEvent () {
-    
-        }
-        getElementById(id) {
-            return this.listElement.find(element=> element.id == id);
         }
     }
     
-
         let lightbox = new Lightbox (media);
             document.querySelectorAll(".media").forEach((media) => {
                 media.addEventListener("click", function (e){
