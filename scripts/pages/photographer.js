@@ -99,7 +99,7 @@ async function getArtist (){
                 display(){
                 return `
                 <div class= "media_container" data-id="${this.id}">
-                    <img class="media" src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>
+                    <img class="media" src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>
                     <div class="content">
                         <div class="content__description">    
                             <h3 class="content__description--title"> ${this.title} </h3>
@@ -125,7 +125,7 @@ async function getArtist (){
                 return `
                 <div class= "media_container" data-id="${this.id}">
                     <video class="media" controls="controls"
-                        <source src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
+                        <source src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
                                 type="video/mp4">
                     </video>
                     <div class="content">
