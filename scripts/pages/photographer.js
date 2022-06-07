@@ -5,6 +5,7 @@ async function getArtist (){
     let data1 = await responses.json();
     let urlParams = new URLSearchParams(window.location.search);
     let idPhotographer = parseInt(urlParams.get("id"));
+    const { media } = data1;
     console.log(idPhotographer);
     if (idPhotographer) {
         let artist = data1.photographers;
@@ -37,7 +38,7 @@ async function getArtist (){
     function photographerContent (currentIds) {
         const content = document.querySelector(".photographers-content");
         const article = document.createElement('article');
-        const { media } = data1;
+        
         console.log(media);
         let firstNames = data1.photographers.map(character => character.name.split(" ")[0]);
         console.log(firstNames);
@@ -46,9 +47,11 @@ async function getArtist (){
         const nav = document.createElement("nav");
         const ul = document.createElement("ul");
         ul.setAttribute("class", "filter");
+        ul.setAttribute("role", "navigation");
         const li = document.createElement("li");
         li.setAttribute("class", "filter--popularité");
         const span1 = document.createElement("span");
+        // Eviter les span et mettre des balise button pour les menus déroulants 
         span1.setAttribute("class", "chevron top");
         const li2 = document.createElement("li");
         li2.setAttribute("class", "filter--date");
@@ -99,7 +102,7 @@ async function getArtist (){
                     <img class="media" src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>
                     <div class="content">
                         <div class="content__description">    
-                            <h2 class="content__description--title"> ${this.title} </h2>
+                            <h3 class="content__description--title"> ${this.title} </h3>
                             <div class="content__items">
                                 <p class="content__items--like"> ${this.likes} </p>
                                 <div class="content__items--heart"></div>       
@@ -127,7 +130,7 @@ async function getArtist (){
                     </video>
                     <div class="content">
                         <div class="content__description">    
-                            <h2 class="content__description--title"> ${this.title} </h2>
+                            <h3 class="content__description--title"> ${this.title} </h3>
                             <div class="content__items">
                                 <p class="content__items--like"> ${this.likes} </p>
                                 <div class="content__items--heart"></div>       
@@ -158,12 +161,13 @@ async function getArtist (){
             }).join('');
             
             let modale = `
-            <div class="lightbox" id="modale">                          
+            <div class="lightbox" id="modale">  
+                <span class="chevron1 L"></span>                        
                 <div class="lightbox container">
-                    <span class="lightbox container chevronL"></span>
-                    <img class="lightbox container pictures" src="" alt=""/>
-                    <span class="lightbox container chevronR"></span>
-                    <span class="lightbox container close">&times;</span> 
+                    <img class="lightbox container picture" src="" alt=""/>
+                    <span class="chevron1 R"></span>
+                    <span class="lightbox__close">&times;</span>
+                     
                 </div>  
                 
             </div>
@@ -299,138 +303,26 @@ async function getArtist (){
     likes();
 
     // function pour la modale lightbox 
-    const mediasPhotographer = Array.from(document.querySelectorAll(".media"))
-    
-    window.onload = () => {
-        const light = document.querySelector(".lightbox");
-        const lightboxContent = document.querySelector(".lightbox.container img");
-        const next = document.querySelector(".lightbox.container chevronR");
-        const prev = document.querySelector(".lightbox.container chevronL");
-        const pics = document.querySelectorAll(".pics");
-        let count =0;
-
-    // on ajoute l'ecouteur click 
-        
-            
-
-         
-        
-
-        function nextS (){
-            imgs[count].classList.remove("active");
-            if (count < nbImgs -1) {
-                count++;
-            }
-            else {
-                count=0;
-            }
-        
-            imgs[count].classList.add("active");
-            console.log(count);
-        }
-        
-        function previous (){
-            imgs[count].classList.remove("active");
-            if (count > 0) {
-                count--;
-            }
-            else {
-                count= nbImgs - 1;
-            }
-        
-            imgs[count].classList.add("active");
-            console.log(count);
-        }
-
-    }
-
-
+    const mediasPhotographer = Array.from(document.querySelectorAll(".media_container"));
+    const next = document.querySelector(".chevron1.R");
+    const prev = document.querySelector(".chevron1.L");
+    const lightboxContent = document.querySelector(".lightbox.container img");
     class Lightbox {
-        static init(){
-            
-            const gallery = mediasPhotographer.map((media)=>media.getAttribute('src'));
-            mediasPhotographer.forEach((media)=> media.addEventListener('click', e =>{
-                    e.preventDefault();
-                    new Lightbox (e.currentTarget.getAttribute('src'), gallery);
-                }))
-        }
-
-
-        constructor(url,images){
-            this.element = this.buildDOM(url)
-            this.images=images
-            document.body.appendChild(this.element)
-        }
-        loadImage(){
-            this.url = null;
-            const image = new Image();
-            const container = this.element.querySelector(".lightbox__container");
-            container.innerHTML=""
-            image.onload = () => {
-                container.appendChild(image);
-                this.url=url;
-            }
-            image.src=url
-        }
-        next(e){
-            e.preventDefault();
-            let i = this.images.findIndex(image => image === this.url)
-            if(i === this.images.length -1){
-                i=-1
-            }
-            this.loadImage(this.images[i+1])
-        }
-        prev (e) {
-            e.preventDefault();
-            let i = this.images.findIndex(image => image === this.url)
-            this.loadImage(this.images[i+1]);
-            if(i == 0){
-                i= this.images.length -1
-            }
-            this.loadImage(this.images[i-1]);
-        }
-
-        close (e){
-            e.preventDefault();
-            this.element.classList.add('')
-        }
-        onKeyUp(e){
-            if (e.key === 'Escape'){
-                this.close(e);
-            }
-        }
-
-        buildDOM (url){
-            const dom = document.createElement('div');
-            dom.classList.add('lightbox');
-            dom.innerHTML = `<button class="lightbox__close"></button>
-            <button class="next"> Suivant </button>
-            <button class="prev"> Précédent </button>                              
-            <div class=lightbox__container>
-                <img class="pics" src="https://picsum.photos/500/500" alt=""/> 
-            </div>`
-            dom.querySelector(".lightbox__close").addEventListener('click', 
-            this.close.bind(this))
-            dom.querySelector(".next").addEventListener('click', 
-            this.next.bind(this))
-            dom.querySelector(".prev").addEventListener('click', 
-            this.prev.bind(this))
-            
-            return dom
-        }
-        
-    }
-
-    class Light {
         constructor (listElement) {
             this.currentElement = null; 
-            this.listElement = listElement;
+            this.listElement = listElement;  
     
         }
-        show (id) {
-            this.currentElement = this.getElementById(id);
-            document.querySelectorAll(".lightbox.container.pictures").src = this.currentElement.pictures
-            document.querySelector("#modale").classList.add("show");
+        show (image) {
+            this.currentElement = this.listElement.find(element => element.image == image);
+            console.log(this.currentElement);
+            document.querySelector(".lightbox").classList.add("show");
+            document.querySelector(".lightbox.container").classList.add("show");
+            document.querySelector(".lightbox.container.picture").classList.add("show");
+            document.querySelector(".lightbox.container.picture").src= `assets/Sample_Photos/Tracy/${this.currentElement.image}`;
+            
+        
+
         }
         next (){
     
@@ -445,25 +337,20 @@ async function getArtist (){
             return this.listElement.find(element=> element.id == id);
         }
     }
-    let Lb = new Light (mediasPhotographer);
-    document.querySelectorAll(".media").forEach((media) => {
-        media.addEventListener("click", function (e){
-            Lb.show(e.currentTarget.dataset.id);
-        })
+    
+
+        let lightbox = new Lightbox (media);
+            document.querySelectorAll(".media").forEach((media) => {
+                media.addEventListener("click", function (e){
+                    lightbox.show(e.currentTarget.dataset.id);
+                })
+            });
         
-    })
-    const {media} = data1
-    console
-  
-    
-
-
-
-
-    
    
     
 }
+
+
 
 
 

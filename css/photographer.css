@@ -326,66 +326,57 @@ form .message {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.lightbox__close{
-   color:#901C1C;
-   font-size: 4em;
-   cursor:pointer;
-   position: fixed;
-   top:0;
-   margin-left: -25px;
-   margin-top: -35px;
-}
-
-.lightbox.container{
-    width: 90%;
-    margin:100px;
-    position: absolute;
-    top: 50%;
-    left:65%;
-    transform: translate(-50%, -50%);
-    max-width: 1200px;
-    
-}
-.lightbox.container img {
-   width: 500px;
-   height: 300px;
-}
-img.active{
-    display: flex;
-}
-
-#modale.show{
+.lightbox.show{
     display: block;
 }
 
-.button{
-     position: relative;
+.lightbox.container{
+    width:500px;
+    height:300px;
+    margin: auto;
+    
 }
-.lightbox.container.chevron::before {
-	border-style:solid;
+.lightbox.container.picture{
+    width: 500px;
+    height: 300px;
+}
+
+.chevron1.R:before {
+    left: 15.5em;
+	transform: rotate(45deg);
+    
+}
+.chevron1.L:before {
+    left: 14em;
+    top:11.2em;
+	transform: rotate(-135deg);
+    cursor: pointer;
+
+}
+
+.chevron1::before{
+    border-style: solid;
 	border-width: 0.25em 0.25em 0 0;
 	content: '';
 	display: inline-block;
 	height: 0.45em;
 	left: 0.15em;
 	position: relative;
-    font-weight:lighter;
 	top: 4em;
 	transform: rotate(-45deg);
 	vertical-align: top;
 	width: 0.45em;
-    font-size: 33px;
     color: #901C1C;
+    font-size: 32px;
     cursor: pointer;
 }
-
-.lightbox.container.chevronL:before {
-	top:70;
-	transform: rotate(-135deg);
-}
-.lightbox.container.chevronR:before {
-	left: 0;
-    bottom: 30;
-	transform: rotate(45deg);
+.lightbox__close{
+    font-size: 62px;
+    color: #901C1C;
+    position: relative;
+    left:7.8em;
+    bottom:0.6em;
+    background-color: none;
+    cursor: pointer;
 }
 
