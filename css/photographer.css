@@ -1,7 +1,4 @@
-#contact_modal {
-    display: none;
-}
-
+/* Profil du photographe */
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -15,12 +12,30 @@
     border-radius: 90px;
     width: 170px;
     object-fit: cover;
+    justify-content: flex-end;
+}
+.profile-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
 }
 
-.photograph-header .tagline {
-color: grey;
-font-size: 16px;
-
+.profile__descrpition--location{
+    font-size: 20px;
+    color : #901C1C;
+    margin-top: -15px;
+}
+.profile__descrpition--name{
+    color : #D3573C;
+    font-size: 39px;
+}
+.profile__descrpition--tagline{
+    color: grey;
+    font-size: 16px;
+}
+/* Modale de contact */
+#contact_modal {
+    display: none;
 }
 .contact_button {
     font-size: 20px;
@@ -102,7 +117,7 @@ form .message {
 }
 
 
-
+/* Filtre des images */
 .divNav{
     display: flex;
     margin-left: 100px;
@@ -178,8 +193,11 @@ form .message {
 .filter:hover .sous_menu{
     visibility: visible;
 }
+.border{
+    border : 1px solid black;
+}
 
-
+/* Contenu principal de la page : photo, titre et likes */
 .photographers-content article{
     margin-left: 100px;
     margin-top: 50px;
@@ -190,30 +208,12 @@ form .message {
     display : flex;
     flex-direction: column;
 }
-.profile-description{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-}
+
 .content {
     width: 72%;
     margin-top: 10px;
 }
-.profile__image{
-    justify-content: flex-end;
-}
-.profile__descrpition--location{
-    font-size: 20px;
-    color : #901C1C;
-    margin-top: -15px;
-}
-.profile__descrpition--name{
-    color : #D3573C;
-    font-size: 39px;
-}
-.profile__descrpition--tagline{
-    color: grey;
-}
+
 .media {
     height: 20rem;
     width: 20rem;
@@ -227,17 +227,21 @@ form .message {
 .content__description--title{
     color : #901C1C;
     font-size : 18px;
+    margin-top: 8px;
+    word-break: normal;
+    
 }
 .content__items--like{
     color : #901C1C;
     font-weight: bolder;
+    margin-top: 9px;
 }
 .content__items--heart {
     background: #901C1C;
     width:13px;
     height: 13px;
     position: relative;
-    top :40%;
+    top :30%;
     margin-left: 10px;
     transform: rotate(-45deg);
 }
@@ -265,7 +269,7 @@ form .message {
     display: flex;
 }
 
-
+/* Compteur de likes */
 .container{
     display: flex;
     align-items: center;
@@ -314,7 +318,7 @@ form .message {
     right : -50%;
     border-radius: 50%;
 }
-
+/* Lightbox */
 
 .lightbox{
     display : none;
@@ -332,23 +336,25 @@ form .message {
 
 .lightbox.container{
     width:500px;
-    height:300px;
+    height:400px;
     margin: auto;
+    box-shadow: 3px 0px 0px rgba(0, 0, 0, 0.056);
+    border-radius: 5px;
     
 }
 .lightbox.container.picture{
     width: 500px;
-    height: 300px;
+    height: 400px;
     object-fit: cover;
 }
 
 .chevron1.R:before {
-    left: 14em;
+    left: 14.1em;
 	transform: rotate(45deg);
     
 }
 .chevron1.L:before {
-    left: -1em;
+    left: -1.3em;
 	transform: rotate(-135deg);
     cursor: pointer;
 
@@ -356,18 +362,18 @@ form .message {
 
 .chevron1::before{
     border-style: solid;
-	border-width: 0.25em 0.25em 0 0;
+	border-width: 0.18em 0.18em 0 0;
 	content: '';
 	display: inline-block;
 	height: 0.45em;
 	left: 0.15em;
 	position: relative;
-	top: 3em;
+	top: 4em;
 	transform: rotate(-45deg);
 	vertical-align: top;
 	width: 0.45em;
     color: #901C1C;
-    font-size: 32px;
+    font-size: 33px;
     cursor: pointer;
 }
 .lightbox__close{
@@ -376,7 +382,7 @@ form .message {
     position: relative;
     left:6.8em;
     bottom:0.6em;
-    background-color: none;
     cursor: pointer;
 }
+
 

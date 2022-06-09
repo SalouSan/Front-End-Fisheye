@@ -1,4 +1,4 @@
-class Image {
+export default class Image {
     constructor(media) {
         this.image = media.image;
         this.title = media.title;

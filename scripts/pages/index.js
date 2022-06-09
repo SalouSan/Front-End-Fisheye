@@ -23,8 +23,6 @@ const getPhotographers = async function () {
         
 
     }
-    let url2_string = document.querySelector(".pphotographer__profil--IDlink");
-    console.log(url2_string)
    
 }
 
