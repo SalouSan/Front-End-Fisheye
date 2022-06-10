@@ -1,5 +1,5 @@
 /* Profil du photographe */
-.photograph-header {
+.profile {
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: space-around;
 }
-.photograph-header img {
+.profile img {
     height : 170px;
     border-radius: 90px;
     width: 170px;
@@ -118,7 +118,7 @@ form .message {
 
 
 /* Filtre des images */
-.divNav{
+.menu-wrapper{
     display: flex;
     margin-left: 100px;
     align-items: flex-start;
@@ -131,7 +131,7 @@ form .message {
 }
 .filter--popularité{
     padding-bottom: 9px;
-    padding-top: 12px;
+    padding-top: 11px;
     padding-left: 8px;
     border: 2px solid transparent;
     background-color:#901C1C;
@@ -147,7 +147,7 @@ form .message {
 .filter--titre{
     padding-top: 9px;
 }
-.sous_menu{
+#sous_menu{
     list-style-type: none;
     padding-left: 8px;
     padding-top: 18px;
@@ -190,7 +190,7 @@ form .message {
     top:20px;
     font-size:14px;
 }
-.filter:hover .sous_menu{
+.filter:hover #sous_menu{
     visibility: visible;
 }
 .border{

@@ -5,14 +5,20 @@ async function getArtist (){
     let urlParams = new URLSearchParams(window.location.search);
     let idPhotographer = parseInt(urlParams.get("id"));
     const { media } = data1;
+    const { id, name, city, country, tagline } = data1;
     console.log(idPhotographer);
     if (idPhotographer) {
         let artist = data1.photographers;
 
-// Fonction affichant les infos du photographe dans le header
-        function headerPhotographer (){
-            let header = document.querySelector(".photograph-header");
-            let profile = document.querySelector(".profile__descrpition");
+    // Role Accessibilité 
+
+    let header = document.querySelector("header");
+    header.setAttribute("role", "banner");
+
+// Fonction affichant les infos du photographe en haut de la page
+        function ProfilPhotographer (){
+            let profilContent = document.querySelector(".profile");
+            let profileDescription = document.querySelector(".profile__description");
             let image = document.querySelector(".profile__image");
 
             const profil= artist.filter((person) => person.id === idPhotographer)
@@ -21,15 +27,15 @@ async function getArtist (){
             <p class="profile__descrpition--location"> ${person.city}, ${person.country} </p>
             <p class="profile__descrpition--tagline"> ${person.tagline}</p>
             `);
-            profile.innerHTML=profil;
+            profileDescription.innerHTML=profil;
 
             const photo = artist.filter((person) => person.id === idPhotographer)
             .map ((artist) => 
-            `<img class="pic" src="assets/Sample_Photos/Photographers-ID_Photos/${artist.portrait}"/>`
+            `<img class="pic" src="assets/Sample_Photos/Photographers-ID_Photos/${artist.portrait}" alt="${artist.name}"/>`
             );
             image.innerHTML= photo;
         }
-        headerPhotographer();
+        ProfilPhotographer();
     }
 
     // Fonction qui encadre le conteneur des photographes 
@@ -37,33 +43,36 @@ async function getArtist (){
     function photographerContent (currentIds) {
         const content = document.querySelector(".photographers-content");
         const article = document.createElement('article');
-        
-        console.log(media);
-        let firstNames = data1.photographers.map(character => character.name.split(" ")[0]);
-        console.log(firstNames);
 
         // DOM elements tri 
         const nav = document.createElement("nav");
         const ul = document.createElement("ul");
         ul.setAttribute("class", "filter");
-        ul.setAttribute("role", "navigation");
         const li = document.createElement("li");
         li.setAttribute("class", "filter--popularité");
+        li.setAttribute("aria-label", "filtre par popularité");
         const span1 = document.createElement("span");
         // Eviter les span et mettre des balise button pour les menus déroulants 
         span1.setAttribute("class", "chevron top");
+        span1.setAttribute("aria-expanded", "false");
+        span1.setAttribute("aria-controls", "sous_menu");
+        span1.setAttribute("role", "button");
         const li2 = document.createElement("li");
         li2.setAttribute("class", "filter--date");
+        li2.setAttribute("aria-describedby", "sous_menu");
+        li2.setAttribute("aria-label", "filtre par date");
         const li3 = document.createElement("li");
         li3.setAttribute("class", "filter--titre");
+        li3.setAttribute("aria-describedby", "sous_menu");
+        li3.setAttribute("aria-label", "filtre par titre");
         li.innerText="Popularité";
         li.insertAdjacentElement("afterbegin", span1);
         const sousMenu= document.createElement("ul");
-        sousMenu.setAttribute("class", "sous_menu");
+        sousMenu.setAttribute("id", "sous_menu");
         li2.innerText = "Date";
         li3.innerText = "Titre";
         const divNav = document.createElement("div");
-        divNav.setAttribute("class", "divNav"); 
+        divNav.setAttribute("class", "menu-wrapper"); 
         const spanHeader = document.createElement("span");
         spanHeader.setAttribute("class", "Tri");
         spanHeader.innerText= "Trier par";
@@ -83,6 +92,9 @@ async function getArtist (){
             const popularité = document.querySelector(".filter--popularité");
             const date = document.querySelector(".filter--date");
             const titre = document.querySelector(".filter--titre");
+            const gallery = media
+            .filter((artist)=> artist.photographerId === idPhotographer)
+            console.log(gallery);
 
 
             // Classe qui gere l'affichage de l'image ou de la video 
@@ -97,8 +109,8 @@ async function getArtist (){
         
                 display(){
                 return `
-                <div class= "media_container" >
-                    <img class="media" src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}" data-id="${this.id}"/>
+                <div class= "media_container" role="listitems">
+                    <img class="media" src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}" data-id="${this.id}" alt="${this.title}"/>
                     <div class="content">
                         <div class="content__description">    
                             <h3 class="content__description--title"> ${this.title} </h3>
@@ -122,10 +134,10 @@ async function getArtist (){
                 }
                 display(){
                 return `
-                <div class= "media_container" >
-                    <video class="media" controls="controls data-id="${this.id}""
+                <div class= "media_container" role="listitems">
+                    <video class="media" controls="controls" data-id="${this.id}"
                         <source src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
-                                type="video/mp4">
+                                type="video/mp4 alt="${this.title}">
                     </video>
                     <div class="content">
                         <div class="content__description">    
@@ -165,7 +177,7 @@ async function getArtist (){
                     <button class="chevron1 L"></button>  
                     <img class="lightbox container picture" src="" alt=""/>
                     <button class="chevron1 R"></button>
-                    <span class="lightbox__close"> &times;</span>                 
+                    <span role="button" class="lightbox__close"> &times;</span>                 
                 </div>                  
             </div>
             `   
@@ -255,13 +267,31 @@ async function getArtist (){
                 }
                 manageEvent () {
                     document.querySelector(".chevron1.R").addEventListener("click", () => {
-                        this.next()
+                        this.next();
                     })
-                    document.querySelector(".chevron1.L").addEventListener("click", () => {
-                        this.previous()
+                    document.querySelector(".chevron1.R").addEventListener("keyup", (e) => {
+                        if(e.key === "ArrowRight"){
+                            this.next();
+                        }
+                    })
+                    
+                    document.querySelector(".chevron1.L").addEventListener("click", (e) => {
+                        this.previous();
+                        
+                    })
+                    document.querySelector(".chevron1.L").addEventListener("keyup", (e) => {
+                        if(e.key === "ArrowLeft"){
+                            this.previous();
+                        }
                     })
                     document.querySelector(".lightbox__close").addEventListener("click", () => {
-                        this.close()
+                        this.close();
+                    })
+                    document.querySelector(".lightbox__close").addEventListener("keyup", (e) => {
+                        if (e.key=== "Escape") {
+                            this.close();
+                        }
+                        
                     })
                 }
                 close (){
@@ -275,9 +305,10 @@ async function getArtist (){
                     document.querySelector(".lightbox.container.picture").classList.add("show");
                     document.querySelector(".lightbox.container.picture").src= `assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.image}`;
                 }
+                
             }
             
-                let lightbox = new Lightbox(media);
+                let lightbox = new Lightbox(gallery);
                 document.querySelectorAll(".media").forEach((element) => {
                         element.addEventListener("click", function (e){
                             lightbox.show(e.currentTarget.dataset.id);

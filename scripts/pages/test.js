@@ -11,6 +11,7 @@ const displayPhotographers = async function (){
     const resp = await fetch (`http://127.0.0.1:5502/data/photographers.json`);
     const data = await resp.json();
     console.log(data);
+    const { id, name, city, country, tagline } = data;
     // renderPhotographers(data.photographers[0])
     photographersContener.innerHTML = renderPhotographers(data);
     function renderPhotographers (data) {

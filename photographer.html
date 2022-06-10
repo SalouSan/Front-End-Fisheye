@@ -9,69 +9,69 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="Logo Fisheye"/>
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <div class="profile__descrpition"></div>
+      <div class="profile">
+        <div class="profile__description"></div>
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <div class="profile__image"></div>
       </div>
+      <div id="contact_modal">
+        <div class="modal">
+          <header>
+            <h2>Contactez-moi</h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()" alt="bouton close" />
+          </header>
+          <form onsubmit="saveUserData()">
+            <div class="formData">
+              <label for="first">Prénom</label>
+              <input 
+              class="text-control"
+              type="text"
+              id="first"
+              name="first"
+              />
+              <small></small>
+            </div>
+            <div class="formData">
+              <label for="last"> Nom </label>
+              <input
+              class="text-control"
+              type="text"
+              id="last"
+              name="last"
+              />
+              <small></small>
+            </div>
+            <div class="formData">
+              <label for="mail"> Email </label>
+              <input
+              class="text-control"
+              type="text"
+              id="mail"
+              name="mail"
+              />
+              <small></small>
+            </div>
+            <div class="formData">
+              <label for="message">Votre message </label>
+              <input 
+              class="text-control"
+              type="text"
+              id="message"
+              name="message"
+              />
+              <small></small>
+            </div>
+            <button class="contact_button">Envoyer</button>
+          </form>
+          <span> </span>
+        </div>
+      </div>
+        <div class="photographers-content">          
+        </div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form onsubmit="saveUserData()">
-					<div class="formData">
-						<label for="first">Prénom</label>
-						<input 
-            class="text-control"
-            type="text"
-            id="first"
-            name="first"
-            />
-            <small></small>
-          </div>
-          <div class="formData">
-            <label for="last"> Nom </label>
-            <input
-            class="text-control"
-            type="text"
-            id="last"
-            name="last"
-            />
-            <small></small>
-          </div>
-          <div class="formData">
-            <label for="mail"> Email </label>
-            <input
-            class="text-control"
-            type="text"
-            id="mail"
-            name="mail"
-            />
-            <small></small>
-          </div>
-          <div class="formData">
-            <label for="message">Votre message </label>
-            <input 
-            class="text-control"
-            type="text"
-            id="message"
-            name="message"
-            />
-            <small></small>
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-        <span> </span>
-			</div>
-		</div>
-    <div class="photographers-content">          
-    </div>
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script type="module" src="scripts/factories/MediaFactory.js"></script>
