@@ -335,17 +335,19 @@ form .message {
 }
 
 .lightbox.container{
-    width:500px;
-    height:400px;
+    /* width:500px;
+    height:400px; */
+    max-height: 80vh;
     margin: auto;
     box-shadow: 3px 0px 0px rgba(0, 0, 0, 0.056);
     border-radius: 5px;
     
 }
 .lightbox.container.picture{
-    width: 500px;
-    height: 400px;
-    object-fit: cover;
+    /* width: 500px;
+    height: 400px; */
+
+    /* object-fit: contain; */
 }
 
 .chevron1.R:before {
@@ -359,6 +361,7 @@ form .message {
     cursor: pointer;
 
 }
+
 
 .chevron1::before{
     border-style: solid;

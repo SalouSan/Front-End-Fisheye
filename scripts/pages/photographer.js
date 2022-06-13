@@ -1,4 +1,9 @@
 //Fonction asynchrone pour recuperer les données en JSON 
+import {displaySort} from "../utils/displaySort.js";
+import {Lightbox} from "../models/Ligthbox.js";
+
+
+displaySort();
 async function getArtist (){
     let responses = await fetch ('data/photographers.json');
     let data1 = await responses.json();
@@ -94,7 +99,6 @@ async function getArtist (){
             const titre = document.querySelector(".filter--titre");
             const gallery = media
             .filter((artist)=> artist.photographerId === idPhotographer)
-            console.log(gallery);
 
 
             // Classe qui gere l'affichage de l'image ou de la video 
@@ -106,7 +110,7 @@ async function getArtist (){
                     this.id = media.id;
                     this.photographerId = media.photographerId; 
                 }
-        
+            
                 display(){
                 return `
                 <div class= "media_container" role="listitems">
@@ -123,8 +127,7 @@ async function getArtist (){
                 </div>`
                 }
             }
-        
-            class Video{
+            class Video {
                 constructor(media) {
                     this.title = media.title;
                     this.likes = media.likes;
@@ -152,8 +155,6 @@ async function getArtist (){
                 }
                 
             }
-        
-        
             class Media {
                 constructor(media){
                     if ("image" in media){
@@ -164,6 +165,8 @@ async function getArtist (){
                     }
                 }
             }
+            
+           
             const listMedias = media.map((element)=> new Media (element));
             const photographer = listMedias
             .filter((artist)=> artist.photographerId === idPhotographer)
@@ -175,6 +178,7 @@ async function getArtist (){
             <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
                     <button class="chevron1 L"></button>  
+
                     <img class="lightbox container picture" src="" alt=""/>
                     <button class="chevron1 R"></button>
                     <span role="button" class="lightbox__close"> &times;</span>                 
@@ -212,6 +216,7 @@ async function getArtist (){
                 article.innerHTML = photographer;
                 likes();
                 
+                
             });
 
             date.addEventListener("click", function Date (e){
@@ -226,87 +231,10 @@ async function getArtist (){
                 }).join('');
                 article.innerHTML = photographer;
                 e.preventDefault();
+                
                
             });
-            class Lightbox {
-                constructor (listElement) {
-                    this.currentElement = null; 
-                    this.listElement = listElement;  
-                    this.photographerId = listElement.photographerId;
-                    this.manageEvent();
-                }
-                getElementById(id) {
-                    return this.listElement.find(element=> element.id == id);
-                }
-                show (id) {
-                    this.currentElement = this.getElementById(id);
-                    this.display()
-                   
-                }
-                next (){
-                    let index = this.listElement.findIndex(element => element.title === this.currentElement.title);
-                    if (index == this.listElement.length -1) {
-                        this.currentElement = this.listElement[0];
-                    }
-                    else {
-                        this.currentElement = this.listElement [index + 1];
-                    }
-                    
-                    this.display();
-                }
-                previous () {
-                    let index = this.listElement.findIndex(element => element.id === this.currentElement.id);
-                    if (index == 0) {
-                        this.currentElement = this.listElement[this.listElement.length -1];
-                    }
-                    else {
-                        this.currentElement = this.listElement [index - 1];
-                    }
-                    
-                    this.display();
-                }
-                manageEvent () {
-                    document.querySelector(".chevron1.R").addEventListener("click", () => {
-                        this.next();
-                    })
-                    document.querySelector(".chevron1.R").addEventListener("keyup", (e) => {
-                        if(e.key === "ArrowRight"){
-                            this.next();
-                        }
-                    })
-                    
-                    document.querySelector(".chevron1.L").addEventListener("click", (e) => {
-                        this.previous();
-                        
-                    })
-                    document.querySelector(".chevron1.L").addEventListener("keyup", (e) => {
-                        if(e.key === "ArrowLeft"){
-                            this.previous();
-                        }
-                    })
-                    document.querySelector(".lightbox__close").addEventListener("click", () => {
-                        this.close();
-                    })
-                    document.querySelector(".lightbox__close").addEventListener("keyup", (e) => {
-                        if (e.key=== "Escape") {
-                            this.close();
-                        }
-                        
-                    })
-                }
-                close (){
-                    document.querySelector(".lightbox").classList.remove("show");
-                }
-                
-                
-                display(){
-                    document.querySelector(".lightbox").classList.add("show");
-                    document.querySelector(".lightbox.container").classList.add("show");
-                    document.querySelector(".lightbox.container.picture").classList.add("show");
-                    document.querySelector(".lightbox.container.picture").src= `assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.image}`;
-                }
-                
-            }
+            
             
                 let lightbox = new Lightbox(gallery);
                 document.querySelectorAll(".media").forEach((element) => {
@@ -325,8 +253,7 @@ async function getArtist (){
     function likes () { 
         let heart = document.querySelectorAll(".content__items--heart");
         let likes = document.querySelectorAll(".content__items--like");
-        let total = 0;   
-        function globalLikesCounter () {            
+        let total = 0;             
             for (let j=0; j <likes.length; j++){
             total+=parseInt(likes[j].innerText);
             }
@@ -360,8 +287,7 @@ async function getArtist (){
                 });
                 
             }
-        }
-        globalLikesCounter();   
+        
         
     }
     likes();
