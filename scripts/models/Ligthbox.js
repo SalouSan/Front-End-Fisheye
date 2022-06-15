@@ -75,18 +75,6 @@ export class Lightbox {
         document.querySelector(".lightbox.container.picture").classList.add("show");
         document.querySelector(".lightbox.container.picture").src= `assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.image}`;
     }
-    videos(){
-     let video = document.createElement("video");
-     video.setAttribute("controls", "controls");
-     video.setAttribute("class", "ightbox container media");
-     let source = document.createElement("source");
-     source.setAttribute("src")
-     document.querySelector("lightbox.container").innerHTML =`  
-        <video class="lightbox container media" controls="controls" data-id="${this.id}"
-        <source src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
-                type="video/mp4 alt="${this.title}">
-    </video>`
-    
-    }
+   
     
 }

@@ -15,6 +15,7 @@ let email = document.getElementById("mail");
 let message = document.getElementById("message");
 let formData = document.querySelector(".formData");
 let form = document.querySelector("form");
+let btnSubmit = document.querySelector("#btn_submit");
 
 
 // Validate functions 
@@ -99,22 +100,19 @@ function globalValidate () {
         setError (lastName, "Vous devez entrer au moins deux caractères pour le nom");
     }
     if (emailValidate()){
-        setSuccess(email)
+        setSuccess(email);
     }
     else {
         setError(email, "Merci d'entrer un email valide");
     }
     if (messageValidate()){
-        setSuccess(message)
+        setSuccess(message);
     }
     else {
-        setSuccess(message, "Vous devez entrer au moins deux caractères");
+        setError(message, "Vous devez entrer au moins deux caractères");
     }
-    if (firstValidate() && nameValidate () && emailValidate () && messageValidate ()){
-        successMessage();
-    }
+    
 }
-
 
 // add event listener submit 
 
@@ -132,8 +130,22 @@ function successMessage () {
     span.innerText= "Votre demande a bien été prise en compte. Merci !";    
 }
 
+// Validation du formulaire 
+
+btnSubmit.addEventListener("click", function (e){
+    if (firstValidate() && nameValidate () && emailValidate () && messageValidate ()){
+        successMessage();
+        e.preventDefault();
+    }
+} )
+
 // Récuperer les données des utilisateurs
 
 function saveUserData() {
+    localStorage.setItem("Prénom", document.querySelector("#first").value);
+    localStorage.setItem("Nom", document.querySelector("#last").value);
+    localStorage.setItem("Email", document.querySelector("#mail").value);
+    localStorage.setItem("Message", document.querySelector("#message").value);
 
 }
+saveUserData();

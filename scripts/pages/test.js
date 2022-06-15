@@ -16,7 +16,9 @@ const displayPhotographers = async function (){
     photographersContener.innerHTML = renderPhotographers(data);
     function renderPhotographers (data) {
         const names = data.photographers.map((artist)=> `<li> ${artist.name}</li>`).join("-");
-        return `<ul> ${names} </ul>`;
+        return `<ul> ${names} </ul>
+                <button class="boutton"> &times;</button>`
+        ;
         
     }
 
@@ -77,7 +79,7 @@ const displayPhotographers2 = async function () {
                          </div>`
                         ).join('')
                         article.innerHTML = card;
-                        return card
+                        return (card)
                     });
 
         }
@@ -88,76 +90,7 @@ const displayPhotographers2 = async function () {
     
     renderPhotographers2();
     
-    class Image {
-        constructor(media) {
-            this.image = media.image;
-            this.title = media.title;
-            this.likes = media.likes;
-            this.photographerId = media.photographerId; 
-        }
-
-        display(){
-        return `
-        <div class= "media_container">
-            <img class="media" src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.image}"/>
-            <div class="content">
-                <div class="title_likes">    
-                    <h2 class="title"> ${this.title} </h2>
-                    <div class="likes_heart">
-                        <p class="likes"> ${this.likes} </p>
-                        <div class="heart"></div>       
-                    </div>
-                </div>
-            </div>
-        </div>`
-        }
-    }
-
-    class Video{
-        constructor(media) {
-            this.title = media.title;
-            this.likes = media.likes;
-            this.video = media.video;
-            this.photographerId = media.photographerId; 
-        }
-        display(){
-        return `
-        <div class= "media_container">
-            <video class="media" controls="controls"
-                <source src="/assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
-                        type="video/mp4">
-            </video>
-            <div class="content">
-                <div class="title_likes">    
-                    <h2 class="title"> ${this.title} </h2>
-                    <div class="likes_heart">
-                        <p class="likes"> ${this.likes} </p>
-                        <div class="heart"></div>       
-                    </div>
-                </div>
-            </div>
-        </div>`
-        }
-        
-    }
-
-
-    class Media {
-        constructor(media){
-            if ("image" in media){
-                return new Image(media);
-            }
-            else {
-                return new Video(media);
-            }
-        }
-    }
-    const division = document.createElement("div");
-    division.setAttribute("class", "test");
-    const listMedias =media.map((element) => new Media(element));
-    const display= listMedias.map((element)=> element.display())
-    
-    article.innerHTML= display;
+   
     
     // Classe qui gère automatiquement l'instanciaton d'un objet à la classe correspondante
    

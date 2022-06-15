@@ -335,8 +335,6 @@ form .message {
 }
 
 .lightbox.container{
-    /* width:500px;
-    height:400px; */
     max-height: 80vh;
     margin: auto;
     box-shadow: 3px 0px 0px rgba(0, 0, 0, 0.056);
@@ -344,21 +342,27 @@ form .message {
     
 }
 .lightbox.container.picture{
-    /* width: 500px;
-    height: 400px; */
-
-    /* object-fit: contain; */
+    max-width: 80vh;
+    max-height: 80vh;
+    object-fit: contain;
+}
+.lightbox.container.video{
+    max-width: 80vh;
+    max-height: 80vh;
+    object-fit: contain;
 }
 
 .chevron1.R:before {
-    left: 14.1em;
+    left: 40.1em;
 	transform: rotate(45deg);
+    cursor: pointer;
+    
     
 }
 .chevron1.L:before {
-    left: -1.3em;
+    left: 3.3em;
 	transform: rotate(-135deg);
-    cursor: pointer;
+    cursor: pointer;  
 
 }
 
@@ -371,21 +375,28 @@ form .message {
 	height: 0.45em;
 	left: 0.15em;
 	position: relative;
-	top: 4em;
+	top: 7em;
 	transform: rotate(-45deg);
 	vertical-align: top;
 	width: 0.45em;
     color: #901C1C;
     font-size: 33px;
     cursor: pointer;
+    
+ 
+
 }
 .lightbox__close{
-    font-size: 62px;
+    font-size: 60px;
     color: #901C1C;
     position: relative;
-    left:6.8em;
-    bottom:0.6em;
-    cursor: pointer;
+    left:21.5em;
+    bottom:0.8em;
+    background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
 }
 
 
