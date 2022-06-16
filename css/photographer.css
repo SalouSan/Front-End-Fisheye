@@ -341,7 +341,7 @@ form .message {
     border-radius: 5px;
     
 }
-.lightbox.container.picture{
+.lightbox.container.element{
     max-width: 80vh;
     max-height: 80vh;
     object-fit: contain;
@@ -352,11 +352,18 @@ form .message {
     object-fit: contain;
 }
 
+
+.title{
+    color : #901C1C;
+    font-size : 18px;
+    margin-top: 8px;
+    word-break: normal;
+}
+
 .chevron1.R:before {
     left: 40.1em;
 	transform: rotate(45deg);
-    cursor: pointer;
-    
+    cursor: pointer;   
     
 }
 .chevron1.L:before {

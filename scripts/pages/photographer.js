@@ -1,6 +1,7 @@
 //Fonction asynchrone pour recuperer les données en JSON 
 import {displaySort} from "../utils/displaySort.js";
 
+
 displaySort();
 async function getArtist (){
     let responses = await fetch ('data/photographers.json');
@@ -9,9 +10,9 @@ async function getArtist (){
     let idPhotographer = parseInt(urlParams.get("id"));
     const { media } = data1;
     const { id, name, city, country, tagline } = data1;
-    console.log(idPhotographer);
+    let artist = data1.photographers;
     if (idPhotographer) {
-        let artist = data1.photographers;
+        
 
     // Role Accessibilité 
 
@@ -95,7 +96,6 @@ async function getArtist (){
             const popularité = document.querySelector(".filter--popularité");
             const date = document.querySelector(".filter--date");
             const titre = document.querySelector(".filter--titre");
-            const {photographers} = data1.photographers;
             const gallery = media
             .filter((artist)=> artist.photographerId === idPhotographer)
             
@@ -175,9 +175,13 @@ async function getArtist (){
             let modale = `
             <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
-                    <span role ="button" class="chevron1 L"></span>  
-
-                    <span role ="button" class="chevron1 R"></span>
+                    <span role="button" class="chevron1 L"></span>  
+                    <img class="lightbox container element" src="" alt=""/>
+                    <video class="lightbox container video" controls="controls"
+                    <source src=""
+                    type="video/mp4">
+                    </video>
+                    <span role="button" class="chevron1 R"></span>
                     <button class="lightbox__close"> &times;</button>                 
                 </div>                  
             </div>
@@ -245,7 +249,7 @@ async function getArtist (){
                    
                 }
                 next (){
-                    let index = this.listElement.findIndex(element => element.title === this.currentElement.title);
+                    let index = this.listElement.findIndex(element => element.id === this.currentElement.id);
                     if (index == this.listElement.length -1) {
                         this.currentElement = this.listElement[0];
                     }
@@ -253,9 +257,7 @@ async function getArtist (){
                         this.currentElement = this.listElement [index + 1];
                     }
                     this.condition();
-                    
-                    
-                    
+                           
                 }
                 previous () {
                     let index = this.listElement.findIndex(element => element.id === this.currentElement.id);
@@ -305,16 +307,18 @@ async function getArtist (){
                 displayImages(){
                     document.querySelector(".lightbox").classList.add("show");
                     document.querySelector(".lightbox.container").classList.add("show");
-                    document.querySelector(".lightbox.container").innerHTML = `<img class="lightbox container picture" src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.image}" alt=""/>`;
-                    document.querySelector(".lightbox.container.picture").classList.add("show");
-                }
+                    document.querySelector(".lightbox.container.element").src = `assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.image}`;
+                    document.querySelector(".lightbox.container.video").style.display = "none";
+                    document.querySelector(".lightbox.container.element").style.display = "block";
+                    document.querySelector(".lightbox.container.element").classList.add("show");
+                    
+                };
                 displayVideos(){
                     document.querySelector(".lightbox").classList.add("show");
                     document.querySelector(".lightbox.container").classList.add("show");
-                    document.querySelector(".lightbox.container").innerHTML = `<video class="lightbox container video" controls="controls"
-                    <source src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.video}"
-                            type="video/mp4 alt="">
-                </video>`;
+                    document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.video}`;
+                    document.querySelector(".lightbox.container.element").style.display = "none";
+                    document.querySelector(".lightbox.container.video").style.display = "block";
                     document.querySelector(".lightbox.container.video").classList.add("show");
                 }
                 condition(){
@@ -327,7 +331,7 @@ async function getArtist (){
                 }
                               
             }
-            
+           
                 let lightbox = new Lightbox(gallery);
                 document.querySelectorAll(".media").forEach((element) => {
                         element.addEventListener("click", function (e){
