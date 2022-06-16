@@ -17,12 +17,70 @@ const displayPhotographers = async function (){
     function renderPhotographers (data) {
         const names = data.photographers.map((artist)=> `<li> ${artist.name}</li>`).join("-");
         return `<ul> ${names} </ul>
-                <button class="boutton"> &times;</button>`
+                <button class="boutton"> &times;</button>
+                <button class= "Trier"> Filter </button>`
         ;
         
     }
 
+
 };
+
+    let heart = document.querySelectorAll(".content__items--heart");
+    let likes = document.querySelectorAll(".content__items--like");
+    const content = document.querySelector(".photographers-content");
+    
+    /* const createDiv = () => {
+        let counter = document.createElement("div");
+        counter.setAttribute("class", "counter_content"); 
+        return counter  
+    }
+    const HandleEvent = () => {
+        let element= null;
+        let total = 0; 
+        for (let j=0; j<likes.length; j++){
+            total+=parseInt(likes[j].innerText);
+        }
+        let person = data.photographers;
+        let people = person.filter((person) => person.id === idPhotographer)
+                .map((person)=>
+                `
+                <div class="counter_price"> 
+                    <div class="container">
+                        <p class="counter"> ${total} </p>
+                        <div class="coeur"></div>  
+                    </div>
+                    <p class="price1"> ${person.price}€/jour </p>
+                </div>`);
+        for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
+            let integer = likes[j].innerText;
+            let count = document.querySelector(".counter");
+            heart[i].addEventListener('click', function () {
+                likes[j].innerText=integer;
+                count.innerText=total;
+                integer++;
+                total++;
+
+            });
+            
+        }
+        return () => {
+            if (!element){
+                element = createDiv();
+                content.appendChild(element)
+            }
+
+            element.innerHTML=people;
+        }
+        
+    }
+    const increment = HandleEvent()
+ */
+
+
+
+
+
 
 displayPhotographers(); 
 
@@ -209,3 +267,4 @@ class Media {
 
     
 }
+

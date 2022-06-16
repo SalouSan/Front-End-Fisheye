@@ -150,7 +150,7 @@ form .message {
 #sous_menu{
     list-style-type: none;
     padding-left: 8px;
-    padding-top: 18px;
+    padding-top: 10px;
     padding-bottom: 10px;
     border:2px solid transparent;
     background-color: #901C1C;
@@ -215,13 +215,15 @@ form .message {
 }
 
 .media {
-    height: 20rem;
-    width: 20rem;
-    object-fit: cover;
+    height: 24rem;
+    width: 24rem;
+    object-fit: contain;
 }
 .content__description {
     display: flex;
     justify-content: space-between;
+    width: auto;
+    margin-left: 47px;
 
 }
 .content__description--title{
@@ -337,7 +339,7 @@ form .message {
 .lightbox.container{
     max-height: 80vh;
     margin: auto;
-    box-shadow: 3px 0px 0px rgba(0, 0, 0, 0.056);
+    background:none;
     border-radius: 5px;
     
 }
@@ -345,11 +347,13 @@ form .message {
     max-width: 80vh;
     max-height: 80vh;
     object-fit: contain;
+    box-shadow: 3px 0px 0px grey;
 }
 .lightbox.container.video{
     max-width: 80vh;
     max-height: 80vh;
     object-fit: contain;
+    box-shadow: 3px 0px 0px grey;
 }
 
 
@@ -361,13 +365,13 @@ form .message {
 }
 
 .chevron1.R:before {
-    left: 40.1em;
+    left: 32.1em;
 	transform: rotate(45deg);
     cursor: pointer;   
     
 }
 .chevron1.L:before {
-    left: 3.3em;
+    left: 10.3em;
 	transform: rotate(-135deg);
     cursor: pointer;  
 
@@ -382,7 +386,7 @@ form .message {
 	height: 0.45em;
 	left: 0.15em;
 	position: relative;
-	top: 7em;
+	top: 9em;
 	transform: rotate(-45deg);
 	vertical-align: top;
 	width: 0.45em;
@@ -397,8 +401,8 @@ form .message {
     font-size: 60px;
     color: #901C1C;
     position: relative;
-    left:21.5em;
-    bottom:0.8em;
+    left:16.1em;
+    bottom:0.5em;
     background: none;
 	border: none;
 	padding: 0;

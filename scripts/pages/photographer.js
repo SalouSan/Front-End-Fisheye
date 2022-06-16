@@ -179,7 +179,7 @@ async function getArtist (){
                     <img class="lightbox container element" src="" alt=""/>
                     <video class="lightbox container video" controls="controls"
                     <source src=""
-                    type="video/mp4">
+                    type="video/mp4" alt="">
                     </video>
                     <span role="button" class="chevron1 R"></span>
                     <button class="lightbox__close"> &times;</button>                 
@@ -206,7 +206,7 @@ async function getArtist (){
                 
             });
             titre.addEventListener("click", function Title(e){
-                titre.classList.add("border");
+                titre.classList.toggle("border");
                 const listMedias = media.map((element)=> new Media (element));
                 const photographer = listMedias
                 .sort((a,b)=> a.title.localeCompare(b.title))
@@ -215,7 +215,7 @@ async function getArtist (){
                 return element.display();
                 }).join('');
                 article.innerHTML = photographer;   
-                likes();
+                increment();
                 
                 
             });
@@ -230,7 +230,8 @@ async function getArtist (){
                 return element.display();
                 }).join('');
                 article.innerHTML = photographer;
-                e.preventDefault();                    
+                e.preventDefault(); 
+                increment();               
                
             });
             class Lightbox {
@@ -308,6 +309,7 @@ async function getArtist (){
                     document.querySelector(".lightbox").classList.add("show");
                     document.querySelector(".lightbox.container").classList.add("show");
                     document.querySelector(".lightbox.container.element").src = `assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.image}`;
+                    document.querySelector(".lightbox.container.element").alt =`${this.currentElement.title}`
                     document.querySelector(".lightbox.container.video").style.display = "none";
                     document.querySelector(".lightbox.container.element").style.display = "block";
                     document.querySelector(".lightbox.container.element").classList.add("show");
@@ -317,6 +319,7 @@ async function getArtist (){
                     document.querySelector(".lightbox").classList.add("show");
                     document.querySelector(".lightbox.container").classList.add("show");
                     document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.video}`;
+                    document.querySelector(".lightbox.container.video").alt =`${this.currentElement.title}`;
                     document.querySelector(".lightbox.container.element").style.display = "none";
                     document.querySelector(".lightbox.container.video").style.display = "block";
                     document.querySelector(".lightbox.container.video").classList.add("show");
@@ -345,11 +348,61 @@ async function getArtist (){
     }
     photographerContent(idPhotographer);
     
+    const createDiv = () => {
+        let counter = document.createElement("div");
+        counter.setAttribute("class", "counter_content"); 
+        return counter  
+    }
+    const HandleEvent = () => {
+        let heart = document.querySelectorAll(".content__items--heart");
+        let likes = document.querySelectorAll(".content__items--like");
+        const content = document.querySelector(".photographers-content");
+        let element= null;
+        let total = 0; 
+        for (let j=0; j<likes.length; j++){
+            total+=parseInt(likes[j].innerText);
+        }
+        let person = data1.photographers;
+        let people = person.filter((person) => person.id === idPhotographer)
+                .map((person)=>
+                `
+                <div class="counter_price"> 
+                    <div class="container">
+                        <p id="counter"> ${total} </p>
+                        <div class="coeur"></div>  
+                    </div>
+                    <p class="price1"> ${person.price}€/jour </p>
+                </div>`);
+        for (let i = 0, j=0; i < heart.length, j<likes.length; i++, j++) {
+            let integer = likes[j].innerText;
+            let compteur = document.querySelector("#counter");
+            heart[i].addEventListener('click', function () {
+                likes[j].innerText=integer;
+                compteur.innerText=total;
+                integer++;
+                total++;
+
+            });
+            
+        }
+        return () => {
+            if (!element){
+                element = createDiv();
+                content.appendChild(element)
+            }
+
+            element.innerHTML=people;
+        }
+        
+    }
+    const increment = HandleEvent();
+    increment();
+
 
   
     
     // Fonction qui permet de gerer les likes 
-    function likes () { 
+    /* function likes () { 
         let heart = document.querySelectorAll(".content__items--heart");
         let likes = document.querySelectorAll(".content__items--like");
         let total = 0;             
@@ -388,9 +441,8 @@ async function getArtist (){
             }
          
     }
-    likes();
-   
-
+    likes(); */
+    
     // function pour la modale lightbox 
     const mediasPhotographer = Array.from(document.querySelectorAll(".media_container"));
     const next = document.querySelector(".chevron1.R");
