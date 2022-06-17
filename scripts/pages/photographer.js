@@ -52,29 +52,35 @@ async function getArtist (){
         const nav = document.createElement("nav");
         const ul = document.createElement("ul");
         ul.setAttribute("class", "filter");
-        const li = document.createElement("li");
-        li.setAttribute("class", "filter--popularité");
-        li.setAttribute("aria-label", "filtre par popularité");
+        ul.setAttribute("role", "list");
+        const filtrePopularité = document.createElement("li");
+        filtrePopularité.setAttribute("class", "filter--popularité");
+        filtrePopularité.setAttribute("aria-label", "filtre par popularité");
+        filtrePopularité.setAttribute("role", "listitem");
         const span1 = document.createElement("span");
         // Eviter les span et mettre des balise button pour les menus déroulants 
         span1.setAttribute("class", "chevron top");
         span1.setAttribute("aria-expanded", "false");
         span1.setAttribute("aria-controls", "sous_menu");
         span1.setAttribute("role", "button");
-        const li2 = document.createElement("li");
-        li2.setAttribute("class", "filter--date");
-        li2.setAttribute("aria-describedby", "sous_menu");
-        li2.setAttribute("aria-label", "filtre par date");
-        const li3 = document.createElement("li");
-        li3.setAttribute("class", "filter--titre");
-        li3.setAttribute("aria-describedby", "sous_menu");
-        li3.setAttribute("aria-label", "filtre par titre");
-        li.innerText="Popularité";
-        li.insertAdjacentElement("afterbegin", span1);
+        span1.setAttribute("tabindex", "0");
+        const filtreDate = document.createElement("li");
+        filtreDate.setAttribute("class", "filter--date");
+        filtreDate.setAttribute("aria-describedby", "sous_menu");
+        filtreDate.setAttribute("aria-label", "filtre par date");
+        filtreDate.setAttribute("role", "listitem");
+        const filtreTitle = document.createElement("li");
+        filtreTitle.setAttribute("class", "filter--titre");
+        filtreTitle.setAttribute("aria-describedby", "sous_menu");
+        filtreTitle.setAttribute("aria-label", "filtre par titre");
+        filtreTitle.setAttribute("role", "listitem");
+        filtrePopularité.innerText="Popularité";
+        filtrePopularité.insertAdjacentElement("afterbegin", span1);
         const sousMenu= document.createElement("ul");
         sousMenu.setAttribute("id", "sous_menu");
-        li2.innerText = "Date";
-        li3.innerText = "Titre";
+        sousMenu.setAttribute("role", "list");
+        filtreDate.innerText = "Date";
+        filtreTitle.innerText = "Titre";
         const divNav = document.createElement("div");
         divNav.setAttribute("class", "menu-wrapper"); 
         const spanHeader = document.createElement("span");
@@ -82,12 +88,13 @@ async function getArtist (){
         spanHeader.innerText= "Trier par";
         divNav.insertAdjacentElement("afterbegin", spanHeader);
         divNav.appendChild(ul);
-        ul.appendChild(li);
-        li.insertAdjacentElement("afterend", sousMenu);
-        sousMenu.appendChild(li2);
-        sousMenu.appendChild(li3);
+        ul.appendChild(filtrePopularité);
+        filtrePopularité.insertAdjacentElement("afterend", sousMenu);
+        sousMenu.appendChild(filtreDate);
+        sousMenu.appendChild(filtreTitle);
         nav.appendChild(divNav);
         content.insertAdjacentElement("beforebegin", nav);
+
         
 // Condition permettant d'affichant les réalisations du photographer 
         if (idPhotographer) {
@@ -205,6 +212,7 @@ async function getArtist (){
             popularité.addEventListener("click", function (e){
                 
             });
+
             titre.addEventListener("click", function Title(e){
                 titre.classList.toggle("border");
                 const listMedias = media.map((element)=> new Media (element));
@@ -219,7 +227,7 @@ async function getArtist (){
                 
                 
             });
-
+        
             date.addEventListener("click", function Date (e){
                 date.classList.toggle("border");
                 const listMedias = media.map((element)=> new Media (element));
@@ -234,6 +242,7 @@ async function getArtist (){
                 increment();               
                
             });
+            
             class Lightbox {
                 constructor (listElement) {
                     this.currentElement = null; 
@@ -301,6 +310,7 @@ async function getArtist (){
                     })
                 }
                 close (){
+                    document.querySelector(".lightbox").setAttribute("tabindex", "10");
                     document.querySelector(".lightbox").classList.remove("show");
                 }
                 
