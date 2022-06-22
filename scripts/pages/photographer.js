@@ -97,7 +97,6 @@ export async function getArtist (){
         divNav.insertAdjacentElement("afterbegin", spanHeader);
         divNav.appendChild(ul);
         ul.appendChild(filtrePopularité);
-        filtrePopularité.insertAdjacentHTML("afterbegin",svg);
         filtrePopularité.insertAdjacentElement("beforeend", division);
         division.insertAdjacentHTML("afterbegin",svg);
         filtrePopularité.insertAdjacentElement("afterend", sousMenu);    
@@ -293,10 +292,10 @@ export async function getArtist (){
                     if (e.key == "Enter") {
                         sousMenu.style.visibility = "visible";
                         chevronUpDown.setAttribute("aria-expanded", "true");
-                        chevronUpDown.style.transform = "rotate(180deg)"
+                        chevronUpDown.style.transform = "rotate(180deg)";
                         filtermain.style.display ="block";
                     }
-                    else if (e.key== "Enter"){
+                    else {
                         sousMenu.style.visibility = "hidden";
                         chevronUpDown.setAttribute("aria-expanded", "false");
                     }
