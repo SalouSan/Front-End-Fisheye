@@ -7,9 +7,7 @@ export async function getArtist (){
     let idPhotographer = parseInt(urlParams.get("id"));
     const { media } = data1;
     const { id, name, city, country, tagline } = data1.media;
-    console.log(id);
     const {likes} = media;
-    console.log(likes)
     let artist = data1.photographers;
     if (idPhotographer) {       
     
@@ -71,7 +69,7 @@ export async function getArtist (){
         filtreTitle.setAttribute("class", "filter--titre");
         filtreTitle.innerText = "Titre";
 
-         // Attributs ARIA et rôle pour l'accessibilité
+         // Attributs ARIA et rôles pour l'accessibilité
         ul.setAttribute("role", "list");
         ul.setAttribute("tabindex", "3");
         ul.setAttribute("aria-label", "Filtres par items");
@@ -140,7 +138,9 @@ export async function getArtist (){
                             <h3 class="content__description--title"> ${this.title} </h3>
                             <div class="content__items">
                                 <p aria-label="Nombre de likes :${this.likes}" class="content__items--like"> ${this.likes} </p>
-                                <div class="content__items--heart"></div>       
+                                <div>
+                                    <img class="content__items--heart" src="assets/icons/heart.svg"/>  
+                                </div>     
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,9 @@ export async function getArtist (){
                             <h3 class="content__description--title"> ${this.title} </h3>
                             <div class="content__items">
                                 <p aria-label="Nombre de likes :${this.likes}" class="content__items--like"> ${this.likes} </p>
-                                <div class="content__items--heart"></div>       
+                                <div>
+                                    <img class="content__items--heart" src="assets/icons/heart.svg"/>    
+                                </div>   
                             </div>
                         </div>
                     </div>
@@ -194,18 +196,18 @@ export async function getArtist (){
                 return element.display();
             }).join('');
 
-            // Création de la div qui gère la lightbox
+            // Création de la div qui affiche la lightbox
             
             let modale = `
             <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
-                    <span role="button" class="chevron1 L"></span>  
+                    <img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
                     <img class="lightbox container element" src="" alt=""/>
                     <video class="lightbox container video" controls="controls"
                     <source src=""
                     type="video/mp4" alt="">
                     </video>
-                    <span role="button" class="chevron1 R"></span>
+                    <img role="button" class="chevronR" src="assets/icons/chevronRight.svg"/>
                     <button class="lightbox__close">&times;</button>                 
                 </div>                  
             </div>
@@ -215,8 +217,8 @@ export async function getArtist (){
 
              // Aria roles et attributs pour les éléments de la lightbox
 
-             let chevronR = document.querySelector(".chevron1.R")
-             let chevronL = document.querySelector(".chevron1.L")
+             let chevronR = document.querySelector(".chevronR")
+             let chevronL = document.querySelector(".chevronL")
              let closeBtn = document.querySelector(".lightbox__close")
              chevronL.setAttribute("tabindex", "4")
              chevronR.setAttribute("tabindex", "4")
@@ -236,7 +238,8 @@ export async function getArtist (){
                 return element.display();
                 }).join('');
                 article.innerHTML = photographer;   
-                likes();
+                handleLikes();
+                
                 
                 
             });
@@ -252,11 +255,11 @@ export async function getArtist (){
                 }).join('');
                 article.innerHTML = photographer;
                 e.preventDefault(); 
-                likes();               
+                handleLikes();            
                
             });
 
-            // Aria roles et attributs pour les éléments de la page 
+            // Aria roles et attributs pour les éléments de la page : logo, 
             let logo = document.querySelector(".logo");
             logo.setAttribute("tabindex", "1")
             let contactBtn = document.querySelector(".contact_button");
@@ -280,7 +283,7 @@ export async function getArtist (){
 
            
 
-
+            // Fonction qui permet de gerer l'aria-expanded sur le chevron du menu deroulant
             function ariaExpand () {
                 let chevronUpDown = document.querySelector(".chevron.up.down");
                 let filterpop = document.querySelector(".filter--popularité")
@@ -291,7 +294,7 @@ export async function getArtist (){
                         sousMenu.style.visibility = "visible";
                         chevronUpDown.setAttribute("aria-expanded", "true");
                         chevronUpDown.style.transform = "rotate(180deg)"
-                        filter.style.display ="block";
+                        filtermain.style.display ="block";
                     }
                     else if (e.key== "Enter"){
                         sousMenu.style.visibility = "hidden";
@@ -340,20 +343,20 @@ export async function getArtist (){
                     this.condition();
                 }
                 manageEvent () {
-                    document.querySelector(".chevron1.R").addEventListener("click", () => {
+                    document.querySelector(".chevronR").addEventListener("click", () => {
                         this.next();
                     })
-                    document.querySelector(".chevron1.R").addEventListener("keyup", (e) => {
+                    document.querySelector(".chevronR").addEventListener("keyup", (e) => {
                         if(e.key === "ArrowRight"){
                             this.next();
                         }
                     })
                     
-                    document.querySelector(".chevron1.L").addEventListener("click", (e) => {
+                    document.querySelector(".chevronL").addEventListener("click", (e) => {
                         this.previous();
                         
                     })
-                    document.querySelector(".chevron1.L").addEventListener("keyup", (e) => {
+                    document.querySelector(".chevronL").addEventListener("keyup", (e) => {
                         if(e.key === "ArrowLeft"){
                             this.previous();
                         }
@@ -403,7 +406,7 @@ export async function getArtist (){
                 }
                               
             }
-           // Instanciation de la class lightbox avec comme parametre la galerie puis ecouteur d'evenement sur les images de la galerie pour afficher la lightbox
+           // Instanciation de la class lightbox avec comme parametre la galerie puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
                 let lightbox = new Lightbox(gallery);
                 document.querySelectorAll(".media").forEach((element) => {
                         element.addEventListener("click", function (e){
@@ -476,7 +479,7 @@ export async function getArtist (){
   
     
     // Fonction qui permet d'incrémenter le nombre de likes au click sur le coeur et de comptabiliser le nombre total de likes sur la page
-    function jaime () { 
+    function handleLikes () { 
         let heart = document.querySelectorAll(".content__items--heart");
         let likes = document.querySelectorAll(".content__items--like");
         let total = 0;             
@@ -493,7 +496,9 @@ export async function getArtist (){
                 <div class="counter_price"> 
                     <div class="container">
                         <p class="counter"> ${total} </p>
-                        <div class="coeur"></div>  
+                        <div>
+                            <img class="heart" src="assets/icons/CounterHeart.svg"/>   
+                        </div>  
                     </div>
                     <p class="price1"> ${person.price}€/jour </p>
                 </div>`);
@@ -523,9 +528,9 @@ export async function getArtist (){
             }
          
     }
-    jaime();
+    handleLikes();
     
-    // Aria role et attributs pour le compteur global de likes//
+    // Aria attributs pour le compteur global de likes
 
     let counter = document.querySelector(".counter_content");
     counter.setAttribute("tabindex", "5");
@@ -536,12 +541,15 @@ export async function getArtist (){
     total.setAttribute("tabindex", "5")
     total.setAttribute("aria-describedby", "counter");
     total.setAttribute("aria-label", `Nombre total de likes : ${TotalValue}`);
+
+    let heart = document.querySelector(".heart");
+    heart.setAttribute("aria-label", "icône coeur");
+    heart.setAttribute("tabindex", "6");
     
     let price = document.querySelector(".price1");
     let priceContent = price.innerText;
-    price.setAttribute("tabindex", "6");
+    price.setAttribute("tabindex", "7");
     price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
-
 
 }
 
