@@ -1,4 +1,4 @@
-//Fonction asynchrone pour recuperer les données en JSON 
+//Fonction asynchrone qui permet de recuperer les données en JSON 
 
 export async function getArtist (){
     let responses = await fetch ('data/photographers.json');
@@ -6,11 +6,14 @@ export async function getArtist (){
     let urlParams = new URLSearchParams(window.location.search);
     let idPhotographer = parseInt(urlParams.get("id"));
     const { media } = data1;
-    const { id, name, city, country, tagline } = data1;
+    const { id, name, city, country, tagline } = data1.media;
+    console.log(id);
+    const {likes} = media;
+    console.log(likes)
     let artist = data1.photographers;
     if (idPhotographer) {       
     
-    // Role Accessibilité 
+    // Role Accessibilité pour le header de la page 
 
     let header = document.querySelector("header");
     header.setAttribute("role", "banner");
@@ -44,51 +47,62 @@ export async function getArtist (){
         const content = document.querySelector(".photographers-content");
         const article = document.createElement('article');
 
-        // DOM elements tri 
+        // Création du menu de navigation à partir des elements DOM pour le filtrage des photographies selon 3 critères : popularité, date et titre.
         const nav = document.createElement("nav");
+        const divNav = document.createElement("div");
+        divNav.setAttribute("class", "menu-wrapper"); 
         const ul = document.createElement("ul");
         ul.setAttribute("class", "filter");
+        const filtrePopularité = document.createElement("li");
+        filtrePopularité.setAttribute("class", "filter--popularité");
+        filtrePopularité.innerText="Popularité";
+        const spanHeader = document.createElement("span");
+        spanHeader.setAttribute("class", "Tri");
+        spanHeader.innerText= "Trier par";
+
+        // Création du sous-menu enfant du menu principal et qui englobe les deux autres filtres : date et titre
+        const sousMenu= document.createElement("ul");
+        sousMenu.setAttribute("id", "sous_menu");
+        const filtreDate = document.createElement("li");
+        filtreDate.setAttribute("class", "filter--date");
+        filtreDate.innerText = "Date";
+        
+        const filtreTitle = document.createElement("li");
+        filtreTitle.setAttribute("class", "filter--titre");
+        filtreTitle.innerText = "Titre";
+
+         // Attributs ARIA et rôle pour l'accessibilité
         ul.setAttribute("role", "list");
         ul.setAttribute("tabindex", "3");
         ul.setAttribute("aria-label", "Filtres par items");
-        const filtrePopularité = document.createElement("li");
-        filtrePopularité.setAttribute("class", "filter--popularité");
         filtrePopularité.setAttribute("aria-label", "filtre par popularité");
         filtrePopularité.setAttribute("role", "listitem");
         filtrePopularité.setAttribute("tabindex", "3");
-        const span1 = document.createElement("span");
-        span1.setAttribute("class", "chevron top");
-        span1.setAttribute("aria-expanded", "false");
-        span1.setAttribute("aria-controls", "sous_menu");
-        span1.setAttribute("role", "button");
-        span1.setAttribute("tabindex", "3");
-        const filtreDate = document.createElement("li");
-        filtreDate.setAttribute("class", "filter--date");
+        sousMenu.setAttribute("role", "region");
         filtreDate.setAttribute("aria-describedby", "sous_menu");
         filtreDate.setAttribute("aria-label", "filtre par date");
         filtreDate.setAttribute("role", "listitem");
         filtreDate.setAttribute("tabindex", "3");
-        const filtreTitle = document.createElement("li");
-        filtreTitle.setAttribute("class", "filter--titre");
         filtreTitle.setAttribute("role", "listitem");
         filtreTitle.setAttribute("tabindex", "3");
         filtreTitle.setAttribute("aria-label", "filtre par titre");
-        filtrePopularité.innerText="Popularité";
-        filtrePopularité.insertAdjacentElement("afterbegin", span1);
-        const sousMenu= document.createElement("ul");
-        sousMenu.setAttribute("id", "sous_menu");
-        sousMenu.setAttribute("role", "list");
-        filtreDate.innerText = "Date";
-        filtreTitle.innerText = "Titre";
-        const divNav = document.createElement("div");
-        divNav.setAttribute("class", "menu-wrapper"); 
-        const spanHeader = document.createElement("span");
-        spanHeader.setAttribute("class", "Tri");
-        spanHeader.innerText= "Trier par";
+
+        // Création d'une div qui permet d'afficher le chevron
+        const division = document.createElement("div");
+        division.setAttribute("class", "svg");
+        
+        // Chevron SVG importé qui gère le deroulant du menu  
+        const svg = `<img class="chevron up down" role="button" tabindex="3" aria-label="button" aria-controls="sous_menu" aria-expanded="false" src="assets/icons/chevronTop.svg"/>`
+    
+        
+       // Insertion des éléments enfants dans leur element parent   
         divNav.insertAdjacentElement("afterbegin", spanHeader);
         divNav.appendChild(ul);
         ul.appendChild(filtrePopularité);
-        filtrePopularité.insertAdjacentElement("afterend", sousMenu);
+        filtrePopularité.insertAdjacentHTML("afterbegin",svg);
+        filtrePopularité.insertAdjacentElement("beforeend", division);
+        division.insertAdjacentHTML("afterbegin",svg);
+        filtrePopularité.insertAdjacentElement("afterend", sousMenu);    
         sousMenu.appendChild(filtreDate);
         sousMenu.appendChild(filtreTitle);
         nav.appendChild(divNav);
@@ -125,7 +139,7 @@ export async function getArtist (){
                         <div class="content__description">    
                             <h3 class="content__description--title"> ${this.title} </h3>
                             <div class="content__items">
-                                <p class="content__items--like"> ${this.likes} </p>
+                                <p aria-label="Nombre de likes :${this.likes}" class="content__items--like"> ${this.likes} </p>
                                 <div class="content__items--heart"></div>       
                             </div>
                         </div>
@@ -145,14 +159,14 @@ export async function getArtist (){
                 return `
                 <div class= "media_container" role="listitems">
                         <video class="media" controls="controls" data-id="${this.id} tabindex="4"
-                            <source src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video} "tabindex="4"
-                                type="video/mp4 alt="Video : ${this.title}">
+                            <source src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
+                                type="video/mp4 alt="Video:${this.title}">
                         </video>
                     <div class="content">
                         <div class="content__description">    
                             <h3 class="content__description--title"> ${this.title} </h3>
                             <div class="content__items">
-                                <p class="content__items--like"> ${this.likes} </p>
+                                <p aria-label="Nombre de likes :${this.likes}" class="content__items--like"> ${this.likes} </p>
                                 <div class="content__items--heart"></div>       
                             </div>
                         </div>
@@ -179,6 +193,8 @@ export async function getArtist (){
             .map((element)=>{
                 return element.display();
             }).join('');
+
+            // Création de la div qui gère la lightbox
             
             let modale = `
             <div class="lightbox" id="modale">                        
@@ -196,8 +212,19 @@ export async function getArtist (){
             `   
             article.innerHTML= photographer + modale;
             content.appendChild(article);  
+
+             // Aria roles et attributs pour les éléments de la lightbox
+
+             let chevronR = document.querySelector(".chevron1.R")
+             let chevronL = document.querySelector(".chevron1.L")
+             let closeBtn = document.querySelector(".lightbox__close")
+             chevronL.setAttribute("tabindex", "4")
+             chevronR.setAttribute("tabindex", "4")
+             closeBtn.setAttribute("tabindex", "4");
+             closeBtn.setAttribute("aria-label", "Fermer");
             
         
+            // Ecouteur d'evenement sur les filtres du menu déroulant
 
             titre.addEventListener("click", function Title(e){
                 titre.classList.toggle("border");
@@ -228,7 +255,8 @@ export async function getArtist (){
                 likes();               
                
             });
-            // Aria roles 
+
+            // Aria roles et attributs pour les éléments de la page 
             let logo = document.querySelector(".logo");
             logo.setAttribute("tabindex", "1")
             let contactBtn = document.querySelector(".contact_button");
@@ -240,14 +268,38 @@ export async function getArtist (){
                 item.setAttribute("aria-label", "likes");
 
             })
+            let titles = document.querySelectorAll(".content__description--title");
+            titles.forEach((title) => {
+                title.setAttribute("tabindex", "4");
 
-            let chevronR = document.querySelector(".chevron1.R")
-            let chevronL = document.querySelector(".chevron1.L")
-            let closeBtn = document.querySelector(".lightbox__close")
-            chevronL.setAttribute("tabindex", "4")
-            chevronR.setAttribute("tabindex", "4")
-            closeBtn.setAttribute("tabindex", "4");
-            closeBtn.setAttribute("aria-label", "Fermer");
+            })
+            let like = document.querySelectorAll(".content__items--like")
+            like.forEach((like) =>{
+                like.setAttribute("tabindex", "4");
+            })
+
+           
+
+
+            function ariaExpand () {
+                let chevronUpDown = document.querySelector(".chevron.up.down");
+                let filterpop = document.querySelector(".filter--popularité")
+                let sousMenu = document.querySelector("#sous_menu");
+                let filtermain = document.querySelector(".filter");
+                filtermain.addEventListener("keydown", function (e) {
+                    if (e.key == "Enter") {
+                        sousMenu.style.visibility = "visible";
+                        chevronUpDown.setAttribute("aria-expanded", "true");
+                        chevronUpDown.style.transform = "rotate(180deg)"
+                        filter.style.display ="block";
+                    }
+                    else if (e.key== "Enter"){
+                        sousMenu.style.visibility = "hidden";
+                        chevronUpDown.setAttribute("aria-expanded", "false");
+                    }
+                } )
+            }
+            ariaExpand();
             
             
             class Lightbox {
@@ -351,7 +403,7 @@ export async function getArtist (){
                 }
                               
             }
-           
+           // Instanciation de la class lightbox avec comme parametre la galerie puis ecouteur d'evenement sur les images de la galerie pour afficher la lightbox
                 let lightbox = new Lightbox(gallery);
                 document.querySelectorAll(".media").forEach((element) => {
                         element.addEventListener("click", function (e){
@@ -423,8 +475,8 @@ export async function getArtist (){
 
   
     
-    // Fonction qui permet de gerer les likes 
-    function likes () { 
+    // Fonction qui permet d'incrémenter le nombre de likes au click sur le coeur et de comptabiliser le nombre total de likes sur la page
+    function jaime () { 
         let heart = document.querySelectorAll(".content__items--heart");
         let likes = document.querySelectorAll(".content__items--like");
         let total = 0;             
@@ -471,10 +523,26 @@ export async function getArtist (){
             }
          
     }
-    likes();
+    jaime();
     
-    // function pour la modale lightbox 
+    // Aria role et attributs pour le compteur global de likes//
+
+    let counter = document.querySelector(".counter_content");
+    counter.setAttribute("tabindex", "5");
+    counter.setAttribute("aria-label", "compteur de likes");
+
+    let total = document.querySelector(".counter");
+    let TotalValue = total.innerText;
+    total.setAttribute("tabindex", "5")
+    total.setAttribute("aria-describedby", "counter");
+    total.setAttribute("aria-label", `Nombre total de likes : ${TotalValue}`);
     
+    let price = document.querySelector(".price1");
+    let priceContent = price.innerText;
+    price.setAttribute("tabindex", "6");
+    price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
+
+
 }
 
 getArtist ();

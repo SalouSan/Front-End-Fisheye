@@ -28,3 +28,11 @@ article {
     font-size:66px;
 
 }
+.items{
+    height:40px;
+    width: 40px;
+    background-color: brown;
+    margin: auto;
+    list-style-type: none;
+
+}
