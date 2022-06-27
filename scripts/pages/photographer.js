@@ -2,7 +2,7 @@
 
 //Fonction asynchrone qui permet de recuperer les données en JSON 
 
-export async function getArtist (){
+async function getArtist (){
 	let responses = await fetch ("data/photographers.json");
 	let data1 = await responses.json();
 	let urlParams = new URLSearchParams(window.location.search);
@@ -154,7 +154,7 @@ export async function getArtist (){
 				display(){
 					return `
                 <div class= "media_container" role="listitems">
-                        <video class="media" controls="controls" data-id="${this.id} tabindex="4"
+                        <video class="media" autoplay="false" data-id="${this.id} tabindex="4"
                             <source src="assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.video}"
                                 type="video/mp4 alt="Video:${this.title}">
                         </video>
@@ -223,7 +223,39 @@ export async function getArtist (){
             
         
 			// Ecouteur d'evenement sur les filtres du menu déroulant
-
+			const date = document.querySelector(".filter--date");
+			const titre = document.querySelector(".filter--titre");
+	
+			titre.addEventListener("click", function Title(e){
+				titre.classList.toggle("border");
+				e.preventDefault();
+				const listMedias = media.map((element)=> new Media (element));
+				const photographer = listMedias
+					.sort((a,b)=> a.title.localeCompare(b.title))
+					.filter((artist)=> artist.photographerId === idPhotographer)
+					.map((element)=>{
+						return element.display();
+					}).join("");
+				article.innerHTML = photographer;   
+				handleLikes();
+				
+				
+			});
+		
+			date.addEventListener("click", function Date (e){
+				date.classList.toggle("border");
+				const listMedias = media.map((element)=> new Media (element));
+				const photographer = listMedias
+					.filter((artist)=> artist.photographerId === idPhotographer)
+					.sort((a,b)=> a.date - b.date)
+					.map((element)=>{
+						return element.display();
+					}).join("");
+				article.innerHTML = photographer;
+				e.preventDefault(); 
+				handleLikes();            
+  
+			});
 			
 			
   

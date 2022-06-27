@@ -44,6 +44,7 @@
     width: 170px;
     height: 70px;
     border: none;
+    margin-right: 40px;
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
@@ -196,12 +197,12 @@ form .message {
 
 /* Contenu principal de la page : photo, titre et likes */
 
-.photographers-content{
-    max-width: 90%;
+*{
+    max-width: 100%;
 }
 .photographers-content article{
     margin-left: 100px;
-    margin-top: 50px;
+    margin-top: 30px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
 }
@@ -284,6 +285,7 @@ form .message {
     bottom: 0;
     top: 0;
     background-color: rgba(255, 255, 255, 0.9);
+    max-width: 100%;
 }
 
 .lightbox.show{
@@ -296,6 +298,7 @@ form .message {
     background:none;
     border-radius: 5px;
     position: relative;
+    max-width: 100%;
     
 }
 .lightbox.container.element{
@@ -324,17 +327,17 @@ form .message {
 
 .chevronR{
     color: #901C1C;
-    position: absolute;
-    top:320px;  
-    right:300px;  
+    position: fixed;
+    top:37%;
+    right:23%; 
     cursor: pointer;
 }
 .chevronL{
     color: #901C1C;
     cursor: pointer;
-    position: absolute;
-    top:320px;
-    left:300px;
+    position: fixed;
+    top:36%;
+    left:20em;
 }
 .lightbox__close{
     font-size: 52px;
@@ -348,3 +351,52 @@ form .message {
 }
 
 
+@media screen and (max-width:750px){
+    .profile{
+        margin-top: 70px;
+        display: flex;
+        flex-direction: column;
+        height: 40%;
+    }
+    .contact_button{
+        height: 40%;
+        margin: auto;
+    }
+    .profile_image {
+        margin-top: 20px;
+    }
+    nav{
+        max-width: 80%;
+    }
+
+    .menu-wrapper{
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        max-width: 50%;
+    }
+    .Tri {
+        margin-left : 10px;
+    }
+    .photographers-content article {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+
+    }
+    .counter_content{
+        width: 80%;
+    }
+    .lightbox{
+        max-width: 100%;
+    }
+    .lightbox.container{
+        max-width: 80%;
+    }
+    .lightbox.container.element{
+        max-width: 80%;
+    }
+    .lightbox.container.video{
+        max-width: 80%;
+    }
+}
