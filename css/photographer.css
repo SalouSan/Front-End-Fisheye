@@ -195,6 +195,10 @@ form .message {
 }
 
 /* Contenu principal de la page : photo, titre et likes */
+
+.photographers-content{
+    max-width: 90%;
+}
 .photographers-content article{
     margin-left: 100px;
     margin-top: 50px;

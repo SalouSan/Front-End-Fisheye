@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/SalouSan/Front-End-Fisheye/issues"
   },
-  "homepage": "https://github.com/SalouSan/Front-End-Fisheye#readme"
+  "homepage": "https://github.com/SalouSan/Front-End-Fisheye#readme",
+  "devDependencies": {
+    "eslint": "^8.18.0"
+  }
 }

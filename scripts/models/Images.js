@@ -1,17 +1,16 @@
 export class Image {
-    constructor(media) {
-        this.image = media.image;
-        this.title = media.title;
-        this.likes = media.likes;
-        this.id = media.id;
-        this.photographerId = media.photographerId; 
+	constructor(media) {
+		this.image = media.image;
+		this.title = media.title;
+		this.likes = media.likes;
+		this.id = media.id;
+		this.photographerId = media.photographerId; 
 
     
-    }
+	}
 
-
-    display(){
-    return `
+	display(){
+		return `
     <div class= "media_container" role="listitems">
         <img class="media" src="assets/Sample_Photos/${this.photographerId.name}/${this.image}" data-id="${this.id}" alt="${this.title}"/>
         <div class="content">
@@ -23,8 +22,8 @@ export class Image {
                 </div>
             </div>
         </div>
-    </div>`
-    }
+    </div>`;
+	}
 }
 
 
