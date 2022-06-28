@@ -217,15 +217,15 @@ form .message {
 }
 
 .media {
-    height: 24rem;
-    width: 24rem;
-    object-fit: contain;
+    width: 350px;
+    object-fit: cover;
 }
 .content__description {
     display: flex;
     justify-content: space-between;
-    width: auto;
-    margin-left: 47px;
+    width: 100%;
+    margin:auto;
+    padding-right: 30px;
 
 }
 .content__description--title{
@@ -240,10 +240,12 @@ form .message {
     font-weight: bolder;
     margin-top: 7px;
     font-size: 19px;
+    
 }
 
 .content__items{
     display: flex;
+    margin-right: -29px;
 }
 .content__items--heart{
     padding-top:8px;
@@ -301,7 +303,7 @@ form .message {
     max-width: 100%;
     
 }
-.lightbox.container.element{
+.lightbox.container.element, .lightbox.container.video{
     max-width: 80vh;
     max-height: 80vh;
     object-fit: contain;
@@ -309,14 +311,7 @@ form .message {
     position: absolute;
     top:650px;
 }
-.lightbox.container.video{
-    max-width: 80vh;
-    max-height: 80vh;
-    object-fit: contain;
-    box-shadow: 3px 0px 0px grey;
-    position: absolute;
-    top:650px;
-}
+
 
 .title{
     color : #901C1C;
@@ -325,20 +320,20 @@ form .message {
     word-break: normal;
 }
 
+.chevronL, .chevronR{
+    position: absolute;
+    top:18em;
+    cursor: pointer;
+    transform: translateY(-50%);
+    max-width: 100%;
+
+}
 .chevronR{
-    color: #901C1C;
-    position: fixed;
-    top:37%;
-    right:23%; 
-    cursor: pointer;
+    right: 0%;
+    max-width: 100%;
+
 }
-.chevronL{
-    color: #901C1C;
-    cursor: pointer;
-    position: fixed;
-    top:36%;
-    left:20em;
-}
+
 .lightbox__close{
     font-size: 52px;
     cursor: pointer;
@@ -385,18 +380,37 @@ form .message {
 
     }
     .counter_content{
-        width: 80%;
+        width: 70%;
     }
     .lightbox{
         max-width: 100%;
     }
     .lightbox.container{
         max-width: 80%;
+        position: relative;
     }
     .lightbox.container.element{
         max-width: 80%;
     }
     .lightbox.container.video{
         max-width: 80%;
+    }
+    .chevronL{
+        position: fixed;
+        left: 4%;
+        top:38%;
+        max-width: 100%;
+    }
+    .chevronR{
+        position: fixed;
+        right: 4%;
+        top:38%
+
+    }
+    .lightbox__close{
+        position:fixed;
+        right: 5%;
+        top:0%;
+        max-width: 100%;
     }
 }

@@ -199,7 +199,7 @@ async function getArtist (){
                 <div class="lightbox container">
                     <img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
                     <img class="lightbox container element" src="" alt=""/>
-                    <video class="lightbox container video" controls="controls"
+                    <video class="lightbox container video" autoplay="false"
                     <source src=""
                     type="video/mp4" alt="">
                     </video>
