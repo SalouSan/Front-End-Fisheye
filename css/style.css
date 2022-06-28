@@ -67,3 +67,31 @@ article {
 .photographer__profil--IDlink {
     text-decoration: red;
 }
+
+@media screen and (max-width:750px){
+    body{
+        margin-left: -5px;
+    }
+    
+    header{
+        display: flex;
+        flex-direction: column;
+    }
+    .logo{
+        margin-top: 10px;
+        align-self: flex-start;
+    }
+    h1{
+        margin-left: 25%;
+        word-wrap: normal;
+    }
+    .photographer_section{
+        display: flex;
+        flex-direction: column;
+    }
+    .photographer__profil--name{
+        word-wrap: break-word;
+    }
+   
+    
+}

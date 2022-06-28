@@ -205,6 +205,7 @@ form .message {
     margin-top: 30px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
+    max-width: 90%;
 }
 .media_container{
     display : flex;
@@ -217,7 +218,7 @@ form .message {
 }
 
 .media {
-    width: 350px;
+    width: 90%;
     object-fit: cover;
 }
 .content__description {
@@ -225,13 +226,14 @@ form .message {
     justify-content: space-between;
     width: 100%;
     margin:auto;
-    padding-right: 30px;
+    padding-right: 75px;
 
 }
 .content__description--title{
     color : #901C1C;
     font-size : 18px;
     margin-top: 8px;
+    width: 80%;
     word-break: normal;
     
 }
@@ -245,7 +247,7 @@ form .message {
 
 .content__items{
     display: flex;
-    margin-right: -29px;
+    margin-right:-42px ;
 }
 .content__items--heart{
     padding-top:8px;
@@ -339,7 +341,7 @@ form .message {
     cursor: pointer;
     color: #901C1C;
     position: absolute;
-    left:75%;
+    left:85%;
     background: none;
     outline: inherit;
     border: none;
@@ -347,16 +349,29 @@ form .message {
 
 
 @media screen and (max-width:750px){
+    .link_logo{
+        margin-right: 80px;
+    }
     .profile{
         margin-top: 70px;
         display: flex;
         flex-direction: column;
         height: 40%;
+        width: 60%;
+        padding-bottom: 20px;
+    }
+    .profile__descrpition--location{
+        margin-left: 20%;
+    }
+    .profile__descrpition--tagline{
+        margin-left: 20%;
     }
     .contact_button{
         height: 40%;
         margin: auto;
+        margin-bottom: 10px;
     }
+
     .profile_image {
         margin-top: 20px;
     }
@@ -364,8 +379,9 @@ form .message {
         max-width: 80%;
     }
 
+
     .menu-wrapper{
-        margin-top: 100px;
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         max-width: 50%;
@@ -377,7 +393,15 @@ form .message {
         display: flex;
         flex-direction: column;
         margin: auto;
+        margin-top: 10px;
 
+    }
+    
+    .content__description--title{
+        word-break: keep-all;
+    }
+    .content__items{
+        margin-right: -29px;
     }
     .counter_content{
         width: 70%;
