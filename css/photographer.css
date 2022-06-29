@@ -145,6 +145,15 @@ form .message {
     border-bottom: 0.5px solid white;
     padding-bottom: 9px;
 }
+.filter--date.pointer{
+    color:blue;
+}
+.filter--popularité.pointer{
+    color: blue;
+}
+.filter--titre.pointer{
+    color: blue;
+}
 .filter--titre{
     padding-top: 9px;
 }
@@ -266,6 +275,9 @@ form .message {
     margin: auto;
     background-color:#DB8876;
     border-radius: 5px;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
 }
 .counter_price{
     font-weight: bold;
@@ -349,6 +361,8 @@ form .message {
 
 
 @media screen and (max-width:750px){
+
+    /* Header et profil du photographe */
     .link_logo{
         margin-right: 80px;
     }
@@ -375,6 +389,7 @@ form .message {
     .profile_image {
         margin-top: 20px;
     }
+    /* Menu déroulant de navigation */
     nav{
         max-width: 80%;
     }
@@ -389,6 +404,7 @@ form .message {
     .Tri {
         margin-left : 10px;
     }
+    /* Contenu photographique du photographe */
     .photographers-content article {
         display: flex;
         flex-direction: column;
@@ -403,9 +419,11 @@ form .message {
     .content__items{
         margin-right: -29px;
     }
+    /* Compteur de likes */
     .counter_content{
         width: 70%;
     }
+    /* Lightbox */
     .lightbox{
         max-width: 100%;
     }
@@ -437,4 +455,16 @@ form .message {
         top:0%;
         max-width: 100%;
     }
+}
+
+.compteur_like{
+    border: 2px solid black;
+    width: 30%;
+    margin-left:35%;
+    background-color: #DB8876;
+
+}
+.le_contenu{
+    display: flex;
+    justify-content: space-between;
 }

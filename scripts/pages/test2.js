@@ -2,35 +2,35 @@ console.log ("test2.js");
 
 
 class User {
-    constructor(firstName, lastName, email) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
-      if(this.firstName){
-          this.displayFirstName();
-      }
-      else if (this.lastName){
-          this.displaylastName();
-      }
-    }
+	constructor(firstName, lastName, email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		if(this.firstName){
+			this.displayFirstName();
+		}
+		else if (this.lastName){
+			this.displaylastName();
+		}
+	}
   
-    displayFirstName(){
-        return `J'affiche le firstname : ${this.firstName}`;
-    }
-    displaylastName(){
-        return `J'affiche le lastName : ${this.lastName}`;
-    }
+	displayFirstName(){
+		return `J'affiche le firstname : ${this.firstName}`;
+	}
+	displaylastName(){
+		return `J'affiche le lastName : ${this.lastName}`;
+	}
 
-    /* fullName() {
+	/* fullName() {
       return `${this.firstName} ${this.lastName}`;
     } */
-  }
+}
   
-  const user1 = new User("John","Doe","john@doe.com");
+const user1 = new User("John","Doe","john@doe.com");
   
-  const user2 = new User("Jane","Doe","jane@doe.com");
+const user2 = new User("Jane","Doe","jane@doe.com");
 
-  console.log(user2.displayFirstName());
+console.log(user2.displayFirstName());
 
 
 
@@ -38,23 +38,23 @@ class User {
 
   
 
-  class Image {
-    constructor(media) {
-        this._title = media.title;
-        this._likes = media.likes;
-        this._image = media.image;
-        this._video = media.video;
+class Image {
+	constructor(media) {
+		this._title = media.title;
+		this._likes = media.likes;
+		this._image = media.image;
+		this._video = media.video;
 
-        if(this._image){
-            this.displayImage();
-        }
-        else if (this._video){
-            this.displayVideo();
-        }
-    }
+		if(this._image){
+			this.displayImage();
+		}
+		else if (this._video){
+			this.displayVideo();
+		}
+	}
 
-    displayImage(){
-        `<div class= "picture">
+	displayImage(){
+		`<div class= "picture">
         <img class="media" src ="assets/Sample_Photos/Mimi/${this._image}"/>
         <div class="content">
             <div class="title_likes">    
@@ -65,10 +65,10 @@ class User {
                 </div>
             </div>
         </div>
-    </div>`
-    }
-    displayVideo(){
-        `<div class= "picture">
+    </div>`;
+	}
+	displayVideo(){
+		`<div class= "picture">
         <video class="media" controls="controls"
             <source src = "assets/Sample_Photos/Mimi/${this._video}"
                     type="video/mp4">
@@ -81,7 +81,7 @@ class User {
                 </div>
             </div>
         </div>
-    </div>`
-    }
+    </div>`;
+	}
     
 }

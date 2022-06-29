@@ -1,2 +1,28 @@
+export class Image {
+	constructor(media) {
+		this.image = media.image;
+		this.title = media.title;
+		this.likes = media.likes;
+		this.id = media.id;
+		this.photographer = media.photographer; 
+	}
 
+	display(){
+		return `
+    <div class= "media_container" role="listitems">
+        <img class="media" src="assets/Sample_Photos/${this.photographer.name.split(" ")[0]}/${this.image}" data-id="${this.id}" alt="Photo :${this.title}" tabindex="4"/>
+        <div class="content">
+            <div class="content__description">    
+                <h3 class="content__description--title"> ${this.title} </h3>
+                <div class="content__items">
+                    <p aria-label="Nombre de likes :${this.likes}" class="content__items--like"> ${this.likes} </p>
+                    <div>
+                        <img class="content__items--heart" src="assets/icons/heart.svg"/>  
+                    </div>     
+                </div>
+            </div>
+        </div>
+    </div>`;
+	}
+}
 
