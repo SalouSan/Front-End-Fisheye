@@ -18,10 +18,15 @@ export class Photographer {
 	}
 	displayHeader(){
 		return `
+        <div class="profile__description">
             <h1 class="profile__descrpition--name"> ${this.name} </h1>
             <p class="profile__descrpition--location"> ${this.city}, ${this.country} </p>
             <p class="profile__descrpition--tagline"> ${this.tagline}</p>
-            <img class="pic" src="assets/Sample_Photos/Photographers-ID_Photos/${this.portrait}" alt="${this.name}"/>`;
+        </div>
+        `;
 				
+	}
+	displayImage () {
+		return `<img class="pic" src="assets/Sample_Photos/Photographers-ID_Photos/${this.portrait}" alt="${this.name}"/>`;
 	}
 }

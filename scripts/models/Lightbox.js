@@ -3,6 +3,7 @@ export class Lightbox {
 		this.currentElement = null; 
 		this.listElement = listElement;  
 		this.photographerId = listElement.photographerId;
+		this.photographer = listElement.photographer; 
 		this.manageEvent();
 	}
 	getElementById(id) {
@@ -73,7 +74,7 @@ export class Lightbox {
 	displayImages(){
 		document.querySelector(".lightbox").classList.add("show");
 		document.querySelector(".lightbox.container").classList.add("show");
-		document.querySelector(".lightbox.container.element").src = `assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.image}`;
+		document.querySelector(".lightbox.container.element").src = `assets/Sample_Photos/${this.photographer.name.split(" ")[0]}/${this.currentElement.image}`;
 		document.querySelector(".lightbox.container.element").alt =`${this.currentElement.title}`;
 		document.querySelector(".lightbox.container.video").style.display = "none";
 		document.querySelector(".lightbox.container.element").style.display = "block";
@@ -83,7 +84,7 @@ export class Lightbox {
 	displayVideos(){
 		document.querySelector(".lightbox").classList.add("show");
 		document.querySelector(".lightbox.container").classList.add("show");
-		document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${photographerId.name.split(" ")[0]}/${this.currentElement.video}`;
+		document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${this.photographer.name.split(" ")[0]}/${this.currentElement.video}`;
 		document.querySelector(".lightbox.container.video").alt =`${this.currentElement.title}`;
 		document.querySelector(".lightbox.container.element").style.display = "none";
 		document.querySelector(".lightbox.container.video").style.display = "block";

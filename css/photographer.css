@@ -14,11 +14,16 @@
     object-fit: cover;
     justify-content: flex-end;
 }
+
+.profile__content{
+    display: flex;
+    justify-content: space-between;
+}
 .profile-description{
     display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
+    flex-direction: column; 
 }
+
 
 .profile__descrpition--location{
     font-size: 20px;
@@ -124,6 +129,7 @@ form .message {
     margin-left: 100px;
     align-items: flex-start;
     cursor: pointer;
+    margin-top: 50px;
 }
 .Tri{
     margin-top: 30px;
