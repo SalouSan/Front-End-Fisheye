@@ -273,8 +273,6 @@ async function getArtist (){
 	let priceContent = price.innerText;
 	price.setAttribute("tabindex", "7");
 	price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
-
-	
 	
 }
 
