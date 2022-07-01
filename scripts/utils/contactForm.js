@@ -2,7 +2,7 @@ function displayModal() {
 	const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
 }
-displayModal();
+
 
 function closeModal() {
 	const modal = document.getElementById("contact_modal");
@@ -18,6 +18,14 @@ let message = document.getElementById("message");
 let form = document.querySelector("form");
 let btnSubmit = document.querySelector("#btn_submit");
 
+function tabIndex () {
+	if (displayModal()){
+		firstName.setAttribute("tabindex", "1");
+		lastName.setAttribute("tabindex", "2");
+		email.setAttribute("tabindex", "3");
+	}
+}
+tabIndex();
 
 // Validate functions 
 

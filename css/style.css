@@ -76,13 +76,15 @@ article {
     header{
         display: flex;
         flex-direction: column;
+        vertical-align: middle;
     }
     .logo{
         margin-top: 10px;
         align-self: flex-start;
     }
     h1{
-        margin-left: 25%;
+        margin-left: 0px;
+        margin-bottom: 20px;
         word-wrap: normal;
     }
     .photographer_section{

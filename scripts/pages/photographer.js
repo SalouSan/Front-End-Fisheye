@@ -2,7 +2,6 @@
 import {Media} from "../factories/MediaFactory.js";
 import { Photographer } from "../models/photographer.js";
 import { handleLikes } from "../utils/displayLikes.js";
-import { Lightbox } from "../models/Lightbox.js";
 //Fonction asynchrone qui permet de recuperer les données en JSON 
 
 async function getArtist (){
@@ -29,14 +28,15 @@ async function getArtist (){
 		
 		// Affichage des medias du photographe
 		const article = document.createElement("article");
-
+		
 		const listMedias = media.map((element)=> new Media(element,photographer));
 		article.innerHTML=listMedias.map((element)=>{
 			return element.display();
 		}).join("");
 
 		document.querySelector(".photographers-content").insertAdjacentElement("afterbegin", article);
-	
+		
+
 		// Création du compteur global de likes
 
 		document.querySelector("#main").innerHTML+= `
@@ -121,10 +121,20 @@ async function getArtist (){
 			const popularite = document.querySelector(".filter--popularité");
 		
 			// Ecouteur d'évenement sur les filtres du menu déroulant
+
+			/* const sortDefault = () => {
+				if (titre.innerText == "Titre"){
+					listMedias.sort((a,b)=>{
+						return a.likes < b.likes ? -1 : 1;
+					});
+				}
+			};
+			sortDefault(); */
 		
 			date.addEventListener("click", function Date (e){
 				e.preventDefault();
-				listMedias.sort((a,b)=> a.date - b.date)
+				document.querySelector("article").innerHTML=listMedias.sort((a,b)=>{a.date - (b.date);
+				})
 					.map((element)=>{
 						return element.display();
 					}).join("");
@@ -138,7 +148,10 @@ async function getArtist (){
 		
 			titre.addEventListener("click", function Titre (e){
 				e.preventDefault();
-				listMedias.sort((a,b)=> a.title.localeCompare(b.title));
+				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.title.localeCompare(b.title))
+					.map((element)=>{
+						return element.display();
+					}).join("");
 				this.classList.add("pointer");
 				date.classList.remove("pointer");	
 				popularite.classList.remove("pointer");	
@@ -148,7 +161,10 @@ async function getArtist (){
 		
 			popularite.addEventListener("click", function Popularité (e){
 				e.preventDefault();
-				listMedias.sort((a,b)=> a.likes-b.likes);
+				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.likes-b.likes)
+					.map((element)=>{
+						return element.display();
+					}).join("");
 				this.classList.add("pointer");
 				date.classList.remove("pointer");	
 				titre.classList.remove("pointer");	
@@ -188,10 +204,7 @@ async function getArtist (){
 		closeBtn.setAttribute("tabindex", "4");
 		closeBtn.setAttribute("aria-label", "Fermer");
             
-		
-
-
-		// Aria roles et attributs pour les éléments de la page : logo, 
+		// Aria roles et attributs pour les éléments de la page : logo, titre et likes
 		let logo = document.querySelector(".logo");
 		logo.setAttribute("tabindex", "1");
 		let contactBtn = document.querySelector(".contact_button");
@@ -237,7 +250,7 @@ async function getArtist (){
 
 		// Instanciation de la class lightbox avec comme parametre la galerie puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
-		let lightbox = new Lightbox({...media,photographer:photographer});
+		/* let lightbox = new Lightbox({...media,photographer:photographer});
 		document.querySelectorAll(".media").forEach((element) => {
 			element.addEventListener("click", function (e){
 				lightbox.show(e.currentTarget.dataset.id);
@@ -247,7 +260,7 @@ async function getArtist (){
 					lightbox.show(e.currentTarget.dataset.id);
 				}
 			});
-		});
+		}); */
 
 	
 	}
@@ -275,8 +288,6 @@ async function getArtist (){
 	price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
 	
 }
-
-
 getArtist ();
 
 
