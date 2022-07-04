@@ -2,6 +2,7 @@
 import {Media} from "../factories/MediaFactory.js";
 import { Photographer } from "../models/photographer.js";
 import { handleLikes } from "../utils/displayLikes.js";
+import { Lightbox } from "../models/Lightbox.js";
 //Fonction asynchrone qui permet de recuperer les données en JSON 
 
 async function getArtist (){
@@ -30,9 +31,11 @@ async function getArtist (){
 		const article = document.createElement("article");
 		
 		const listMedias = media.map((element)=> new Media(element,photographer));
-		article.innerHTML=listMedias.map((element)=>{
-			return element.display();
-		}).join("");
+		article.innerHTML=listMedias.sort((a,b)=>
+			new Date(b.date) - new Date(a.date))
+			.map((element)=>{
+				return element.display();
+			}).join("");
 
 		document.querySelector(".photographers-content").insertAdjacentElement("afterbegin", article);
 		
@@ -133,8 +136,9 @@ async function getArtist (){
 		
 			date.addEventListener("click", function Date (e){
 				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort((a,b)=>{a.date - (b.date);
-				})
+				document.querySelector("article").innerHTML=listMedias.sort((a,b)=>
+					console.log(a.date, b.date))
+
 					.map((element)=>{
 						return element.display();
 					}).join("");
@@ -161,7 +165,7 @@ async function getArtist (){
 		
 			popularite.addEventListener("click", function Popularité (e){
 				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.likes-b.likes)
+				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.likes< b.likes ? -1 :1)
 					.map((element)=>{
 						return element.display();
 					}).join("");
@@ -250,7 +254,7 @@ async function getArtist (){
 
 		// Instanciation de la class lightbox avec comme parametre la galerie puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
-		/* let lightbox = new Lightbox({...media,photographer:photographer});
+		let lightbox = new Lightbox({...media,photographer:photographer});
 		document.querySelectorAll(".media").forEach((element) => {
 			element.addEventListener("click", function (e){
 				lightbox.show(e.currentTarget.dataset.id);
@@ -260,7 +264,7 @@ async function getArtist (){
 					lightbox.show(e.currentTarget.dataset.id);
 				}
 			});
-		}); */
+		});
 
 	
 	}
@@ -289,5 +293,4 @@ async function getArtist (){
 	
 }
 getArtist ();
-
 

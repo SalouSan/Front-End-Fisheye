@@ -17,14 +17,14 @@
       <div class="profile">
         <div class="profile__content">
         </div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()"> Contactez-moi</button>
         <div class="profile__image"></div>
       </div>
       <div id="contact_modal">
         <div class="modal">
           <header>
             <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" alt="bouton close" />
+            <img src="assets/icons/close.svg" onclick="closeModal()" alt="bouton close" class="close-modal"/>
           </header>
           <form onsubmit="saveUserData()" method="post">
             <div class="formData">
@@ -75,9 +75,10 @@
         <div class="photographers-content">       
         </div>
     </main>
-    
     <script type ="module" src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
+
     
   </body>
+  
 </html>

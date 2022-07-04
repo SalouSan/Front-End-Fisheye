@@ -1,8 +1,9 @@
+// eslint-disable-next-line no-unused-vars
 function displayModal() {
 	const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
 }
-
+displayModal();
 
 function closeModal() {
 	const modal = document.getElementById("contact_modal");
@@ -10,7 +11,8 @@ function closeModal() {
 }
 closeModal();
 
-// DOM elements 
+
+// DOM elements inputs et bouton submit
 let firstName = document.getElementById("first");
 let lastName = document.getElementById("last");
 let email = document.getElementById("mail");
@@ -18,21 +20,15 @@ let message = document.getElementById("message");
 let form = document.querySelector("form");
 let btnSubmit = document.querySelector("#btn_submit");
 
-function tabIndex () {
-	if (displayModal()){
-		firstName.setAttribute("tabindex", "1");
-		lastName.setAttribute("tabindex", "2");
-		email.setAttribute("tabindex", "3");
-	}
-}
-tabIndex();
 
 // Validate functions 
 
 function firstValidate () {
 	let firstNameValue = firstName.value.trim();
 	if (firstNameValue.length < 2) {
+
 		return false;
+		
 	}
 	else {
 		return true;
@@ -49,7 +45,7 @@ function nameValidate () {
 }
 function emailValidate () {
 	let emailValue = email.value.trim();
-	let regx = /^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
+	let regx = /^([a-zA-Z0-9\\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;
 	if (!emailValue.match(regx)) {
 		return false;
 	}
@@ -88,6 +84,7 @@ function setSuccess (input) {
 	formData.classList.remove("error");
 
 }
+
 
 // form add event listener 
 form.addEventListener("input", function (e){

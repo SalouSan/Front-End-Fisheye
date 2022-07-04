@@ -381,11 +381,15 @@ form .message {
         width: 60%;
         padding-bottom: 20px;
     }
+    .profile__descrpition--name{
+        margin-left: 15%;
+        
+    }
     .profile__descrpition--location{
-        margin-left: 20%;
+        margin-left: 15%;
     }
     .profile__descrpition--tagline{
-        margin-left: 20%;
+        margin-left: 15%;
     }
     .contact_button{
         height: 40%;
@@ -395,6 +399,28 @@ form .message {
 
     .profile_image {
         margin-top: 20px;
+    }
+
+    /* Contact modal */
+    
+    .modal header h2{
+        text-align:justify;
+        margin-top: -15px;
+        margin-left: -50px;
+        font-size: 30px;
+    }
+    form {
+        margin-top:0px;
+    }
+    header {
+        position: relative;
+    }
+    .modal header img{
+        position:absolute;
+        right: 10px;
+        top:-10px;
+        height: 30px;
+        margin-top: 0px;
     }
     /* Menu déroulant de navigation */
     nav{

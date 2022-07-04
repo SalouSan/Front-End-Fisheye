@@ -9,7 +9,7 @@ export class Video {
 	display(){
 		return `
     <div class= "media_container" role="listitems">
-            <video class="media" autoplay="false" data-id="${this.id} tabindex="4"
+            <video class="media" controls="false" data-id="${this.id} tabindex="4"
                 <source src="assets/Sample_Photos/${this.photographer.name.split(" ")[0]}/${this.video}"
                     type="video/mp4 alt="Video:${this.title}">
             </video>
