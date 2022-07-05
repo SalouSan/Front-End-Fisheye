@@ -19,6 +19,26 @@ let email = document.getElementById("mail");
 let message = document.getElementById("message");
 let form = document.querySelector("form");
 let btnSubmit = document.querySelector("#btn_submit");
+let btnClose = document.querySelector(".close-modal");
+
+firstName.setAttribute("tabindex",2);
+lastName.setAttribute("tabindex",2);
+email.setAttribute("tabindex",2);
+message.setAttribute("tabindex",2);
+btnSubmit.setAttribute("tabindex",2);
+btnClose.setAttribute("tabindex",3);
+
+function keyUp () {
+	btnClose.addEventListener("keyup", (e) =>{
+		if (e.key == "Enter"){
+			const modal = document.getElementById("contact_modal");
+			modal.style.display = "none";
+		}
+	});
+	
+}
+keyUp();
+
 
 
 // Validate functions 

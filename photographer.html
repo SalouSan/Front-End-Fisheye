@@ -24,50 +24,46 @@
         <div class="modal">
           <header>
             <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" alt="bouton close" class="close-modal"/>
+            <img src="assets/icons/close.svg" onclick="closeModal()" onkeyup= "keyUp()" alt="bouton close" class="close-modal"/>
           </header>
           <form onsubmit="saveUserData()" action="" method="post">
             <div class="formData">
-              <label for="first">Prénom</label>
+              <label for="first" tabindex="2">Prénom</label>
               <input 
               class="text-control"
               type="text"
               id="first"
               name="first"
-              aria-label="Prenom"
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="last"> Nom </label>
+              <label for="last" tabindex="2"> Nom </label>
               <input
               class="text-control"
               type="text"
               id="last"
               name="last"
-              aria-label="Nom"
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="mail"> Email </label>
+              <label for="mail" tabindex="2"> Email </label>
               <input
               class="text-control"
               type="text"
               id="mail"
               name="mail"
-              aria-label="Email"
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="message">Votre message </label>
+              <label for="message" tabindex="2">Votre message </label>
               <input 
               class="text-control"
               type="text"
               id="message"
               name="message"
-              aria-label="Votre message"
               />
               <small></small>
             </div>

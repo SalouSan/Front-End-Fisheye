@@ -5,10 +5,16 @@ export function handleLikes() {
 			let counter = e.target.closest(".content__items").querySelector(".content__items--like");
 			counter.innerHTML = parseInt(counter.innerHTML)+1;
 			let counterTotal = document.querySelector(".counter_content .counter");
-			counterTotal.innerHTML = parseInt(counterTotal.innerHTML)+1;
+			counterTotal.innerHTML = parseInt(counterTotal.innerHTML)+1;	
 
-			
-
+		});
+		i.addEventListener("keyup", (e) =>{
+			if (e.key == "Enter") {
+				let counter = e.target.closest(".content__items").querySelector(".content__items--like");
+				counter.innerHTML = parseInt(counter.innerHTML)+1;
+				let counterTotal = document.querySelector(".counter_content .counter");
+				counterTotal.innerHTML = parseInt(counterTotal.innerHTML)+1;	
+			}
 		});
 	}
 }
