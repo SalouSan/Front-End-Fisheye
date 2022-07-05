@@ -4,12 +4,13 @@ export class Video {
 		this.likes = media.likes;
 		this.video = media.video;
 		this.id = media.id;
+		this.date = media.date;
 		this.photographer = media.photographer; 
 	}
 	display(){
 		return `
     <div class= "media_container" role="listitems">
-            <video class="media" controls="false" data-id="${this.id} tabindex="4"
+            <video class="media" controls="false" tabindex="4" data-id="${this.id}"
                 <source src="assets/Sample_Photos/${this.photographer.name.split(" ")[0]}/${this.video}"
                     type="video/mp4 alt="Video:${this.title}">
             </video>

@@ -29,7 +29,6 @@ async function getArtist (){
 		
 		// Affichage des medias du photographe
 		const article = document.createElement("article");
-		
 		const listMedias = media.map((element)=> new Media(element,photographer));
 		article.innerHTML=listMedias.sort((a,b)=>
 			new Date(b.date) - new Date(a.date))
@@ -118,62 +117,82 @@ async function getArtist (){
 		nav.appendChild(divNav);
 		content.insertAdjacentElement("beforebegin", nav);
 
+		// Ecouteur d'évenement sur les filtres du menu déroulant
+
 		function displaySort () {
 			const date = document.querySelector(".filter--date");
 			const titre = document.querySelector(".filter--titre");
 			const popularite = document.querySelector(".filter--popularité");
 		
-			// Ecouteur d'évenement sur les filtres du menu déroulant
-
-			/* const sortDefault = () => {
-				if (titre.innerText == "Titre"){
-					listMedias.sort((a,b)=>{
-						return a.likes < b.likes ? -1 : 1;
-					});
-				}
-			};
-			sortDefault(); */
-		
-			date.addEventListener("click", function Date (e){
+			popularite.addEventListener("click", function Popularité (e){
 				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort((a,b)=>
-					console.log(a.date, b.date))
-
+				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.likes < b.likes ? -1 :1)
 					.map((element)=>{
 						return element.display();
 					}).join("");
 				this.classList.add("pointer");
+				date.classList.remove("pointer");	
 				titre.classList.remove("pointer");	
-				popularite.classList.remove("pointer");	
+				let lightbox = new Lightbox(media,artist);
+				document.querySelectorAll(".media").forEach((element) => {
+					element.addEventListener("click", function (e){
+						lightbox.show(e.currentTarget.dataset.id);
+					});
+					element.addEventListener("keyup", function (e){
+						if (e.key === "Enter") {
+							lightbox.show(e.currentTarget.dataset.id);
+						}
+					});
+				});
+
 				handleLikes();
 			
 			});
-		
-		
-			titre.addEventListener("click", function Titre (e){
+
+			date.addEventListener("click", function byDate (e){
+				e.preventDefault();
+				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> new Date(b.date)- new Date(a.date))
+					.map((element)=>{
+						return element.display();
+					}).join("");
+				this.classList.add("pointer");
+				popularite.classList.remove("pointer");	
+				titre.classList.remove("pointer");	
+				handleLikes();
+				let lightbox = new Lightbox(media,artist);
+				document.querySelectorAll(".media").forEach((element) => {
+					element.addEventListener("click", function (e){
+						lightbox.show(e.currentTarget.dataset.id);
+					});
+					element.addEventListener("keyup", function (e){
+						if (e.key === "Enter") {
+							lightbox.show(e.currentTarget.dataset.id);
+						}
+					});
+				});
+			});
+
+			titre.addEventListener("click", function byTitle (e){
 				e.preventDefault();
 				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.title.localeCompare(b.title))
 					.map((element)=>{
 						return element.display();
 					}).join("");
 				this.classList.add("pointer");
-				date.classList.remove("pointer");	
 				popularite.classList.remove("pointer");	
-				handleLikes();
-			
-			});
-		
-			popularite.addEventListener("click", function Popularité (e){
-				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.likes< b.likes ? -1 :1)
-					.map((element)=>{
-						return element.display();
-					}).join("");
-				this.classList.add("pointer");
 				date.classList.remove("pointer");	
-				titre.classList.remove("pointer");	
 				handleLikes();
-			
+				let lightbox = new Lightbox(media,artist);
+				document.querySelectorAll(".media").forEach((element) => {
+					element.addEventListener("click", function (e){
+						lightbox.show(e.currentTarget.dataset.id);
+					});
+					element.addEventListener("keyup", function (e){
+						if (e.key === "Enter") {
+							lightbox.show(e.currentTarget.dataset.id);
+						}
+					});
+				});
 			});
 		}
 
@@ -186,7 +205,7 @@ async function getArtist (){
                 <div class="lightbox container">
                     <img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
                     <img class="lightbox container element" src="" alt=""/>
-                    <video class="lightbox container video" autoplay="false"
+                    <video class="lightbox container video" controls="false"
                     <source src=""
                     type="video/mp4" alt="">
                     </video>
@@ -254,7 +273,7 @@ async function getArtist (){
 
 		// Instanciation de la class lightbox avec comme parametre la galerie puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
-		let lightbox = new Lightbox({...media,photographer:photographer});
+		let lightbox = new Lightbox(media,artist);
 		document.querySelectorAll(".media").forEach((element) => {
 			element.addEventListener("click", function (e){
 				lightbox.show(e.currentTarget.dataset.id);
@@ -293,4 +312,6 @@ async function getArtist (){
 	
 }
 getArtist ();
+
+
 

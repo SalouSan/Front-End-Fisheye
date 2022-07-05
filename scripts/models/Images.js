@@ -5,6 +5,7 @@ export class Image {
 		this.likes = media.likes;
 		this.id = media.id;
 		this.photographer = media.photographer; 
+		this.date = media.date;
 	}
 
 	display(){

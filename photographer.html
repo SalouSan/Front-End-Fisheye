@@ -26,7 +26,7 @@
             <h2>Contactez-moi</h2>
             <img src="assets/icons/close.svg" onclick="closeModal()" alt="bouton close" class="close-modal"/>
           </header>
-          <form onsubmit="saveUserData()" method="post">
+          <form onsubmit="saveUserData()" action="" method="post">
             <div class="formData">
               <label for="first">Prénom</label>
               <input 
@@ -34,6 +34,7 @@
               type="text"
               id="first"
               name="first"
+              aria-label="Prenom"
               />
               <small></small>
             </div>
@@ -44,6 +45,7 @@
               type="text"
               id="last"
               name="last"
+              aria-label="Nom"
               />
               <small></small>
             </div>
@@ -54,6 +56,7 @@
               type="text"
               id="mail"
               name="mail"
+              aria-label="Email"
               />
               <small></small>
             </div>
@@ -64,6 +67,7 @@
               type="text"
               id="message"
               name="message"
+              aria-label="Votre message"
               />
               <small></small>
             </div>
@@ -77,8 +81,6 @@
     </main>
     <script type ="module" src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
-
-    
   </body>
-  
+
 </html>
