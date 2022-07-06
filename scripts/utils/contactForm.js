@@ -30,10 +30,13 @@ btnClose.setAttribute("tabindex",3);
 
 function keyUp () {
 	btnClose.addEventListener("keyup", (e) =>{
-		if (e.key == "Enter"){
+		if (e.key == "Enter") {
 			const modal = document.getElementById("contact_modal");
 			modal.style.display = "none";
+			console.log("ok");
+			e.preventDefault();
 		}
+		
 	});
 	
 }

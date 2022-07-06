@@ -234,7 +234,7 @@ async function getArtist (){
 		contactBtn.setAttribute("tabindex", "2");
 		let items = document.querySelectorAll(".content__items--heart");
 		items.forEach((item)=>{
-			item.setAttribute("tabindex", "4");
+			item.setAttribute("tabindex", "5");
 			item.setAttribute("role", "button");
 			item.setAttribute("aria-label", "likes");
 
@@ -292,22 +292,22 @@ async function getArtist (){
 	// Aria attributs pour le compteur global de likes
 
 	let counter = document.querySelector(".counter_content");
-	counter.setAttribute("tabindex", "5");
+	counter.setAttribute("tabindex", "6");
 	counter.setAttribute("aria-label", "compteur de likes");
 
 	let total = document.querySelector(".counter");
 	let TotalValue = total.innerText;
-	total.setAttribute("tabindex", "5");
+	total.setAttribute("tabindex", "6");
 	total.setAttribute("aria-describedby", "counter");
 	total.setAttribute("aria-label", `Nombre total de likes : ${TotalValue}`);
 
 	let heart = document.querySelector(".heart");
 	heart.setAttribute("aria-label", "icône coeur");
-	heart.setAttribute("tabindex", "6");
+	heart.setAttribute("tabindex", "7");
     
 	let price = document.querySelector(".price1");
 	let priceContent = price.innerText;
-	price.setAttribute("tabindex", "7");
+	price.setAttribute("tabindex", "8");
 	price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
 	
 }
