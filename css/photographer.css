@@ -109,6 +109,13 @@ form input {
     border: none;
     border-radius: 5px;
 }
+form input:valid {
+    border: 2px solid green;
+}
+form input:invalid {
+    border: 2px solid red;
+}
+
 form .message {
     height : 400px;
 }

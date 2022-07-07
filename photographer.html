@@ -34,6 +34,8 @@
               type="text"
               id="first"
               name="first"
+              required
+              minlength="2"
               />
               <small></small>
             </div>
@@ -44,6 +46,8 @@
               type="text"
               id="last"
               name="last"
+              required
+              minlength="2"
               />
               <small></small>
             </div>
@@ -51,9 +55,10 @@
               <label for="mail" tabindex="2"> Email </label>
               <input
               class="text-control"
-              type="text"
+              type="email"
               id="mail"
               name="mail"
+              required
               />
               <small></small>
             </div>
@@ -64,10 +69,13 @@
               type="text"
               id="message"
               name="message"
+              minlength="2"
+              required
               />
               <small></small>
             </div>
             <button class="contact_button" id="btn_submit" onclick="saveUserData()">Envoyer</button>
+            <input type="submit" value="Submit" onclick="saveUserData()">
           </form>
           <span> </span>
         </div>
@@ -75,7 +83,7 @@
         <div class="photographers-content">       
         </div>
     </main>
-    <script type ="module" src="scripts/pages/photographer.js"></script>
+    <script type="module" src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
   </body>
 

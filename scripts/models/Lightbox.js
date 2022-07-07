@@ -86,15 +86,21 @@ export class Lightbox {
 		document.querySelector(".lightbox.container").classList.add("show");
 		document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${this.photographer.split(" ")[0]}/${this.currentElement.video}`;
 		document.querySelector(".lightbox.container.video").alt =`${this.currentElement.title}`;
+		document.querySelector(".lightbox.container.video").controls = false;
 		document.querySelector(".lightbox.container.element").style.display = "none";
 		document.querySelector(".lightbox.container.video").style.display = "block";
 		document.querySelector(".lightbox.container.video").classList.add("show");
+		document.querySelector(".lightbox.container.video").addEventListener("click", (e)=>{
+			this.controls = true;
+			this.load();
+			e.preventDefault();
+		});
+		
 	}
 
 	condition () {
 		let key = Object.keys(this.currentElement); 
 		key[3] == "video" ? this.displayVideos() : this.displayImages();
-		console.log(key);	
 		
 	}
     

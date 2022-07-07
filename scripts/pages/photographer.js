@@ -35,10 +35,20 @@ async function getArtist (){
 			.map((element)=>{
 				return element.display();
 			}).join("");
-
-		document.querySelector(".photographers-content").insertAdjacentElement("afterbegin", article);
 		
 
+		document.querySelector(".photographers-content").insertAdjacentElement("afterbegin", article);
+		let video = document.querySelector("#vid");
+		function disabledVideo () {
+			video.controls = false;
+		}
+		disabledVideo();
+
+
+		// eslint-disable-next-line no-unused-vars
+		
+		
+		
 		// Création du compteur global de likes
 
 		document.querySelector("#main").innerHTML+= `
@@ -234,7 +244,7 @@ async function getArtist (){
 		contactBtn.setAttribute("tabindex", "2");
 		let items = document.querySelectorAll(".content__items--heart");
 		items.forEach((item)=>{
-			item.setAttribute("tabindex", "5");
+			item.setAttribute("tabindex", "4");
 			item.setAttribute("role", "button");
 			item.setAttribute("aria-label", "likes");
 
@@ -287,6 +297,7 @@ async function getArtist (){
 
 	
 	}
+	
 	// eslint-disable-next-line no-mixed-spaces-and-tabs
 	
 	// Aria attributs pour le compteur global de likes

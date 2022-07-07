@@ -8,6 +8,7 @@ export class Media {
 		}
 		else {
 			return new Video({...media,photographer:photographer});
+			
 		}
 	}
 }
