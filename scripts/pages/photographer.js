@@ -182,9 +182,11 @@ async function getArtist (){
 				});
 			});
 
+			
+
 			titre.addEventListener("click", function byTitle (e){
 				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.title.localeCompare(b.title))
+				document.querySelector("article").innerHTML=listMedias.sort(sortByTitle)
 					.map((element)=>{
 						return element.display();
 					}).join("");
@@ -192,18 +194,41 @@ async function getArtist (){
 				popularite.classList.remove("pointer");	
 				date.classList.remove("pointer");	
 				handleLikes();
-				let lightbox = new Lightbox(media,artist);
-				document.querySelectorAll(".media").forEach((element) => {
-					element.addEventListener("click", function (e){
+				displayLightbox();
+				
+			});
+
+		}
+		
+		/* function event (sortType) {
+			document.querySelector("article").innerHTML=listMedias.sort(sortType)
+				.map((element)=>{
+					return element.display();
+				}).join("");	
+			handleLikes();
+			let lightbox = new Lightbox(media,artist);
+			document.querySelectorAll(".media").forEach((element) => {
+				element.addEventListener("click", function (e){
+					lightbox.show(e.currentTarget.dataset.id);
+				});
+				element.addEventListener("keyup", function (e){
+					if (e.key === "Enter") {
 						lightbox.show(e.currentTarget.dataset.id);
-					});
-					element.addEventListener("keyup", function (e){
-						if (e.key === "Enter") {
-							lightbox.show(e.currentTarget.dataset.id);
-						}
-					});
+					}
 				});
 			});
+		}
+		
+
+		function sortByDate (a,b){
+			return new Date(a.date) - new Date (b.date);
+		}
+		function sortByLikes (a,b){
+			return a.likes - b.likes;
+		} */
+		
+		function sortByTitle (a,b) {
+			return a.title.localeCompare(b.title);
 		}
 
 		
@@ -273,7 +298,7 @@ async function getArtist (){
 					filtermain.style.display= "block";
 					sousMenu.style.visibility = "visible";
 				}
-				else {
+				else if (e.key == "Escape") {
 					sousMenu.style.visibility = "hidden";
 					chevronUpDown.setAttribute("aria-expanded", "false");
 				}
@@ -282,22 +307,24 @@ async function getArtist (){
 		ariaExpand();
 
 		// Instanciation de la class lightbox avec comme parametre la galerie puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
-
-		let lightbox = new Lightbox(media,artist);
-		document.querySelectorAll(".media").forEach((element) => {
-			element.addEventListener("click", function (e){
-				lightbox.show(e.currentTarget.dataset.id);
-				chevronL.setAttribute("tabindex", "4");
-				chevronR.setAttribute("tabindex", "4");
-				closeBtn.setAttribute("tabindex", "4");
-			
-			});
-			element.addEventListener("keyup", function (e){
-				if (e.key === "Enter") {
+		function displayLightbox () {
+			let lightbox = new Lightbox(media,artist);
+			document.querySelectorAll(".media").forEach((element) => {
+				element.addEventListener("click", function (e){
 					lightbox.show(e.currentTarget.dataset.id);
-				}
+					chevronL.setAttribute("tabindex", "4");
+					chevronR.setAttribute("tabindex", "4");
+					closeBtn.setAttribute("tabindex", "4");
+				
+				});
+				element.addEventListener("keyup", function (e){
+					if (e.key === "Enter") {
+						lightbox.show(e.currentTarget.dataset.id);
+					}
+				});
 			});
-		});
+		}
+		displayLightbox();
 
 
 
