@@ -59,7 +59,7 @@ export class Lightbox {
 			this.close();
 		});
 		document.querySelector(".lightbox__close").addEventListener("keyup", (e) => {
-			if (e.key=== "Escape") {
+			if (e.key=== "Enter") {
 				this.close();
 			}
             
@@ -92,7 +92,6 @@ export class Lightbox {
 		document.querySelector(".lightbox.container.video").classList.add("show");
 		document.querySelector(".lightbox.container.video").addEventListener("click", (e)=>{
 			this.controls = true;
-			this.load();
 			e.preventDefault();
 		});
 		

@@ -220,7 +220,7 @@ async function getArtist (){
                     type="video/mp4" alt="">
                     </video>
                     <img role="button" class="chevronR" src="assets/icons/chevronRight.svg"/>
-                    <button class="lightbox__close">&times;</button>                 
+                    <img role="button" class="lightbox__close" src="assets/icons/closeLightbox.svg"/>                 
                 </div>                  
             </div>
             `;   
@@ -266,12 +266,12 @@ async function getArtist (){
 			let chevronUpDown = document.querySelector(".chevron.up.down");
 			let sousMenu = document.querySelector("#sous_menu");
 			let filtermain = document.querySelector(".filter");
-			filtermain.addEventListener("keydown", function (e) {
+			filtermain.addEventListener("keypress", function (e) {
 				if (e.key == "Enter") {
-					sousMenu.style.visibility = "visible";
 					chevronUpDown.setAttribute("aria-expanded", "true");
 					chevronUpDown.style.transform = "rotate(180deg)";
-					filtermain.style.display ="block";
+					filtermain.style.display= "block";
+					sousMenu.style.visibility = "visible";
 				}
 				else {
 					sousMenu.style.visibility = "hidden";
@@ -287,6 +287,10 @@ async function getArtist (){
 		document.querySelectorAll(".media").forEach((element) => {
 			element.addEventListener("click", function (e){
 				lightbox.show(e.currentTarget.dataset.id);
+				chevronL.setAttribute("tabindex", "4");
+				chevronR.setAttribute("tabindex", "4");
+				closeBtn.setAttribute("tabindex", "4");
+			
 			});
 			element.addEventListener("keyup", function (e){
 				if (e.key === "Enter") {
@@ -295,31 +299,33 @@ async function getArtist (){
 			});
 		});
 
+
+
+		// Aria attributs pour le compteur global de likes
+
+		let counter = document.querySelector(".counter_content");
+		counter.setAttribute("tabindex", "6");
+		counter.setAttribute("aria-label", "compteur de likes");
+
+		let total = document.querySelector(".counter");
+		let TotalValue = total.innerText;
+		total.setAttribute("tabindex", "6");
+		total.setAttribute("aria-describedby", "counter");
+		total.setAttribute("aria-label", `Nombre total de likes : ${TotalValue}`);
+
+		let heart = document.querySelector(".heart");
+		heart.setAttribute("aria-label", "icône coeur");
+		heart.setAttribute("tabindex", "7");
+    
+		let price = document.querySelector(".price1");
+		let priceContent = price.innerText;
+		price.setAttribute("tabindex", "8");
+		price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
+	
 	
 	}
 	
-	// eslint-disable-next-line no-mixed-spaces-and-tabs
-	
-	// Aria attributs pour le compteur global de likes
-
-	let counter = document.querySelector(".counter_content");
-	counter.setAttribute("tabindex", "6");
-	counter.setAttribute("aria-label", "compteur de likes");
-
-	let total = document.querySelector(".counter");
-	let TotalValue = total.innerText;
-	total.setAttribute("tabindex", "6");
-	total.setAttribute("aria-describedby", "counter");
-	total.setAttribute("aria-label", `Nombre total de likes : ${TotalValue}`);
-
-	let heart = document.querySelector(".heart");
-	heart.setAttribute("aria-label", "icône coeur");
-	heart.setAttribute("tabindex", "7");
-    
-	let price = document.querySelector(".price1");
-	let priceContent = price.innerText;
-	price.setAttribute("tabindex", "8");
-	price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
+	// eslint-disable-next-line no-mixed-spaces-and-tabs	
 	
 }
 getArtist ();

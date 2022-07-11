@@ -316,10 +316,12 @@ form .message {
     top: 0;
     background-color: rgba(255, 255, 255, 0.9);
     max-width: 100%;
+    z-index: 100;
 }
 
 .lightbox.show{
     display: block;
+    z-index: 100;
 }
 
 .lightbox.container{
@@ -368,9 +370,6 @@ form .message {
     color: #901C1C;
     position: absolute;
     left:85%;
-    background: none;
-    outline: inherit;
-    border: none;
 }
 
 
@@ -492,7 +491,7 @@ form .message {
     .lightbox__close{
         position:fixed;
         right: 5%;
-        top:0%;
+        top:5%;
         max-width: 100%;
     }
 }
