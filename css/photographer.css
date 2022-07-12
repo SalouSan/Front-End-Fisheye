@@ -244,6 +244,8 @@ form .message {
     width: 90%;
     object-fit: cover;
 }
+
+
 .content__description {
     display: flex;
     justify-content: space-between;

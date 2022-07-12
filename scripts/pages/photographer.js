@@ -38,15 +38,6 @@ async function getArtist (){
 		
 
 		document.querySelector(".photographers-content").insertAdjacentElement("afterbegin", article);
-		let video = document.querySelector("#vid");
-		function disabledVideo () {
-			video.controls = false;
-		}
-		disabledVideo();
-
-
-		// eslint-disable-next-line no-unused-vars
-		
 		
 		
 		// Création du compteur global de likes
@@ -143,18 +134,7 @@ async function getArtist (){
 				this.classList.add("pointer");
 				date.classList.remove("pointer");	
 				titre.classList.remove("pointer");	
-				let lightbox = new Lightbox(media,artist);
-				document.querySelectorAll(".media").forEach((element) => {
-					element.addEventListener("click", function (e){
-						lightbox.show(e.currentTarget.dataset.id);
-					});
-					element.addEventListener("keyup", function (e){
-						if (e.key === "Enter") {
-							lightbox.show(e.currentTarget.dataset.id);
-						}
-					});
-				});
-
+				displayLightbox();
 				handleLikes();
 			
 			});
@@ -169,20 +149,18 @@ async function getArtist (){
 				popularite.classList.remove("pointer");	
 				titre.classList.remove("pointer");	
 				handleLikes();
-				let lightbox = new Lightbox(media,artist);
-				document.querySelectorAll(".media").forEach((element) => {
-					element.addEventListener("click", function (e){
-						lightbox.show(e.currentTarget.dataset.id);
-					});
-					element.addEventListener("keyup", function (e){
-						if (e.key === "Enter") {
-							lightbox.show(e.currentTarget.dataset.id);
-						}
-					});
-				});
+				displayLightbox();
+				
 			});
 
-			
+			date.addEventListener("keyup", (e)=>{
+				if (e.key=="Enter") {
+					document.querySelector("article").innerHTML=listMedias.sort((a,b)=> new Date(b.date)- new Date(a.date))
+						.map((element)=>{
+							return element.display();
+						}).join("");
+				}
+			});
 
 			titre.addEventListener("click", function byTitle (e){
 				e.preventDefault();
@@ -196,6 +174,15 @@ async function getArtist (){
 				handleLikes();
 				displayLightbox();
 				
+			});
+
+			titre.addEventListener("keyup", (e)=>{
+				if(e.key=="Enter"){
+					document.querySelector("article").innerHTML=listMedias.sort(sortByTitle)
+						.map((element)=>{
+							return element.display();
+						}).join("");
+				}
 			});
 
 		}
@@ -231,10 +218,10 @@ async function getArtist (){
 			return a.title.localeCompare(b.title);
 		}
 
-		
 		displaySort();
-		// Création de la div qui affiche la lightbox
-            
+
+		// Création de la div qui affiche la lightbox   
+        
 		let modale = `
             <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
@@ -297,16 +284,29 @@ async function getArtist (){
 					chevronUpDown.style.transform = "rotate(180deg)";
 					filtermain.style.display= "block";
 					sousMenu.style.visibility = "visible";
-				}
-				else if (e.key == "Escape") {
-					sousMenu.style.visibility = "hidden";
+				} else {
+					sousMenu.style.visibility="hidden";
 					chevronUpDown.setAttribute("aria-expanded", "false");
+					chevronUpDown.style.transform = "rotate(0deg)";
 				}
-			} );
+			});
 		}
 		ariaExpand();
 
-		// Instanciation de la class lightbox avec comme parametre la galerie puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
+		// Contrôle de la video pour affichage de la miniature
+
+		let video = document.getElementById("vid");
+		video.addEventListener("mouseover", (e)=>{
+			e.preventDefault();
+			video.setAttribute("controls", "controls");
+		});
+		video.addEventListener("mouseout", (e)=>{
+			e.preventDefault();
+			video.removeAttribute("controls");
+		});
+
+		// Instanciation de la class lightbox puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
+
 		function displayLightbox () {
 			let lightbox = new Lightbox(media,artist);
 			document.querySelectorAll(".media").forEach((element) => {
@@ -325,8 +325,6 @@ async function getArtist (){
 			});
 		}
 		displayLightbox();
-
-
 
 		// Aria attributs pour le compteur global de likes
 
@@ -348,10 +346,7 @@ async function getArtist (){
 		let priceContent = price.innerText;
 		price.setAttribute("tabindex", "8");
 		price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
-	
-	
 	}
-	
 	// eslint-disable-next-line no-mixed-spaces-and-tabs	
 	
 }
