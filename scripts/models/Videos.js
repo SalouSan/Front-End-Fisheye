@@ -16,7 +16,7 @@ export class Video {
             </video>
         <div class="content">
             <div class="content__description">    
-                <h3 class="content__description--title" tabindex="4"> ${this.title}  </h3>
+                <h3 class="content__description--title" tabindex="4"> ${this.title} </h3>
                 <div class="content__items">
                     <p aria-label="Nombre de likes :${this.likes}" class="content__items--like" tabindex="4"> ${this.likes} </p>
                     <div>

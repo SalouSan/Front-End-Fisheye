@@ -221,13 +221,15 @@ form .message {
 
 *{
     max-width: 100%;
-}
+} 
+
 .photographers-content article{
     margin-left: 100px;
     margin-top: 30px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
     max-width: 90%;
+    z-index: -1;
 }
 .media_container{
     display : flex;
@@ -318,12 +320,11 @@ form .message {
     top: 0;
     background-color: rgba(255, 255, 255, 0.9);
     max-width: 100%;
-    z-index: 100;
 }
 
 .lightbox.show{
     display: block;
-    z-index: 100;
+    z-index: 130;
 }
 
 .lightbox.container{

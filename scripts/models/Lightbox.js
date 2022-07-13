@@ -90,17 +90,24 @@ export class Lightbox {
 		document.querySelector(".lightbox.container.element").style.display = "none";
 		document.querySelector(".lightbox.container.video").style.display = "block";
 		document.querySelector(".lightbox.container.video").classList.add("show");
-		document.querySelector(".lightbox.container.video").addEventListener("click", (e)=>{
-			this.controls = true;
-			e.preventDefault();
-		});
-		
+		this.handleControls();		
 	}
 
 	condition () {
 		let key = Object.keys(this.currentElement); 
 		key[3] == "video" ? this.displayVideos() : this.displayImages();
 		
+	}
+	handleControls () {
+		let video = document.getElementById("lightbox_vid");
+		video.addEventListener("mouseover", (e)=>{
+			e.preventDefault();
+			video.setAttribute("controls", "controls");
+		});
+		video.addEventListener("mouseout", (e)=>{
+			e.preventDefault();
+			video.removeAttribute("controls");
+		});
 	}
     
                   

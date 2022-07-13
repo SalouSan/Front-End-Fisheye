@@ -37,7 +37,7 @@ async function getArtist (){
 			}).join("");
 		
 
-		document.querySelector(".photographers-content").insertAdjacentElement("afterbegin", article);
+		document.querySelector(".photographers-content").insertAdjacentElement("beforeend", article);
 		
 		
 		// Création du compteur global de likes
@@ -136,6 +136,7 @@ async function getArtist (){
 				filter3.classList.remove("pointer");
 				handleLikes();
 				displayLightbox();
+				handleControls();
 			}
 			
 	
@@ -194,7 +195,7 @@ async function getArtist (){
                 <div class="lightbox container">
                     <img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
                     <img class="lightbox container element" src="" alt=""/>
-                    <video class="lightbox container video" controls="false"
+                    <video class="lightbox container video" controls="false" id="lightbox_vid"
                     <source src=""
                     type="video/mp4" alt="">
                     </video>
@@ -204,7 +205,7 @@ async function getArtist (){
             </div>
             `;   
 		
-		content.insertAdjacentHTML("beforeend",modale);
+		content.insertAdjacentHTML("afterbegin",modale);
 
 		// Aria roles et attributs pour les éléments de la lightbox
 
@@ -244,16 +245,24 @@ async function getArtist (){
 		ariaExpand();
 
 		// Contrôle de la video pour affichage de la miniature
+		function handleControls () {
+			let video = document.getElementById("vid");
+			video.addEventListener("mouseover", (e)=>{
+				e.preventDefault();
+				video.setAttribute("controls", "controls");
+			});
+			video.addEventListener("mouseout", (e)=>{
+				e.preventDefault();
+				video.removeAttribute("controls");
+			});
+		}
+		handleControls();
 
-		let video = document.getElementById("vid");
-		video.addEventListener("mouseover", (e)=>{
-			e.preventDefault();
+		// eslint-disable-next-line no-unused-vars
+		function enableControls () {
+			let video = document.getElementById("vid");
 			video.setAttribute("controls", "controls");
-		});
-		video.addEventListener("mouseout", (e)=>{
-			e.preventDefault();
-			video.removeAttribute("controls");
-		});
+		}
 
 		// Instanciation de la class lightbox puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
@@ -262,14 +271,12 @@ async function getArtist (){
 			document.querySelectorAll(".media").forEach((element) => {
 				element.addEventListener("click", function (e){
 					lightbox.show(e.currentTarget.dataset.id);
-					chevronL.setAttribute("tabindex", "1");
-					chevronR.setAttribute("tabindex", "1");
-					closeBtn.setAttribute("tabindex", "1");
-				
+					
 				});
 				element.addEventListener("keyup", function (e){
 					if (e.key === "Enter") {
 						lightbox.show(e.currentTarget.dataset.id);
+						
 					}
 				});
 			});
