@@ -124,100 +124,67 @@ async function getArtist (){
 			const date = document.querySelector(".filter--date");
 			const titre = document.querySelector(".filter--titre");
 			const popularite = document.querySelector(".filter--popularité");
-		
-			popularite.addEventListener("click", function Popularité (e){
-				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> a.likes < b.likes ? -1 :1)
+
+
+			function event (sortType, filter1, filter2, filter3) {
+				document.querySelector("article").innerHTML=listMedias.sort(sortType)
 					.map((element)=>{
 						return element.display();
 					}).join("");
-				this.classList.add("pointer");
-				date.classList.remove("pointer");	
-				titre.classList.remove("pointer");	
-				displayLightbox();
+				filter1.classList.add("pointer");
+				filter2.classList.remove("pointer");
+				filter3.classList.remove("pointer");
 				handleLikes();
+				displayLightbox();
+			}
 			
+	
+			function sortByDate (a,b){
+				return new Date(b.date) - new Date (a.date);
+			}
+			function sortByLikes (a,b){
+				return a.likes - b.likes;
+			}
+			
+			function sortByTitle (a,b) {
+				return a.title.localeCompare(b.title);
+			}
+		
+			popularite.addEventListener("click", (e) =>{
+				e.preventDefault();
+				event(sortByLikes, popularite, date, titre);	
+				
+			});
+			popularite.addEventListener("keyup", (e)=>{
+				if (e.key== "Enter"){
+					event(sortByLikes,popularite, date, titre);
+				}
 			});
 
-			date.addEventListener("click", function byDate (e){
+			date.addEventListener("click", (e) =>{
 				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort((a,b)=> new Date(b.date)- new Date(a.date))
-					.map((element)=>{
-						return element.display();
-					}).join("");
-				this.classList.add("pointer");
-				popularite.classList.remove("pointer");	
-				titre.classList.remove("pointer");	
-				handleLikes();
-				displayLightbox();
+				event(sortByDate, date, titre, popularite);
 				
 			});
 
 			date.addEventListener("keyup", (e)=>{
 				if (e.key=="Enter") {
-					document.querySelector("article").innerHTML=listMedias.sort((a,b)=> new Date(b.date)- new Date(a.date))
-						.map((element)=>{
-							return element.display();
-						}).join("");
+					event(sortByDate, date, titre, popularite);
 				}
 			});
 
-			titre.addEventListener("click", function byTitle (e){
+			titre.addEventListener("click", (e) =>{
 				e.preventDefault();
-				document.querySelector("article").innerHTML=listMedias.sort(sortByTitle)
-					.map((element)=>{
-						return element.display();
-					}).join("");
-				this.classList.add("pointer");
-				popularite.classList.remove("pointer");	
-				date.classList.remove("pointer");	
-				handleLikes();
-				displayLightbox();
-				
+				event(sortByTitle, titre, date, popularite);				
 			});
 
 			titre.addEventListener("keyup", (e)=>{
 				if(e.key=="Enter"){
-					document.querySelector("article").innerHTML=listMedias.sort(sortByTitle)
-						.map((element)=>{
-							return element.display();
-						}).join("");
+					event(sortByTitle, titre, date, popularite);
 				}
 			});
 
 		}
-		
-		/* function event (sortType) {
-			document.querySelector("article").innerHTML=listMedias.sort(sortType)
-				.map((element)=>{
-					return element.display();
-				}).join("");	
-			handleLikes();
-			let lightbox = new Lightbox(media,artist);
-			document.querySelectorAll(".media").forEach((element) => {
-				element.addEventListener("click", function (e){
-					lightbox.show(e.currentTarget.dataset.id);
-				});
-				element.addEventListener("keyup", function (e){
-					if (e.key === "Enter") {
-						lightbox.show(e.currentTarget.dataset.id);
-					}
-				});
-			});
-		}
-		
-
-		function sortByDate (a,b){
-			return new Date(a.date) - new Date (b.date);
-		}
-		function sortByLikes (a,b){
-			return a.likes - b.likes;
-		} */
-		
-		function sortByTitle (a,b) {
-			return a.title.localeCompare(b.title);
-		}
-
 		displaySort();
 
 		// Création de la div qui affiche la lightbox   
@@ -254,24 +221,7 @@ async function getArtist (){
 		logo.setAttribute("tabindex", "1");
 		let contactBtn = document.querySelector(".contact_button");
 		contactBtn.setAttribute("tabindex", "2");
-		let items = document.querySelectorAll(".content__items--heart");
-		items.forEach((item)=>{
-			item.setAttribute("tabindex", "4");
-			item.setAttribute("role", "button");
-			item.setAttribute("aria-label", "likes");
-
-		});
-		let titles = document.querySelectorAll(".content__description--title");
-		titles.forEach((title) => {
-			title.setAttribute("tabindex", "4");
-
-		});
-		let like = document.querySelectorAll(".content__items--like");
-		like.forEach((like) =>{
-			like.setAttribute("tabindex", "4");
-		});
-
-           
+   
 
 		// Fonction qui permet de gerer l'aria-expanded sur le chevron du menu deroulant
 		function ariaExpand () {
@@ -312,9 +262,9 @@ async function getArtist (){
 			document.querySelectorAll(".media").forEach((element) => {
 				element.addEventListener("click", function (e){
 					lightbox.show(e.currentTarget.dataset.id);
-					chevronL.setAttribute("tabindex", "4");
-					chevronR.setAttribute("tabindex", "4");
-					closeBtn.setAttribute("tabindex", "4");
+					chevronL.setAttribute("tabindex", "1");
+					chevronR.setAttribute("tabindex", "1");
+					closeBtn.setAttribute("tabindex", "1");
 				
 				});
 				element.addEventListener("keyup", function (e){
