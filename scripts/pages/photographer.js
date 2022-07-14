@@ -3,6 +3,7 @@ import {Media} from "../factories/MediaFactory.js";
 import { Photographer } from "../models/photographer.js";
 import { handleLikes } from "../utils/displayLikes.js";
 import { Lightbox } from "../models/Lightbox.js";
+import contactForm2  from "../utils/contactForm2.js";
 //Fonction asynchrone qui permet de recuperer les données en JSON 
 
 async function getArtist (){
@@ -24,8 +25,10 @@ async function getArtist (){
 		let photographer = new Photographer(artist);
 		let profileContent = document.querySelector(".profile__content");
 		let profileImage = document.querySelector(".profile__image");
-		profileContent.innerHTML= photographer.displayHeader();
+		profileContent.innerHTML= photographer.displayHeader();		
 		profileImage.innerHTML= photographer.displayImage();
+
+		
 		
 		// Affichage des medias du photographe
 		const article = document.createElement("article");
@@ -38,6 +41,7 @@ async function getArtist (){
 		
 
 		document.querySelector(".photographers-content").insertAdjacentElement("beforeend", article);
+		
 		
 		
 		// Création du compteur global de likes
@@ -206,7 +210,7 @@ async function getArtist (){
             `;   
 		
 		content.insertAdjacentHTML("afterbegin",modale);
-
+		
 		// Aria roles et attributs pour les éléments de la lightbox
 
 		let chevronR = document.querySelector(".chevronR");
@@ -303,6 +307,13 @@ async function getArtist (){
 		let priceContent = price.innerText;
 		price.setAttribute("tabindex", "8");
 		price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
+
+		document.querySelector(".contact_button").addEventListener("click", contactForm2.displayModal);
+		let btnSubmit = document.querySelector("#btn_submit");
+		btnSubmit.addEventListener("click", function (e){
+			e.preventDefault();
+			contactForm2.checkForm();
+		} );
 	}
 	// eslint-disable-next-line no-mixed-spaces-and-tabs	
 	
