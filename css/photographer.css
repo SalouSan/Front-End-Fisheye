@@ -41,6 +41,14 @@
 /* Modale de contact */
 #contact_modal {
     display: none;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background-color: #80808080;
+    top:0px;
+    height: 100vh;
+    align-items: center;
+    overflow-y: auto;
 }
 .contact_button {
     font-size: 20px;
@@ -66,6 +74,7 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    
 }
 
 .modal header {

@@ -309,6 +309,7 @@ async function getArtist (){
 		price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
 
 		document.querySelector(".contact_button").addEventListener("click", contactForm2.displayModal);
+		document.querySelector(".close-modal").addEventListener("click", contactForm2.closeModal);
 		let btnSubmit = document.querySelector("#btn_submit");
 		btnSubmit.addEventListener("click", function (e){
 			e.preventDefault();

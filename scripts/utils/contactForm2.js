@@ -2,7 +2,7 @@
 
 function displayModal() {
 	const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+	modal.style.display = "flex";
 }
 displayModal();
 
@@ -15,9 +15,10 @@ closeModal();
 
 
 
-let formInput = document.querySelectorAll("form input");
+
 
 function checkForm () {
+	let formInput = document.querySelectorAll("form input");
 	let valid = true;
 	for (let input of formInput){
 		valid &=input.reportValidity();
@@ -26,7 +27,10 @@ function checkForm () {
 		}
 	}
 	if(valid){
-		console.log("ok");
+		for (let input of formInput){
+			console.log(input.name + ": " + input.value);
+		}
+		closeModal();
 	}
 	
 }
