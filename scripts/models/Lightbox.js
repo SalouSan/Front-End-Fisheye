@@ -40,33 +40,32 @@ export class Lightbox {
 		document.querySelector(".chevronR").addEventListener("click", () => {
 			this.next();
 		});
-		document.querySelector(".chevronR").addEventListener("keyup", (e) => {
+		document.addEventListener("keydown", (e)=>{
 			if(e.key === "ArrowRight"){
 				this.next();
 			}
 		});
-        
+				
 		document.querySelector(".chevronL").addEventListener("click", () => {
 			this.previous();
             
 		});
-		document.querySelector(".chevronL").addEventListener("keyup", (e) => {
+		document.addEventListener("keydown", (e)=>{
 			if(e.key === "ArrowLeft"){
 				this.previous();
 			}
 		});
+		
 		document.querySelector(".lightbox__close").addEventListener("click", () => {
 			this.close();
 		});
-		document.querySelector(".lightbox__close").addEventListener("keyup", (e) => {
-			if (e.key=== "Enter") {
+		document.addEventListener("keydown", (e)=>{
+			if(e.key === "Escape"){
 				this.close();
 			}
-            
 		});
 	}
 	close (){
-
 		document.querySelector(".lightbox").classList.remove("show");
 	}
     

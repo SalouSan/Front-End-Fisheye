@@ -197,14 +197,16 @@ async function getArtist (){
 		let modale = `
             <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
-                    <img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
-                    <img class="lightbox container element" src="" alt=""/>
-                    <video class="lightbox container video" controls="false" id="lightbox_vid"
-                    <source src=""
-                    type="video/mp4" alt="">
-                    </video>
-                    <img role="button" class="chevronR" src="assets/icons/chevronRight.svg"/>
-                    <img role="button" class="lightbox__close" src="assets/icons/closeLightbox.svg"/>                 
+					<div class="test">
+						<img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
+						<img class="lightbox container element" src="" alt=""/>
+						<video class="lightbox container video" controls="false" id="lightbox_vid"
+						<source src=""
+						type="video/mp4" alt="">
+						</video>
+						<img role="button" class="chevronR" src="assets/icons/chevronRight.svg"/>
+						<img role="button" class="lightbox__close" src="assets/icons/closeLightbox.svg"/>   
+					</div>              
                 </div>                  
             </div>
             `;   
@@ -234,15 +236,16 @@ async function getArtist (){
 			let sousMenu = document.querySelector("#sous_menu");
 			let filtermain = document.querySelector(".filter");
 			filtermain.addEventListener("keypress", function (e) {
-				if (e.key == "Enter") {
+				if (e.key == "Escape") {
+					sousMenu.style.visibility="hidden";
+					chevronUpDown.setAttribute("aria-expanded", "false");
+					chevronUpDown.style.transform = "rotate(0deg)";
+					console.log("ok");
+				} else {					
 					chevronUpDown.setAttribute("aria-expanded", "true");
 					chevronUpDown.style.transform = "rotate(180deg)";
 					filtermain.style.display= "block";
 					sousMenu.style.visibility = "visible";
-				} else {
-					sousMenu.style.visibility="hidden";
-					chevronUpDown.setAttribute("aria-expanded", "false");
-					chevronUpDown.style.transform = "rotate(0deg)";
 				}
 			});
 		}
@@ -308,6 +311,8 @@ async function getArtist (){
 		price.setAttribute("tabindex", "8");
 		price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
 
+		// Event listener sur la modale
+
 		document.querySelector(".contact_button").addEventListener("click", contactForm2.displayModal);
 		document.querySelector(".close-modal").addEventListener("click", contactForm2.closeModal);
 		let btnSubmit = document.querySelector("#btn_submit");
@@ -315,8 +320,12 @@ async function getArtist (){
 			e.preventDefault();
 			contactForm2.checkForm();
 		} );
+
+		
 	}
 	// eslint-disable-next-line no-mixed-spaces-and-tabs	
+
+	
 	
 }
 getArtist ();
