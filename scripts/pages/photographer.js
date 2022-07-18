@@ -236,16 +236,15 @@ async function getArtist (){
 			let sousMenu = document.querySelector("#sous_menu");
 			let filtermain = document.querySelector(".filter");
 			filtermain.addEventListener("keypress", function (e) {
-				if (e.key == "Escape") {
-					sousMenu.style.visibility="hidden";
-					chevronUpDown.setAttribute("aria-expanded", "false");
-					chevronUpDown.style.transform = "rotate(0deg)";
-					console.log("ok");
-				} else {					
+				if (e.key == "Enter") {
 					chevronUpDown.setAttribute("aria-expanded", "true");
 					chevronUpDown.style.transform = "rotate(180deg)";
 					filtermain.style.display= "block";
 					sousMenu.style.visibility = "visible";
+				} else {
+					sousMenu.style.visibility="hidden";
+					chevronUpDown.setAttribute("aria-expanded", "false");
+					chevronUpDown.style.transform = "rotate(0deg)";
 				}
 			});
 		}

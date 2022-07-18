@@ -215,10 +215,10 @@ form .message {
     left:75px;
 }
 
-.filter:hover #sous_menu{
+.svg:hover+#sous_menu{
     visibility: visible;
 }
-.svg:hover .chevron.up.down{
+.filter:hover .chevron.up.down{
     transform: rotate(180deg);
 }
 
