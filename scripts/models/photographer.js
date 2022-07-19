@@ -9,9 +9,9 @@ export class Photographer {
                 <img class="photographer__profil--portrait" src= "assets/Sample_Photos/Photographers-ID_Photos/${this.portrait}" alt= " Photo de :${this.name}" 
                 />         
                 <h2 class="photographer__profil--name"> ${this.name} </h2>
-                <span class="photographer__profil--location"> ${this.city}, ${this.country} </span> </br>
-                <span class="photographer__profil--tagline"> ${this.tagline} </span> </br>
-                <span class="photographer__profil--price"> ${this.price} €/jour </span> 
+                <span class="photographer__profil--location" aria-label= "${this.city}, ${this.country}"> ${this.city}, ${this.country} </span> </br>
+                <span class="photographer__profil--tagline" aria-label="${this.tagline}"> ${this.tagline} </span> </br>
+                <span class="photographer__profil--price" aria-label="${this.price} euros par jour"> ${this.price} €/jour </span> 
             </a>
         </div>
         ` ;

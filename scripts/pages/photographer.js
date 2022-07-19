@@ -3,7 +3,7 @@ import {Media} from "../factories/MediaFactory.js";
 import { Photographer } from "../models/photographer.js";
 import { handleLikes } from "../utils/displayLikes.js";
 import { Lightbox } from "../models/Lightbox.js";
-import contactForm2  from "../utils/contactForm2.js";
+import contactForm  from "../utils/contactForm.js";
 //Fonction asynchrone qui permet de recuperer les données en JSON 
 
 async function getArtist (){
@@ -88,18 +88,18 @@ async function getArtist (){
 
 		// Attributs ARIA et rôles pour l'accessibilité
 		ul.setAttribute("role", "list");
-		ul.setAttribute("tabindex", "3");
+		ul.setAttribute("tabindex", "6");
 		ul.setAttribute("aria-label", "Filtres par items");
 		filtrePopularite.setAttribute("aria-label", "filtre par popularité");
 		filtrePopularite.setAttribute("role", "listitem");
-		filtrePopularite.setAttribute("tabindex", "3");
+		filtrePopularite.setAttribute("tabindex", "6");
 		sousMenu.setAttribute("role", "region");
 		filtreDate.setAttribute("aria-describedby", "sous_menu");
 		filtreDate.setAttribute("aria-label", "filtre par date");
 		filtreDate.setAttribute("role", "listitem");
-		filtreDate.setAttribute("tabindex", "3");
+		filtreDate.setAttribute("tabindex", "7");
 		filtreTitle.setAttribute("role", "listitem");
-		filtreTitle.setAttribute("tabindex", "3");
+		filtreTitle.setAttribute("tabindex", "8");
 		filtreTitle.setAttribute("aria-label", "filtre par titre");
 
 		// Création d'une div qui permet d'afficher le chevron
@@ -107,7 +107,7 @@ async function getArtist (){
 		division.setAttribute("class", "svg");
         
 		// Chevron SVG importé qui gère le deroulant du menu  
-		const svg = "<img class=\"chevron up down\" role=\"button\" tabindex=\"3\" aria-label=\"button\" aria-controls=\"sous_menu\" aria-expanded=\"false\" src=\"assets/icons/chevronTop.svg\"/>";
+		const svg = "<img class=\"chevron up down\" role=\"button\" tabindex=\"6\" aria-label=\"button\" aria-controls=\"sous_menu\" aria-expanded=\"false\" src=\"assets/icons/chevronTop.svg\"/>";
     
         
 		// Insertion des éléments enfants dans leur element parent   
@@ -214,20 +214,37 @@ async function getArtist (){
 		content.insertAdjacentHTML("afterbegin",modale);
 		
 		// Aria roles et attributs pour les éléments de la lightbox
-
+		let lightbox = document.querySelector(".lightbox");
 		let chevronR = document.querySelector(".chevronR");
 		let chevronL = document.querySelector(".chevronL");
 		let closeBtn = document.querySelector(".lightbox__close");
+		let image = document.querySelector(".lightbox.container.element");
+		let video = document.querySelector(".lightbox.container.video");
+		lightbox.setAttribute("tabindex", "1");
+		image.setAttribute("tabindex", "2");
+		video.setAttribute("tabindex", "3");	
 		chevronL.setAttribute("tabindex", "4");
-		chevronR.setAttribute("tabindex", "4");
-		closeBtn.setAttribute("tabindex", "4");
+		chevronR.setAttribute("tabindex", "5");
+		closeBtn.setAttribute("tabindex", "6");
 		closeBtn.setAttribute("aria-label", "Fermer");
             
-		// Aria roles et attributs pour les éléments de la page : logo, titre et likes
+		// Aria roles et attributs pour les éléments du header
 		let logo = document.querySelector(".logo");
 		logo.setAttribute("tabindex", "1");
+
+		let name = document.querySelector(".profile__descrpition--name");
+		name.setAttribute("tabindex", "2");
+
+		let location = document.querySelector(".profile__descrpition--location");
+		location.setAttribute("tabindex","3");
+		let tagline = document.querySelector(".profile__descrpition--tagline");
+		tagline.setAttribute("tabindex","3");
+
 		let contactBtn = document.querySelector(".contact_button");
-		contactBtn.setAttribute("tabindex", "2");
+		contactBtn.setAttribute("tabindex", "4");
+				
+		let photo = document.querySelector(".pic");
+		photo.setAttribute("tabindex", "5");
    
 
 		// Fonction qui permet de gerer l'aria-expanded sur le chevron du menu deroulant
@@ -292,39 +309,37 @@ async function getArtist (){
 		// Aria attributs pour le compteur global de likes
 
 		let counter = document.querySelector(".counter_content");
-		counter.setAttribute("tabindex", "6");
+		counter.setAttribute("tabindex", "10");
 		counter.setAttribute("aria-label", "compteur de likes");
 
 		let total = document.querySelector(".counter");
 		let TotalValue = total.innerText;
-		total.setAttribute("tabindex", "6");
+		total.setAttribute("tabindex", "11");
 		total.setAttribute("aria-describedby", "counter");
 		total.setAttribute("aria-label", `Nombre total de likes : ${TotalValue}`);
 
 		let heart = document.querySelector(".heart");
 		heart.setAttribute("aria-label", "icône coeur");
-		heart.setAttribute("tabindex", "7");
+		heart.setAttribute("tabindex", "12");
     
 		let price = document.querySelector(".price1");
 		let priceContent = price.innerText;
-		price.setAttribute("tabindex", "8");
+		price.setAttribute("tabindex", "13");
 		price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
 
 		// Event listener sur la modale
 
-		document.querySelector(".contact_button").addEventListener("click", contactForm2.displayModal);
-		document.querySelector(".close-modal").addEventListener("click", contactForm2.closeModal);
+		document.querySelector(".contact_button").addEventListener("click", contactForm.displayModal);
+		document.querySelector(".close-modal").addEventListener("click", contactForm.closeModal);
 		let btnSubmit = document.querySelector("#btn_submit");
 		btnSubmit.addEventListener("click", function (e){
 			e.preventDefault();
-			contactForm2.checkForm();
+			contactForm.checkForm();
 		} );
 
 		
 	}
 	// eslint-disable-next-line no-mixed-spaces-and-tabs	
-
-	
 	
 }
 getArtist ();

@@ -23,12 +23,12 @@
       <div id="contact_modal">
         <div class="modal">
           <header>
-            <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg"  alt="bouton close" class="close-modal"/>
+            <h2 tabindex="2"> Contactez-moi</h2>
+            <img src="assets/icons/close.svg"  alt="bouton close" class="close-modal" tabindex="12"/>
           </header>
           <form method= "post">
             <div class="formData">
-              <label for="first" tabindex="2">Prénom</label>
+              <label for="first" tabindex="3">Prénom</label>
               <input 
               class="text-control"
               type="text"
@@ -36,11 +36,12 @@
               name="prénom"
               required
               minlength="2"
+              tabindex="4"
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="last" tabindex="2"> Nom </label>
+              <label for="last" tabindex="5"> Nom </label>
               <input
               class="text-control"
               type="text"
@@ -48,22 +49,24 @@
               name="Nom"
               required
               minlength="2"
+              tabindex="6"
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="mail" tabindex="2"> Email </label>
+              <label for="mail" tabindex="7"> Email </label>
               <input
               class="text-control"
               type="email"
               id="mail"
               name="email"
               required
+              tabindex="8"
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="message" tabindex="2">Votre message </label>
+              <label for="message" tabindex="9">Votre message </label>
               <input 
               class="text-control"
               type="text"
@@ -71,10 +74,11 @@
               name="message"
               minlength="2"
               required
+              tabindex="10"
               />
               <small></small>
             </div>
-            <button class="contact_button" id="btn_submit" >Envoyer</button>
+            <button class="contact_button" id="btn_submit" tabindex="11" >Envoyer</button>
           </form>
           <span> </span>
         </div>

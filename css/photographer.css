@@ -215,7 +215,7 @@ form .message {
     left:75px;
 }
 
-.svg:hover+#sous_menu{
+.filter:hover #sous_menu{
     visibility: visible;
 }
 .filter:hover .chevron.up.down{

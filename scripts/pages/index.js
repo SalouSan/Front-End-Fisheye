@@ -19,6 +19,39 @@ const getPhotographers = async function () {
         
 
 	}
+
+	// Tabindex sur elements de la page //
+
+	let logo = document.querySelector(".logo");
+	logo.setAttribute("tabindex", "1");
+	
+	let h1 = document.querySelector("h1");
+	h1.setAttribute("tabindex", "2");
+
+	let img = document.querySelectorAll(".photographer__profil--portrait");
+	img.forEach((img) => {
+		img.setAttribute("tabindex", "3");
+	});
+
+	let names = document.querySelectorAll(".photographer__profil--name");
+	names.forEach((name) => {
+		name.setAttribute("tabindex", "3");
+	});
+
+	let location = document.querySelectorAll(".photographer__profil--location");
+	location.forEach((loc)=>{
+		loc.setAttribute("tabindex", "3");
+	});
+
+	let taglines = document.querySelectorAll(".photographer__profil--tagline");
+	taglines.forEach((tagline) => {
+		tagline.setAttribute("tabindex", "3");
+	});
+
+	let prices = document.querySelectorAll(".photographer__profil--price");
+	prices.forEach((price) => {
+		price.setAttribute("tabindex", "3");
+	});
    
 };
 
