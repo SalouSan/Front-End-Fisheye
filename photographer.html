@@ -24,11 +24,11 @@
         <div class="modal">
           <header>
             <h2 tabindex="2"> Contactez-moi</h2>
-            <img src="assets/icons/close.svg"  alt="bouton close" class="close-modal" tabindex="12"/>
+            <img src="assets/icons/close.svg"  alt="bouton close" class="close-modal" tabindex="10"/>
           </header>
-          <form method= "post">
+          <form method= "post" aria-haspopup="true">
             <div class="formData">
-              <label for="first" tabindex="3">Prénom</label>
+              <label for="first">Prénom</label>
               <input 
               class="text-control"
               type="text"
@@ -36,12 +36,13 @@
               name="prénom"
               required
               minlength="2"
-              tabindex="4"
+              tabindex="5"
+  
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="last" tabindex="5"> Nom </label>
+              <label for="last"> Nom </label>
               <input
               class="text-control"
               type="text"
@@ -54,19 +55,19 @@
               <small></small>
             </div>
             <div class="formData">
-              <label for="mail" tabindex="7"> Email </label>
+              <label for="mail" > Email </label>
               <input
               class="text-control"
               type="email"
               id="mail"
               name="email"
               required
-              tabindex="8"
+              tabindex="7"
               />
               <small></small>
             </div>
             <div class="formData">
-              <label for="message" tabindex="9">Votre message </label>
+              <label for="message">Votre message </label>
               <input 
               class="text-control"
               type="text"
@@ -74,11 +75,11 @@
               name="message"
               minlength="2"
               required
-              tabindex="10"
+              tabindex="8"
               />
               <small></small>
             </div>
-            <button class="contact_button" id="btn_submit" tabindex="11" >Envoyer</button>
+            <button class="contact_button" id="btn_submit" tabindex="9" >Envoyer</button>
           </form>
           <span> </span>
         </div>

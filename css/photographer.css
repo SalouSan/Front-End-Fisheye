@@ -43,12 +43,12 @@
     display: none;
     position: fixed;
     width: 100%;
-    z-index: 10;
     background-color: #80808080;
     top:0px;
     height: 100vh;
     align-items: center;
     overflow-y: auto;
+
 }
 .contact_button {
     font-size: 20px;
@@ -74,7 +74,7 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-    
+    z-index: 150;
 }
 
 .modal header {
@@ -145,6 +145,7 @@ form .message {
     margin-left: 100px;
     align-items: flex-start;
     cursor: pointer;
+    z-index: -99;
     
 }
 .Tri{
@@ -232,14 +233,16 @@ form .message {
 *{
     max-width: 100%;
 } 
-
+.photographers-content{
+    z-index: -99;
+}
 .photographers-content article{
     margin-left: 100px;
     margin-top: 20px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
     max-width: 90%;
-    z-index: -1;
+    z-index: -99;
 }
 .media_container{
     display : flex;
@@ -295,6 +298,7 @@ form .message {
 .container{
     display: flex;
     align-items: center;
+    z-index: -99;
 }
 
 .counter_content{
@@ -330,10 +334,12 @@ form .message {
     top: 0;
     background-color: rgba(255, 255, 255, 0.9);
     max-width: 100%;
+    z-index: 33;
 }
 
 .lightbox.show{
     display: block;
+    z-index: 33;
 }
 
 .lightbox.container{
@@ -345,21 +351,23 @@ form .message {
     height: 100%;
     
 }
-.lightbox.container.element, .lightbox.container.video{
-    max-width: 80%;
-    max-height: 80vh;
-    object-fit: contain;
-}
-.test{
+.items{
     max-width: 90%;
     width: 90%;
     margin-left: 5%;
     position: relative;
     height: 100%;
 }
+.lightbox.container.element, .lightbox.container.video{
+    margin-top: 5%;
+    max-width: 76%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
 .title{
     color : #901C1C;
-    font-size : 18px;
+    font-size : 88px;
     margin-top: 8px;
     word-break: normal;
 }
@@ -372,15 +380,15 @@ form .message {
     right: 5%;
 }
 .chevronL{
-    left: 5%;
+    left: 3.5%;
 }
 .lightbox__close{
     font-size: 52px;
     cursor: pointer;
     color: #901C1C;
     position: absolute;
-    left:95%;
-    top:2%;
+    left:93%;
+    top:1%;
 }
 
 

@@ -27,8 +27,6 @@ async function getArtist (){
 		let profileImage = document.querySelector(".profile__image");
 		profileContent.innerHTML= photographer.displayHeader();		
 		profileImage.innerHTML= photographer.displayImage();
-
-		
 		
 		// Affichage des medias du photographe
 		const article = document.createElement("article");
@@ -40,9 +38,7 @@ async function getArtist (){
 			}).join("");
 		
 
-		document.querySelector(".photographers-content").insertAdjacentElement("beforeend", article);
-		
-		
+		document.querySelector(".photographers-content").insertAdjacentElement("beforeend", article);		
 		
 		// Création du compteur global de likes
 
@@ -88,18 +84,18 @@ async function getArtist (){
 
 		// Attributs ARIA et rôles pour l'accessibilité
 		ul.setAttribute("role", "list");
-		ul.setAttribute("tabindex", "6");
+		ul.setAttribute("tabindex", "12");
 		ul.setAttribute("aria-label", "Filtres par items");
 		filtrePopularite.setAttribute("aria-label", "filtre par popularité");
 		filtrePopularite.setAttribute("role", "listitem");
-		filtrePopularite.setAttribute("tabindex", "6");
+		filtrePopularite.setAttribute("tabindex", "13");
 		sousMenu.setAttribute("role", "region");
 		filtreDate.setAttribute("aria-describedby", "sous_menu");
 		filtreDate.setAttribute("aria-label", "filtre par date");
 		filtreDate.setAttribute("role", "listitem");
-		filtreDate.setAttribute("tabindex", "7");
+		filtreDate.setAttribute("tabindex", "15");
 		filtreTitle.setAttribute("role", "listitem");
-		filtreTitle.setAttribute("tabindex", "8");
+		filtreTitle.setAttribute("tabindex", "16");
 		filtreTitle.setAttribute("aria-label", "filtre par titre");
 
 		// Création d'une div qui permet d'afficher le chevron
@@ -107,7 +103,7 @@ async function getArtist (){
 		division.setAttribute("class", "svg");
         
 		// Chevron SVG importé qui gère le deroulant du menu  
-		const svg = "<img class=\"chevron up down\" role=\"button\" tabindex=\"6\" aria-label=\"button\" aria-controls=\"sous_menu\" aria-expanded=\"false\" src=\"assets/icons/chevronTop.svg\"/>";
+		const svg = "<img class=\"chevron up down\" role=\"button\" tabindex=\"14\" aria-label=\"button\" aria-controls=\"sous_menu\" aria-expanded=\"false\" src=\"assets/icons/chevronTop.svg\"/>";
     
         
 		// Insertion des éléments enfants dans leur element parent   
@@ -161,7 +157,7 @@ async function getArtist (){
 				
 			});
 			popularite.addEventListener("keyup", (e)=>{
-				if (e.key== "Enter"){
+				if (e.key== "Enter" && e.target == popularite){
 					event(sortByLikes,popularite, date, titre);
 				}
 			});
@@ -192,12 +188,70 @@ async function getArtist (){
 		}
 		displaySort();
 
+		// Fonction qui permet de gerer l'aria-expanded sur le chevron du menu deroulant
+		function ariaExpand () {
+			let chevronUpDown = document.querySelector(".chevron.up.down");
+			let sousMenu = document.querySelector("#sous_menu");
+			let filtermain = document.querySelector(".filter");
+			chevronUpDown.addEventListener("keydown", function (e) {
+				if (e.key == "Enter" && e.currentTarget==chevronUpDown) {			
+					chevronUpDown.setAttribute("aria-expanded", "true");
+					chevronUpDown.style.transform = "rotate(180deg)";
+					filtermain.style.display= "block";
+					sousMenu.style.visibility = "visible";
+				} else if (e.key == "Escape"){
+					sousMenu.style.visibility="hidden";
+					chevronUpDown.setAttribute("aria-expanded", "false");
+					chevronUpDown.style.transform = "rotate(0deg)";
+				}
+			});
+		}
+		ariaExpand();
+           
+		// Aria roles et attributs pour les éléments du header
+		let logo = document.querySelector(".logo");
+		logo.setAttribute("tabindex", "1");
+
+		let name = document.querySelector(".profile__descrpition--name");
+		name.setAttribute("tabindex", "2");
+
+		let location = document.querySelector(".profile__descrpition--location");
+		location.setAttribute("tabindex","3");
+		let tagline = document.querySelector(".profile__descrpition--tagline");
+		tagline.setAttribute("tabindex","3");
+
+		let contactBtn = document.querySelector(".contact_button");
+		contactBtn.setAttribute("tabindex", "4");
+				
+		let photo = document.querySelector(".pic");
+		photo.setAttribute("tabindex", "11");
+   
+		// Contrôle de la video pour affichage de la miniature
+		function handleControls () {
+			let video = document.getElementById("vid");
+			video.addEventListener("mouseover", (e)=>{
+				e.preventDefault();
+				video.setAttribute("controls", "controls");
+			});
+			video.addEventListener("mouseout", (e)=>{
+				e.preventDefault();
+				video.removeAttribute("controls");
+			});
+		}
+		handleControls();
+
+		// eslint-disable-next-line no-unused-vars
+		function enableControls () {
+			let video = document.getElementById("vid");
+			video.setAttribute("controls", "controls");
+		}
+
 		// Création de la div qui affiche la lightbox   
         
 		let modale = `
             <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
-					<div class="test">
+					<div class="items">
 						<img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
 						<img class="lightbox container element" src="" alt=""/>
 						<video class="lightbox container video" controls="false" id="lightbox_vid"
@@ -220,81 +274,23 @@ async function getArtist (){
 		let closeBtn = document.querySelector(".lightbox__close");
 		let image = document.querySelector(".lightbox.container.element");
 		let video = document.querySelector(".lightbox.container.video");
-		lightbox.setAttribute("tabindex", "1");
-		image.setAttribute("tabindex", "2");
-		video.setAttribute("tabindex", "3");	
-		chevronL.setAttribute("tabindex", "4");
-		chevronR.setAttribute("tabindex", "5");
-		closeBtn.setAttribute("tabindex", "6");
+		lightbox.setAttribute("tabindex", "");
+		image.setAttribute("tabindex", "23");
+		video.setAttribute("tabindex", "23");	
+		chevronL.setAttribute("tabindex", "22");
+		chevronR.setAttribute("tabindex", "24");
+		closeBtn.setAttribute("tabindex", "25");
 		closeBtn.setAttribute("aria-label", "Fermer");
-            
-		// Aria roles et attributs pour les éléments du header
-		let logo = document.querySelector(".logo");
-		logo.setAttribute("tabindex", "1");
-
-		let name = document.querySelector(".profile__descrpition--name");
-		name.setAttribute("tabindex", "2");
-
-		let location = document.querySelector(".profile__descrpition--location");
-		location.setAttribute("tabindex","3");
-		let tagline = document.querySelector(".profile__descrpition--tagline");
-		tagline.setAttribute("tabindex","3");
-
-		let contactBtn = document.querySelector(".contact_button");
-		contactBtn.setAttribute("tabindex", "4");
-				
-		let photo = document.querySelector(".pic");
-		photo.setAttribute("tabindex", "5");
-   
-
-		// Fonction qui permet de gerer l'aria-expanded sur le chevron du menu deroulant
-		function ariaExpand () {
-			let chevronUpDown = document.querySelector(".chevron.up.down");
-			let sousMenu = document.querySelector("#sous_menu");
-			let filtermain = document.querySelector(".filter");
-			filtermain.addEventListener("keypress", function (e) {
-				if (e.key == "Enter") {
-					chevronUpDown.setAttribute("aria-expanded", "true");
-					chevronUpDown.style.transform = "rotate(180deg)";
-					filtermain.style.display= "block";
-					sousMenu.style.visibility = "visible";
-				} else {
-					sousMenu.style.visibility="hidden";
-					chevronUpDown.setAttribute("aria-expanded", "false");
-					chevronUpDown.style.transform = "rotate(0deg)";
-				}
-			});
-		}
-		ariaExpand();
-
-		// Contrôle de la video pour affichage de la miniature
-		function handleControls () {
-			let video = document.getElementById("vid");
-			video.addEventListener("mouseover", (e)=>{
-				e.preventDefault();
-				video.setAttribute("controls", "controls");
-			});
-			video.addEventListener("mouseout", (e)=>{
-				e.preventDefault();
-				video.removeAttribute("controls");
-			});
-		}
-		handleControls();
-
-		// eslint-disable-next-line no-unused-vars
-		function enableControls () {
-			let video = document.getElementById("vid");
-			video.setAttribute("controls", "controls");
-		}
 
 		// Instanciation de la class lightbox puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
 		function displayLightbox () {
 			let lightbox = new Lightbox(media,artist);
+			let modale = document.querySelector("#modale");
 			document.querySelectorAll(".media").forEach((element) => {
 				element.addEventListener("click", function (e){
 					lightbox.show(e.currentTarget.dataset.id);
-					
+					modale.focus();
 				});
 				element.addEventListener("keyup", function (e){
 					if (e.key === "Enter") {
@@ -309,22 +305,22 @@ async function getArtist (){
 		// Aria attributs pour le compteur global de likes
 
 		let counter = document.querySelector(".counter_content");
-		counter.setAttribute("tabindex", "10");
+		counter.setAttribute("tabindex", "18");
 		counter.setAttribute("aria-label", "compteur de likes");
 
 		let total = document.querySelector(".counter");
 		let TotalValue = total.innerText;
-		total.setAttribute("tabindex", "11");
+		total.setAttribute("tabindex", "19");
 		total.setAttribute("aria-describedby", "counter");
 		total.setAttribute("aria-label", `Nombre total de likes : ${TotalValue}`);
 
 		let heart = document.querySelector(".heart");
 		heart.setAttribute("aria-label", "icône coeur");
-		heart.setAttribute("tabindex", "12");
+		heart.setAttribute("tabindex", "20");
     
 		let price = document.querySelector(".price1");
 		let priceContent = price.innerText;
-		price.setAttribute("tabindex", "13");
+		price.setAttribute("tabindex", "21");
 		price.setAttribute("aria-label", `Prix du photographe : ${priceContent}`);
 
 		// Event listener sur la modale

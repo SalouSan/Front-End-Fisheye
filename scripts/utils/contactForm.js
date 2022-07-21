@@ -1,8 +1,10 @@
 
-
+let formInput = document.querySelector("form input");
 function displayModal() {
 	const modal = document.getElementById("contact_modal");
 	modal.style.display = "flex";
+	formInput.focus();
+
 }
 displayModal();
 
