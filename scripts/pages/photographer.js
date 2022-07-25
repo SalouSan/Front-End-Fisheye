@@ -153,6 +153,7 @@ async function getArtist (){
 		
 			popularite.addEventListener("click", (e) =>{
 				e.preventDefault();
+				console.log(e);
 				event(sortByLikes, popularite, date, titre);	
 				
 			});
@@ -227,29 +228,31 @@ async function getArtist (){
 		photo.setAttribute("tabindex", "11");
    
 		// Contrôle de la video pour affichage de la miniature
-		function handleControls () {
-			let video = document.getElementById("vid");
-			video.addEventListener("mouseover", (e)=>{
+		
+		function handleControls () {	
+			let vid = document.getElementById("vid");	
+			vid.addEventListener("mouseover", (e)=>{
 				e.preventDefault();
-				video.setAttribute("controls", "controls");
+				vid.setAttribute("controls", "controls");
 			});
-			video.addEventListener("mouseout", (e)=>{
+			vid.addEventListener("mouseout", (e)=>{
 				e.preventDefault();
-				video.removeAttribute("controls");
+				vid.removeAttribute("controls");
 			});
+			vid.addEventListener("focus", (e)=>{
+				e.preventDefault();
+				vid.setAttribute("controls", "controls");
+						
+			});	
 		}
 		handleControls();
 
-		// eslint-disable-next-line no-unused-vars
-		function enableControls () {
-			let video = document.getElementById("vid");
-			video.setAttribute("controls", "controls");
-		}
-
+	
+		
 		// Création de la div qui affiche la lightbox   
         
 		let modale = `
-            <div class="lightbox" id="modale">                        
+            <div class="lightbox" id="modale" >                        
                 <div class="lightbox container">
 					<div class="items">
 						<img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
@@ -259,7 +262,7 @@ async function getArtist (){
 						type="video/mp4" alt="">
 						</video>
 						<img role="button" class="chevronR" src="assets/icons/chevronRight.svg"/>
-						<img role="button" class="lightbox__close" src="assets/icons/closeLightbox.svg"/>   
+						<img role="button" class="lightbox__close" src="assets/icons/closeLightbox.svg"/>  
 					</div>              
                 </div>                  
             </div>
@@ -268,36 +271,38 @@ async function getArtist (){
 		content.insertAdjacentHTML("afterbegin",modale);
 		
 		// Aria roles et attributs pour les éléments de la lightbox
-		let lightbox = document.querySelector(".lightbox");
+	
 		let chevronR = document.querySelector(".chevronR");
 		let chevronL = document.querySelector(".chevronL");
 		let closeBtn = document.querySelector(".lightbox__close");
 		let image = document.querySelector(".lightbox.container.element");
 		let video = document.querySelector(".lightbox.container.video");
-		lightbox.setAttribute("tabindex", "");
-		image.setAttribute("tabindex", "23");
-		video.setAttribute("tabindex", "23");	
-		chevronL.setAttribute("tabindex", "22");
-		chevronR.setAttribute("tabindex", "24");
-		closeBtn.setAttribute("tabindex", "25");
+
+		image.setAttribute("tabindex", "17");
+		video.setAttribute("tabindex", "17");
+		chevronL.setAttribute("tabindex", "17");
+		chevronR.setAttribute("tabindex", "17");
+		closeBtn.setAttribute("tabindex", "17");
 		closeBtn.setAttribute("aria-label", "Fermer");
+
+		
+	
 
 		// Instanciation de la class lightbox puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
 		function displayLightbox () {
 			let lightbox = new Lightbox(media,artist);
-			let modale = document.querySelector("#modale");
 			document.querySelectorAll(".media").forEach((element) => {
 				element.addEventListener("click", function (e){
 					lightbox.show(e.currentTarget.dataset.id);
-					modale.focus();
+
 				});
 				element.addEventListener("keyup", function (e){
 					if (e.key === "Enter") {
-						lightbox.show(e.currentTarget.dataset.id);
-						
+						lightbox.show(e.currentTarget.dataset.id);	
 					}
 				});
+			
 			});
 		}
 		displayLightbox();
@@ -332,13 +337,16 @@ async function getArtist (){
 			e.preventDefault();
 			contactForm.checkForm();
 		} );
-
-		
+		let closeModalBtn = document.querySelector(".close-modal");
+		const modal = document.getElementById("contact_modal");
+		closeModalBtn.addEventListener("keyup", (e)=>{
+			if (e.key== "Escape"){
+				modal.style.display = "none";
+			}
+		});	
 	}
-	// eslint-disable-next-line no-mixed-spaces-and-tabs	
 	
 }
 getArtist ();
-
 
 

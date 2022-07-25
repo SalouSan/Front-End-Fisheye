@@ -12,8 +12,41 @@ export class Lightbox {
 	show (id) {
 		this.currentElement = this.getElementById(id);
 		this.condition();
+		let lightbox = document.querySelector(".lightbox");
+		this.trapFocus(lightbox);
        
 	}
+	
+	trapFocus (element) {
+		let focusableElements = "img, video";
+		let focusableContent = element.querySelectorAll(focusableElements);
+		let firstFocusableEl = element.querySelectorAll(focusableElements)[0];
+		let lastFocusableEl = focusableContent[focusableContent.length -1];
+	
+		document.addEventListener("keydown", (e)=>{
+			let isTabPressed = e.key === "Tab"; 
+	
+			if (!isTabPressed){
+				return;
+			}
+	
+			if (e.shiftKey){
+				if(document.activeElement === firstFocusableEl) {
+					lastFocusableEl.focus();
+					e.preventDefault();
+				}
+			}else {
+				if (document.activeElement === lastFocusableEl) {
+					firstFocusableEl.focus();
+					e.preventDefault();
+				}
+			}
+			
+		});
+		firstFocusableEl.focus();
+	
+	}
+
 	next (){
 		let index = this.listElement.findIndex(element => element.id === this.currentElement.id);
 		if (index == this.listElement.length -1) {
@@ -106,6 +139,10 @@ export class Lightbox {
 		video.addEventListener("mouseout", (e)=>{
 			e.preventDefault();
 			video.removeAttribute("controls");
+		});
+		video.addEventListener("focus", (e)=>{
+			e.preventDefault();
+			video.setAttribute("controls", "controls");
 		});
 	}
     
