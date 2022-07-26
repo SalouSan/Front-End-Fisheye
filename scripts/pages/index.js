@@ -5,7 +5,6 @@ const article = document.querySelector(".photographer_section");
 const getPhotographers = async function () {
 	let response = await fetch (api_url);
 	let data = await response.json();
-	console.log(data);
 	let headerIndex = document.querySelector("header");
 	headerIndex.setAttribute("role", "banner");
 	article.innerHTML = renderPhotographers(data);

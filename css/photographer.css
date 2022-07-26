@@ -48,6 +48,7 @@
     height: 100vh;
     align-items: center;
     overflow-y: auto;
+    z-index: 150;
 
 }
 .contact_button {
@@ -215,23 +216,26 @@ form .message {
     justify-content: center;
     list-style-type: none;
     padding-left: 10px;
-    z-index: -99;
 }
 .svg{
     margin-left: 13px;
     position: relative;
+    
 }
 .chevron.up {
     position: absolute;
     top:-18px;
     left:81px;
+    cursor: pointer;
 }
 
 .filter:hover #sous_menu{
     visibility: visible;
+    
 }
 .filter:hover .chevron.up.down{
     transform: rotate(180deg);
+    cursor: pointer;
 }
 
 .border{
@@ -372,7 +376,7 @@ form .message {
     margin-top: 5%;
     max-width: 76%;
     max-height: 80%;
-    object-fit: cover;
+    object-fit:cover;
     box-shadow: 3px 0px 0px 0px grey;
 }
 
@@ -394,7 +398,7 @@ form .message {
 }
 .chevronL, .chevronR{
     position:absolute;
-    top: 23em;
+    top: 18em;
     cursor: pointer;
 }
 .chevronR{
@@ -510,16 +514,11 @@ form .message {
         max-width: 80%;
         position: relative;
     }
-    .lightbox.container.element{
-        max-width: 80%;
-    }
-    .lightbox.container.video{
-        max-width: 80%;
-    }
+    
     .chevronL{
         position: fixed;
         left: 4%;
-        top:38%;
+        top:36.5%;
         max-width: 100%;
     }
     .chevronR{

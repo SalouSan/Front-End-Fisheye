@@ -247,7 +247,6 @@ async function getArtist (){
 		}
 		handleControls();
 
-	
 		
 		// Création de la div qui affiche la lightbox   
         
@@ -284,9 +283,6 @@ async function getArtist (){
 		chevronR.setAttribute("tabindex", "17");
 		closeBtn.setAttribute("tabindex", "17");
 		closeBtn.setAttribute("aria-label", "Fermer");
-
-		
-	
 
 		// Instanciation de la class lightbox puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
