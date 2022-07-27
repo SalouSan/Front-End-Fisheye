@@ -153,7 +153,6 @@ async function getArtist (){
 		
 			popularite.addEventListener("click", (e) =>{
 				e.preventDefault();
-				console.log(e);
 				event(sortByLikes, popularite, date, titre);	
 				
 			});
@@ -251,15 +250,18 @@ async function getArtist (){
 		// Création de la div qui affiche la lightbox   
         
 		let modale = `
-            <div class="lightbox" id="modale" >                        
+            <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
 					<div class="items">
 						<img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
 						<img class="lightbox container element" src="" alt=""/>
+						<p class="image_title"> </p>
 						<video class="lightbox container video" controls="false" id="lightbox_vid"
 						<source src=""
 						type="video/mp4" alt="">
 						</video>
+						<p class="video_title"> </p>
+						
 						<img role="button" class="chevronR" src="assets/icons/chevronRight.svg"/>
 						<img role="button" class="lightbox__close" src="assets/icons/closeLightbox.svg"/>  
 					</div>              

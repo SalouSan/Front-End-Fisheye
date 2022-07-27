@@ -108,6 +108,9 @@ export class Lightbox {
 		document.querySelector(".lightbox.container").classList.add("show");
 		document.querySelector(".lightbox.container.element").src = `assets/Sample_Photos/${this.photographer.split(" ")[0]}/${this.currentElement.image}`;
 		document.querySelector(".lightbox.container.element").alt =`${this.currentElement.title}`;
+		document.querySelector(".image_title").innerText =`${this.currentElement.title}`;
+		document.querySelector(".image_title").style.display ="block";
+		document.querySelector(".video_title").style.display ="none";
 		document.querySelector(".lightbox.container.video").style.display = "none";
 		document.querySelector(".lightbox.container.element").style.display = "block";
 		document.querySelector(".lightbox.container.element").classList.add("show");
@@ -119,6 +122,9 @@ export class Lightbox {
 		document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${this.photographer.split(" ")[0]}/${this.currentElement.video}`;
 		document.querySelector(".lightbox.container.video").alt =`${this.currentElement.title}`;
 		document.querySelector(".lightbox.container.video").controls = false;
+		document.querySelector(".video_title").innerText =`${this.currentElement.title}`;
+		document.querySelector(".video_title").style.display ="block";
+		document.querySelector(".image_title").style.display ="none";
 		document.querySelector(".lightbox.container.element").style.display = "none";
 		document.querySelector(".lightbox.container.video").style.display = "block";
 		document.querySelector(".lightbox.container.video").classList.add("show");
@@ -128,6 +134,11 @@ export class Lightbox {
 	condition () {
 		let key = Object.keys(this.currentElement); 
 		key[3] == "video" ? this.displayVideos() : this.displayImages();
+
+		if ("video" in this.listElement){
+			document.querySelector(".image_title").style.display ="none";
+		}
+		
 		
 	}
 	handleControls () {

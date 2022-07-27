@@ -377,7 +377,6 @@ form .message {
     max-width: 76%;
     max-height: 80%;
     object-fit:cover;
-    box-shadow: 3px 0px 0px 0px grey;
 }
 
 .lightbox.container.video{
@@ -386,7 +385,18 @@ form .message {
     max-height: 80%;
     position: relative;
     object-fit: cover;
-    box-shadow: 3px 0px 0px 0px grey;
+}
+.image_title, .video_title{
+    color: #901C1C;
+    font-size: 22px;
+}
+.image_title{
+    margin-left: 38%;
+    width: 30%;
+}
+.video_title{
+    margin-left: 38%;
+    width: 30%;
 }
 
 
@@ -502,6 +512,8 @@ form .message {
     .content__items{
         margin-right: -29px;
     }
+
+
     /* Compteur de likes */
     .counter_content{
         width: 70%;
@@ -533,16 +545,12 @@ form .message {
         top:5%;
         max-width: 100%;
     }
-}
-
-.compteur_like{
-    border: 2px solid black;
-    width: 30%;
-    margin-left:35%;
-    background-color: #DB8876;
-
-}
-.le_contenu{
-    display: flex;
-    justify-content: space-between;
+    .image_title{
+        margin-left: 18%;
+        width: 60%;
+    }
+    .video_title{
+        margin-left: 18%;
+        width: 60%;
+    }
 }
