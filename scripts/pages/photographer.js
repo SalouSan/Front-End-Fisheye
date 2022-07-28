@@ -127,7 +127,8 @@ async function getArtist (){
 
 
 			function event (sortType, filter1, filter2, filter3) {
-				document.querySelector("article").innerHTML=listMedias.sort(sortType)
+				listMedias.sort(sortType);
+				document.querySelector("article").innerHTML=listMedias
 					.map((element)=>{
 						return element.display();
 					}).join("");
@@ -135,6 +136,7 @@ async function getArtist (){
 				filter2.classList.remove("pointer");
 				filter3.classList.remove("pointer");
 				handleLikes();
+				lightbox.listElement = listMedias;
 				displayLightbox();
 				handleControls();
 			}
@@ -289,7 +291,7 @@ async function getArtist (){
 		// Instanciation de la class lightbox puis écouteur d'evenement sur les images de la galerie pour afficher la lightbox
 
 		function displayLightbox () {
-			let lightbox = new Lightbox(media,artist);
+			
 			document.querySelectorAll(".media").forEach((element) => {
 				element.addEventListener("click", function (e){
 					lightbox.show(e.currentTarget.dataset.id);
@@ -303,6 +305,7 @@ async function getArtist (){
 			
 			});
 		}
+		let lightbox = new Lightbox(listMedias,artist);
 		displayLightbox();
 
 		// Aria attributs pour le compteur global de likes

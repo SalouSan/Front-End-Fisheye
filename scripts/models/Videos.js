@@ -27,5 +27,20 @@ export class Video {
         </div>
     </div>`;
 	}
+
+	displayLightbox(callback){
+		document.querySelector(".lightbox").classList.add("show");
+		document.querySelector(".lightbox.container").classList.add("show");
+		document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${this.photographer.name.split(" ")[0]}/${this.video}`;
+		document.querySelector(".lightbox.container.video").alt =`${this.title}`;
+		document.querySelector(".lightbox.container.video").controls = false;
+		document.querySelector(".video_title").innerText =`${this.title}`;
+		document.querySelector(".video_title").style.display ="block";
+		document.querySelector(".image_title").style.display ="none";
+		document.querySelector(".lightbox.container.element").style.display = "none";
+		document.querySelector(".lightbox.container.video").style.display = "block";
+		document.querySelector(".lightbox.container.video").classList.add("show");
+		callback();		
+	}
     
 }

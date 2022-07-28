@@ -4,14 +4,17 @@ export class Lightbox {
 		this.listElement = listElement;  
 		this.photographerId = listElement.photographerId;
 		this.photographer = artist.name; 
+		this.isOpen = false;
 		this.manageEvent();
 	}
+
 	getElementById(id) {
 		return this.listElement.find(element=> element.id == id);
 	}
 	show (id) {
-		this.currentElement = this.getElementById(id);
-		this.condition();
+		this.currentElement = this.listElement.find(element=> element.id == id);
+		this.currentElement.displayLightbox(this.handleControls);
+		this.isOpen = true;
 		let lightbox = document.querySelector(".lightbox");
 		this.trapFocus(lightbox);
        
@@ -55,7 +58,7 @@ export class Lightbox {
 		else {
 			this.currentElement = this.listElement [index + 1];
 		}
-		this.condition();
+		this.currentElement.displayLightbox(this.handleControls);
                
 	}
 	previous () {
@@ -67,14 +70,14 @@ export class Lightbox {
 			this.currentElement = this.listElement [index - 1];
 		}
         
-		this.condition();
+		this.currentElement.displayLightbox(this.handleControls);
 	}
 	manageEvent () {
 		document.querySelector(".chevronR").addEventListener("click", () => {
 			this.next();
 		});
 		document.addEventListener("keydown", (e)=>{
-			if(e.key === "ArrowRight"){
+			if(e.key === "ArrowRight" && this.isOpen){
 				this.next();
 			}
 		});
@@ -84,7 +87,7 @@ export class Lightbox {
             
 		});
 		document.addEventListener("keydown", (e)=>{
-			if(e.key === "ArrowLeft"){
+			if(e.key === "ArrowLeft" && this.isOpen){
 				this.previous();
 			}
 		});
@@ -93,54 +96,19 @@ export class Lightbox {
 			this.close();
 		});
 		document.addEventListener("keydown", (e)=>{
-			if(e.key === "Escape"){
+			if(e.key === "Escape" && this.isOpen){
 				this.close();
 			}
 		});
 	}
 	close (){
 		document.querySelector(".lightbox").classList.remove("show");
+		this.isOpen = false;
 	}
     
     
-	displayImages(){
-		document.querySelector(".lightbox").classList.add("show");
-		document.querySelector(".lightbox.container").classList.add("show");
-		document.querySelector(".lightbox.container.element").src = `assets/Sample_Photos/${this.photographer.split(" ")[0]}/${this.currentElement.image}`;
-		document.querySelector(".lightbox.container.element").alt =`${this.currentElement.title}`;
-		document.querySelector(".image_title").innerText =`${this.currentElement.title}`;
-		document.querySelector(".image_title").style.display ="block";
-		document.querySelector(".video_title").style.display ="none";
-		document.querySelector(".lightbox.container.video").style.display = "none";
-		document.querySelector(".lightbox.container.element").style.display = "block";
-		document.querySelector(".lightbox.container.element").classList.add("show");
-        
-	}
-	displayVideos(){
-		document.querySelector(".lightbox").classList.add("show");
-		document.querySelector(".lightbox.container").classList.add("show");
-		document.querySelector(".lightbox.container.video").src =`assets/Sample_Photos/${this.photographer.split(" ")[0]}/${this.currentElement.video}`;
-		document.querySelector(".lightbox.container.video").alt =`${this.currentElement.title}`;
-		document.querySelector(".lightbox.container.video").controls = false;
-		document.querySelector(".video_title").innerText =`${this.currentElement.title}`;
-		document.querySelector(".video_title").style.display ="block";
-		document.querySelector(".image_title").style.display ="none";
-		document.querySelector(".lightbox.container.element").style.display = "none";
-		document.querySelector(".lightbox.container.video").style.display = "block";
-		document.querySelector(".lightbox.container.video").classList.add("show");
-		this.handleControls();		
-	}
-
-	condition () {
-		let key = Object.keys(this.currentElement); 
-		key[3] == "video" ? this.displayVideos() : this.displayImages();
-
-		if ("video" in this.listElement){
-			document.querySelector(".image_title").style.display ="none";
-		}
-		
-		
-	}
+	
+	
 	handleControls () {
 		let video = document.getElementById("lightbox_vid");
 		video.addEventListener("mouseover", (e)=>{

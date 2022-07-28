@@ -371,6 +371,7 @@ form .message {
     margin-left: 5%;
     position: relative;
     height: 90%;
+    
 }
 .lightbox.container.element{
     margin-top: 5%;
@@ -380,11 +381,13 @@ form .message {
 }
 
 .lightbox.container.video{
+    display: flex;
     margin-top: 5%;
     max-width: 73%;
-    max-height: 80%;
+    height: auto;
     position: relative;
     object-fit: cover;
+    align-self: center;
 }
 .image_title, .video_title{
     color: #901C1C;
@@ -526,6 +529,10 @@ form .message {
         max-width: 80%;
         position: relative;
     }
+    .lightbox.container.video{
+        margin-top: 45%;
+    }
+    
     
     .chevronL{
         position: fixed;
