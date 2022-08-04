@@ -4,6 +4,7 @@ import { Photographer } from "../models/photographer.js";
 import { handleLikes } from "../utils/displayLikes.js";
 import { Lightbox } from "../models/Lightbox.js";
 import contactForm  from "../utils/contactForm.js";
+
 //Fonction asynchrone qui permet de recuperer les données en JSON 
 
 async function getArtist (){
@@ -254,20 +255,19 @@ async function getArtist (){
 		let modale = `
             <div class="lightbox" id="modale">                        
                 <div class="lightbox container">
-					<div class="items">
 						<img role="button" class="chevronL" src="assets/icons/chevronLeft.svg"/> 
-						<img class="lightbox container element" src="" alt=""/>
-						<p class="image_title"> </p>
-						<video class="lightbox container video" controls="false" id="lightbox_vid"
-						<source src=""
-						type="video/mp4" alt="">
-						</video>
-						<p class="video_title"> </p>
-						
+						<div class="items">
+							<img class="lightbox container element" src="" alt=""/>
+							<p class="image_title"></p>
+							<video class="lightbox container video" controls="false" id="lightbox_vid"
+							<source src=""
+							type="video/mp4" alt="">
+							</video>
+							<p class="video_title"></p>
+						</div>  
 						<img role="button" class="chevronR" src="assets/icons/chevronRight.svg"/>
 						<img role="button" class="lightbox__close" src="assets/icons/closeLightbox.svg"/>  
-					</div>              
-                </div>                  
+				</div>                                 
             </div>
             `;   
 		
@@ -279,10 +279,14 @@ async function getArtist (){
 		let chevronL = document.querySelector(".chevronL");
 		let closeBtn = document.querySelector(".lightbox__close");
 		let image = document.querySelector(".lightbox.container.element");
+		let imageTitle = document.querySelector(".image_title");
 		let video = document.querySelector(".lightbox.container.video");
+		let videoTitle = document.querySelector(".video_title");
 
 		image.setAttribute("tabindex", "17");
+		imageTitle.setAttribute("tabindex", "17");
 		video.setAttribute("tabindex", "17");
+		videoTitle.setAttribute("tabindex", "17");
 		chevronL.setAttribute("tabindex", "17");
 		chevronR.setAttribute("tabindex", "17");
 		closeBtn.setAttribute("tabindex", "17");
