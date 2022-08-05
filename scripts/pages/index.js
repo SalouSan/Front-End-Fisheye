@@ -18,6 +18,8 @@ const getPhotographers = async function () {
         
 
 	}
+	let locations = document.querySelectorAll(".photographer__profil--location");
+	console.log(locations);
 
 	// Tabindex sur elements de la page //
 

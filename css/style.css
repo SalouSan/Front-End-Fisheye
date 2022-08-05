@@ -38,22 +38,35 @@ article {
     align-items: center;
     flex-direction: column;
 }
+.photographer__profil--IDlink{
+    text-decoration: none;
+}
 
 .photographer__profil--name {
     color: #D3573C;
     font-size: 36px;
 }
+.photographer_items{
+    margin-top: -25px;
+    
+}
 
 .photographer__profil--location {
     color : #901C1C;
     font-size: 13px;
+    padding-left: 10%;
+    
 }
+
 .photographer__profil--tagline {
     font-size : 0.7rem;
+    color: black;
+    padding-left: 10%;
 }
 .photographer__profil--price {
-    font-size : 0.6rem;
+    font-size : 0.7rem;
     color: grey;
+    padding-left: 10%;
 }
 .photographer_section article a {
     cursor : pointer;
@@ -64,9 +77,7 @@ article {
     border-radius: 100px;
     object-fit:cover;
 }
-.photographer__profil--IDlink {
-    text-decoration: red;
-}
+
 
 @media screen and (max-width:750px){
     body{

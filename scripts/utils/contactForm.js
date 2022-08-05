@@ -20,7 +20,6 @@ function checkForm () {
 	for (let input of formInput){
 		valid &=input.reportValidity();
 		if (!valid) {
-			console.log("Non");
 			break;
 			
 		}
