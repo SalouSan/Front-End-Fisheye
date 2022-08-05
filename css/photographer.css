@@ -406,9 +406,11 @@ form .message {
 
 .chevronR{
     right: 5%;
+    cursor: pointer;
 }
 .chevronL{
     left: 3.5%;
+    cursor: pointer;
 }
 .lightbox__close{
     font-size: 52px;
