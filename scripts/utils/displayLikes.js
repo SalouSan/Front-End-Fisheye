@@ -1,4 +1,5 @@
 export function handleLikes() {
+
 	let heart = document.querySelectorAll(".content__items--heart");
 	for (let i of heart){
 		i.addEventListener("click", function (e){

@@ -253,7 +253,7 @@ form .message {
 }
 .photographers-content article{
     margin-left: 100px;
-    margin-top: 20px;
+    margin-top: -35px;
     display: grid;
     grid-template-columns: 33% 33% 33%;
     max-width: 90%;
