@@ -48,12 +48,6 @@ const getPhotographers = async function () {
 	taglines.forEach((tagline) => {
 		tagline.setAttribute("tabindex", "3");
 	});
-	for (let i=0; i<taglines.length; i++){
-		taglines[0].style.paddingLeft = "5px";	
-		taglines[1].style.paddingLeft = "5px";	
-		taglines[5].style.paddingLeft = "5px";	
-	}
-
 	let prices = document.querySelectorAll(".photographer__profil--price");
 	prices.forEach((price) => {
 		price.setAttribute("tabindex", "3");
