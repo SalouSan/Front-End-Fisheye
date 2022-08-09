@@ -57,6 +57,9 @@ article {
     padding-left: 10%;
     
 }
+span.photographer__profil--tagline:nth-child(2){
+    padding-left: 40%;
+}
 
 .photographer__profil--tagline {
     font-size : 0.7rem;
